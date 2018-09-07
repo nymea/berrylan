@@ -1,0 +1,47 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>components/BerryLanHeader.qml</file>
+        <file>components/ColorIcon.qml</file>
+        <file>components/StatusView.qml</file>
+        <file>images/bluetooth.svg</file>
+        <file>images/github.svg</file>
+        <file>images/help.svg</file>
+        <file>images/link.svg</file>
+        <file>images/refresh.svg</file>
+        <file>images/wifi.svg</file>
+        <file>components/BerryLanPage.qml</file>
+        <file>images/eye.svg</file>
+        <file>images/nymea.svg</file>
+        <file>fonts/Open_Sans/OpenSans-Bold.ttf</file>
+        <file>fonts/Open_Sans/OpenSans-BoldItalic.ttf</file>
+        <file>fonts/Open_Sans/OpenSans-ExtraBold.ttf</file>
+        <file>fonts/Open_Sans/OpenSans-ExtraBoldItalic.ttf</file>
+        <file>fonts/Open_Sans/OpenSans-Italic.ttf</file>
+        <file>fonts/Open_Sans/OpenSans-Light.ttf</file>
+        <file>fonts/Open_Sans/OpenSans-LightItalic.ttf</file>
+        <file>fonts/Open_Sans/OpenSans-Regular.ttf</file>
+        <file>fonts/Open_Sans/OpenSans-SemiBold.ttf</file>
+        <file>fonts/Open_Sans/OpenSans-SemiBoldItalic.ttf</file>
+        <file>fonts/Rajdhani/Rajdhani-Bold.ttf</file>
+        <file>fonts/Rajdhani/Rajdhani-Light.ttf</file>
+        <file>fonts/Rajdhani/Rajdhani-Medium.ttf</file>
+        <file>fonts/Rajdhani/Rajdhani-Regular.ttf</file>
+        <file>fonts/Rajdhani/Rajdhani-SemiBold.ttf</file>
+        <file>fonts/Ubuntu/Ubuntu-B.ttf</file>
+        <file>fonts/Ubuntu/Ubuntu-BI.ttf</file>
+        <file>fonts/Ubuntu/Ubuntu-C.ttf</file>
+        <file>fonts/Ubuntu/Ubuntu-L.ttf</file>
+        <file>fonts/Ubuntu/Ubuntu-LI.ttf</file>
+        <file>fonts/Ubuntu/Ubuntu-M.ttf</file>
+        <file>fonts/Ubuntu/Ubuntu-MI.ttf</file>
+        <file>fonts/Ubuntu/Ubuntu-R.ttf</file>
+        <file>fonts/Ubuntu/Ubuntu-RI.ttf</file>
+        <file>components/WaitView.qml</file>
+        <file>components/BerryLanItemDelegate.qml</file>
+        <file>images/next.svg</file>
+        <file>styles/TextField.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>styles/Button.qml</file>
+    </qresource>
+</RCC>
