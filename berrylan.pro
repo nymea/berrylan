@@ -66,3 +66,18 @@ DISTFILES += \
     android/gradlew.bat
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+android:QMAKE_POST_LINK += cp $$PWD/version.txt $$OUT_PWD/
+
+ios: {
+    QMAKE_TARGET_BUNDLE_PREFIX = io.guh
+    QMAKE_BUNDLE = berrylan
+    # Configure generated xcode project to have our bundle id
+    xcode_product_bundle_identifier_setting.value = $${QMAKE_TARGET_BUNDLE_PREFIX}.$${QMAKE_BUNDLE}
+    #QMAKE_ASSET_CATALOGS += ../packaging/ios/AppIcons.xcassets
+    plist.input = ios/Info.plist.in
+    plist.output = $$OUT_PWD/Info.plist
+    QMAKE_SUBSTITUTES += plist
+    QMAKE_INFO_PLIST = $$OUT_PWD/Info.plist
+    OTHER_FILES += ../packaging/ios/Info.plist.in
+
+}

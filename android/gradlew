@@ -1,0 +1,9 @@
+#!/bin/sh
+
+BASEDIR=$(dirname "$0")
+BERRYLAN_VERSION=`cat $BASEDIR/../version.txt | head -n 1`
+BERRYLAN_VERSION_CODE=`cat $BASEDIR/../version.txt | head -n 2 | tail -n 1`
+echo "Setting version to $BERRYLAN_VERSION ($BERRYLAN_VERSION_CODE)"
+sed -i "s/android:versionName=\"[0-9\.a-zA-Z$_]*\"/android:versionName=\"$BERRYLAN_VERSION\"/" AndroidManifest.xml
+sed -i "s/android:versionCode=\"[0-9]*\"/android:versionCode=\"$BERRYLAN_VERSION_CODE\"/" AndroidManifest.xml
+./gradlew.upstream $@
