@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<BluetoothDiscovery>("BerryLan", 1, 0, "BluetoothDiscovery");
     qmlRegisterUncreatableType<BluetoothDeviceInfos>("BerryLan", 1, 0, "BluetoothDeviceInfos", "Get it from BluetoothDiscovery");
+    qmlRegisterUncreatableType<BluetoothDeviceInfo>("BerryLan", 1, 0, "BluetoothDeviceInfo", "Get it from BluetoothDeviceInfos");
     qmlRegisterType<NetworkManagerController>("BerryLan", 1, 0, "NetworkManagerController");
     qmlRegisterUncreatableType<WirelessSetupManager>("BerryLan", 1, 0, "WirelessSetupManager", "Get it from NeworkManagerController");
     qmlRegisterUncreatableType<WirelessAccessPoints>("BerryLan", 1, 0, "WirelessAccessPoints", "Get it from NetworkManagerController");
