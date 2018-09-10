@@ -31,7 +31,7 @@ Page {
         id: footer
         height: app.iconSize * 2
         RowLayout {
-            anchors { left: parent.left; bottom: parent.bottom; right: parent.right; margins: app.margins }
+            anchors { bottom: parent.bottom; margins: app.margins; horizontalCenter: parent.horizontalCenter }
             height: app.iconSize
             Label {
                 Layout.fillWidth: true
@@ -53,11 +53,12 @@ Page {
                 horizontalAlignment: Text.AlignRight
                 verticalAlignment: Text.AlignBottom
             }
-            ColorIcon {
-                Layout.preferredWidth: app.iconSize
-                Layout.preferredHeight: app.iconSize
-                name: "../images/help.svg"
-            }
+        }
+        ColorIcon {
+            width: app.iconSize
+            height: app.iconSize
+            anchors { right: parent.right; bottom: parent.bottom; margins: app.margins }
+            name: "../images/help.svg"
         }
     }
 }

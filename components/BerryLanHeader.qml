@@ -19,6 +19,8 @@ ColumnLayout {
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             font.pixelSize: app.largeFont
+            font.family: "Rajdhani"
+            font.weight: Font.DemiBold
         }
         ColorIcon {
             Layout.preferredHeight: app.iconSize

@@ -13,35 +13,35 @@
         <file>components/BerryLanPage.qml</file>
         <file>images/eye.svg</file>
         <file>images/nymea.svg</file>
-        <file>fonts/Open_Sans/OpenSans-Bold.ttf</file>
-        <file>fonts/Open_Sans/OpenSans-BoldItalic.ttf</file>
-        <file>fonts/Open_Sans/OpenSans-ExtraBold.ttf</file>
-        <file>fonts/Open_Sans/OpenSans-ExtraBoldItalic.ttf</file>
-        <file>fonts/Open_Sans/OpenSans-Italic.ttf</file>
-        <file>fonts/Open_Sans/OpenSans-Light.ttf</file>
-        <file>fonts/Open_Sans/OpenSans-LightItalic.ttf</file>
-        <file>fonts/Open_Sans/OpenSans-Regular.ttf</file>
-        <file>fonts/Open_Sans/OpenSans-SemiBold.ttf</file>
-        <file>fonts/Open_Sans/OpenSans-SemiBoldItalic.ttf</file>
         <file>fonts/Rajdhani/Rajdhani-Bold.ttf</file>
         <file>fonts/Rajdhani/Rajdhani-Light.ttf</file>
         <file>fonts/Rajdhani/Rajdhani-Medium.ttf</file>
         <file>fonts/Rajdhani/Rajdhani-Regular.ttf</file>
         <file>fonts/Rajdhani/Rajdhani-SemiBold.ttf</file>
-        <file>fonts/Ubuntu/Ubuntu-B.ttf</file>
-        <file>fonts/Ubuntu/Ubuntu-BI.ttf</file>
-        <file>fonts/Ubuntu/Ubuntu-C.ttf</file>
-        <file>fonts/Ubuntu/Ubuntu-L.ttf</file>
-        <file>fonts/Ubuntu/Ubuntu-LI.ttf</file>
-        <file>fonts/Ubuntu/Ubuntu-M.ttf</file>
-        <file>fonts/Ubuntu/Ubuntu-MI.ttf</file>
-        <file>fonts/Ubuntu/Ubuntu-R.ttf</file>
-        <file>fonts/Ubuntu/Ubuntu-RI.ttf</file>
         <file>components/WaitView.qml</file>
         <file>components/BerryLanItemDelegate.qml</file>
         <file>images/next.svg</file>
         <file>styles/TextField.qml</file>
         <file>qtquickcontrols2.conf</file>
         <file>styles/Button.qml</file>
+        <file>fonts/Montserrat/Montserrat-Black.ttf</file>
+        <file>fonts/Montserrat/Montserrat-BlackItalic.ttf</file>
+        <file>fonts/Montserrat/Montserrat-Bold.ttf</file>
+        <file>fonts/Montserrat/Montserrat-BoldItalic.ttf</file>
+        <file>fonts/Montserrat/Montserrat-ExtraBold.ttf</file>
+        <file>fonts/Montserrat/Montserrat-ExtraBoldItalic.ttf</file>
+        <file>fonts/Montserrat/Montserrat-ExtraLight.ttf</file>
+        <file>fonts/Montserrat/Montserrat-ExtraLightItalic.ttf</file>
+        <file>fonts/Montserrat/Montserrat-Italic.ttf</file>
+        <file>fonts/Montserrat/Montserrat-Light.ttf</file>
+        <file>fonts/Montserrat/Montserrat-LightItalic.ttf</file>
+        <file>fonts/Montserrat/Montserrat-Medium.ttf</file>
+        <file>fonts/Montserrat/Montserrat-MediumItalic.ttf</file>
+        <file>fonts/Montserrat/Montserrat-Regular.ttf</file>
+        <file>fonts/Montserrat/Montserrat-SemiBold.ttf</file>
+        <file>fonts/Montserrat/Montserrat-SemiBoldItalic.ttf</file>
+        <file>fonts/Montserrat/Montserrat-Thin.ttf</file>
+        <file>fonts/Montserrat/Montserrat-ThinItalic.ttf</file>
+        <file>fonts/Montserrat/OFL.txt</file>
     </qresource>
 </RCC>

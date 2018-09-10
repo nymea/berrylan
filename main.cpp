@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
         }
     }
     QFont applicationFont;
-    applicationFont.setFamily("Ubuntu");
+    applicationFont.setFamily("Montserrat");
     applicationFont.setCapitalization(QFont::MixedCase);
     applicationFont.setPixelSize(20);
     applicationFont.setWeight(QFont::Light);
