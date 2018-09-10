@@ -1,4 +1,3 @@
-
 QT += quick bluetooth svg quickcontrols2
 CONFIG += c++11
 
@@ -25,6 +24,17 @@ SOURCES += \
     wifisetup/wirelesssetupmanager.cpp \
     wifisetup/networkmanagercontroller.cpp
 
+HEADERS += \
+    wifisetup/bluetoothdevice.h \
+    wifisetup/bluetoothdeviceinfo.h \
+    wifisetup/bluetoothdeviceinfos.h \
+    wifisetup/bluetoothdiscovery.h \
+    wifisetup/wirelessaccesspoint.h \
+    wifisetup/wirelessaccesspoints.h \
+    wifisetup/wirelessaccesspointsproxy.h \
+    wifisetup/wirelesssetupmanager.h \
+    wifisetup/networkmanagercontroller.h
+
 RESOURCES += qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
@@ -38,28 +48,20 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-HEADERS += \
-    wifisetup/bluetoothdevice.h \
-    wifisetup/bluetoothdeviceinfo.h \
-    wifisetup/bluetoothdeviceinfos.h \
-    wifisetup/bluetoothdiscovery.h \
-    wifisetup/wirelessaccesspoint.h \
-    wifisetup/wirelessaccesspoints.h \
-    wifisetup/wirelessaccesspointsproxy.h \
-    wifisetup/wirelesssetupmanager.h \
-    wifisetup/networkmanagercontroller.h
+android: {
+    QT += androidextras
+    DISTFILES += \
+        android/AndroidManifest.xml \
+        android/gradle/wrapper/gradle-wrapper.jar \
+        android/gradlew \
+        android/res/values/libs.xml \
+        android/build.gradle \
+        android/gradle/wrapper/gradle-wrapper.properties \
+        android/gradlew.bat
 
-DISTFILES += \
-    android/AndroidManifest.xml \
-    android/gradle/wrapper/gradle-wrapper.jar \
-    android/gradlew \
-    android/res/values/libs.xml \
-    android/build.gradle \
-    android/gradle/wrapper/gradle-wrapper.properties \
-    android/gradlew.bat
-
-ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
-android:QMAKE_POST_LINK += cp $$PWD/version.txt $$OUT_PWD/
+    ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+    QMAKE_POST_LINK += cp $$PWD/version.txt $$OUT_PWD/
+}
 
 ios: {
     QMAKE_TARGET_BUNDLE_PREFIX = io.guh
@@ -72,5 +74,6 @@ ios: {
     QMAKE_SUBSTITUTES += plist
     QMAKE_INFO_PLIST = $$OUT_PWD/Info.plist
     OTHER_FILES += ios/Info.plist.in
-
+    ios_launch_images.files += $$files(ios/LaunchImage*.png) ios/LaunchScreen1.xib
+    QMAKE_BUNDLE_DATA += ios_launch_images
 }

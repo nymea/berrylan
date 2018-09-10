@@ -6,6 +6,10 @@
 #include <QDir>
 #include <QQuickStyle>
 
+#ifdef Q_OS_ANDROID
+#include <QtAndroidExtras/QtAndroid>
+#endif
+
 #include "wifisetup/bluetoothdiscovery.h"
 #include "wifisetup/networkmanagercontroller.h"
 #include "wifisetup/wirelessaccesspoints.h"
@@ -50,6 +54,10 @@ int main(int argc, char *argv[])
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;
+
+#ifdef Q_OS_ANDROID
+    QtAndroid::hideSplashScreen(250);
+#endif
 
     return app.exec();
 }
