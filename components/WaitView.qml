@@ -6,6 +6,10 @@ Item {
     id: root
 
     property string text
+    property string buttonText
+    property bool running: true
+
+    signal buttonClicked()
 
     ColumnLayout {
         anchors.centerIn: parent
@@ -22,6 +26,14 @@ Item {
 
         BusyIndicator {
             Layout.alignment: Qt.AlignHCenter
+            visible: root.running
+        }
+
+        Button {
+            Layout.alignment: Qt.AlignHCenter
+            text: root.buttonText
+            visible: root.buttonText != ""
+            onClicked: root.buttonClicked()
         }
     }
 }

@@ -66,9 +66,26 @@ ApplicationWindow {
         }
 
         onNetworkStatusChanged: {
+            print("Network status changed:", networkManager.manager.networkStatus)
             if (swipeView.currentItem === connectingToWiFiView) {
                 if (networkManager.manager.networkStatus === WirelessSetupManager.NetworkStatusGlobal) {
                     swipeView.currentIndex++;
+                } else {
+                    print("UNHANDLED Network status change:", networkManager.manager.networkStatus  )
+                }
+
+            }
+        }
+        onWirelessStatusChanged: {
+            print("Wireless status changed:", networkManager.manager.networkStatus)
+            if (swipeView.currentItem === connectingToWiFiView) {
+                if (networkManager.manager.wirelessStatus === WirelessSetupManager.WirelessStatusActivated) {
+                    swipeView.currentIndex++;
+                }
+                if (networkManager.manager.wirelessStatus === WirelessSetupManager.WirelessStatusFailed) {
+                    connectingToWiFiView.running = false
+                    connectingToWiFiView.text = qsTr("Sorry, the password is wrong.")
+                    connectingToWiFiView.buttonText = qsTr("Try again")
                 }
             }
         }
@@ -159,6 +176,7 @@ ApplicationWindow {
                     onClicked: {
                         print("Connect to ", model.ssid, " --> ", model.macAddress)
                         d.currentAP = networkManager.manager.accessPoints.get(index);
+
                         swipeView.currentIndex++;
                     }
                 }
@@ -196,7 +214,11 @@ ApplicationWindow {
                     Button {
                         Layout.fillWidth: true
                         text: qsTr("OK")
+                        enabled: passwordTextField.displayText.length >= 8
                         onClicked: {
+                            connectingToWiFiView.text = qsTr("Connecting the Raspberry Pi to %1").arg(d.currentAP.ssid);
+                            connectingToWiFiView.buttonText = "";
+                            connectingToWiFiView.running = true
                             networkManager.manager.connectWirelessNetwork(d.currentAP.ssid, passwordTextField.text)
                             swipeView.currentIndex++
                         }
@@ -208,6 +230,9 @@ ApplicationWindow {
                 id: connectingToWiFiView
                 height: swipeView.height
                 width: swipeView.width
+                onButtonClicked: {
+                    swipeView.currentIndex--;
+                }
             }
 
             Item {
