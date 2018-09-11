@@ -43,5 +43,7 @@
         <file>fonts/Montserrat/Montserrat-Thin.ttf</file>
         <file>fonts/Montserrat/Montserrat-ThinItalic.ttf</file>
         <file>fonts/Montserrat/OFL.txt</file>
+        <file>components/HelpPage.qml</file>
+        <file>images/back.svg</file>
     </qresource>
 </RCC>

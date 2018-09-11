@@ -91,182 +91,195 @@ ApplicationWindow {
         }
     }
 
-    BerryLanPage {
+    StackView {
+        id: pageStack
         anchors.fill: parent
-        title: qsTr("Devices")
+        initialItem: BerryLanPage {
+            title: qsTr("Devices")
 
-        step: {
-            switch (swipeView.currentIndex) {
-            case 0:
-                return 0;
-            case 1:
-                return 1;
-            case 2:
-                return 2;
-            case 3:
-                if (!networkManager.manager || networkManager.manager.accessPoints.count == 0) {
-                    return 3;
-                }
-                return 4;
-            case 4:
-                return 4;
-            case 5:
-                if (networkManager.manager.wirelessStatus < WirelessSetupManager.WirelessStatusPrepare) {
-                    return 5;
-                }
-                if (networkManager.manager.wirelessStatus < WirelessSetupManager.WirelessStatusIpConfig) {
-                    return 6;
-                }
-                return 7;
-            case 6:
-                return 8;
-            }
-        }
+            onHelpClicked: pageStack.push(Qt.resolvedUrl("components/HelpPage.qml"))
 
-        content: SwipeView {
-            id: swipeView
-            anchors.fill: parent
-
-            WaitView {
-                id: discoveringView
-                height: swipeView.height
-                width: swipeView.width
-                text: qsTr("Searching for your Raspberry Pi")
-            }
-
-            ListView {
-                id: discoveryListView
-                height: swipeView.height
-                width: swipeView.width
-                model: discovery.deviceInfos
-                clip: true
-
-                delegate: BerryLanItemDelegate {
-                    width: parent.width
-                    text: name
-                    iconSource: "../images/bluetooth.svg"
-
-                    onClicked: {
-                        networkManager.bluetoothDeviceInfo = discovery.deviceInfos.get(index);
-                        networkManager.connectDevice();
-                        swipeView.currentIndex++;
+            step: {
+                switch (swipeView.currentIndex) {
+                case 0:
+                    return 0;
+                case 1:
+                    return 1;
+                case 2:
+                    return 2;
+                case 3:
+                    if (!networkManager.manager || networkManager.manager.accessPoints.count == 0) {
+                        return 3;
                     }
+                    return 4;
+                case 4:
+                    return 4;
+                case 5:
+                    if (networkManager.manager.wirelessStatus < WirelessSetupManager.WirelessStatusPrepare) {
+                        return 5;
+                    }
+                    if (networkManager.manager.wirelessStatus < WirelessSetupManager.WirelessStatusIpConfig) {
+                        return 6;
+                    }
+                    return 7;
+                case 6:
+                    return 8;
                 }
             }
 
-            WaitView {
-                id: connectingToPiView
-                height: swipeView.height
-                width: swipeView.width
-                text: qsTr("Connecting to your Raspberry Pi")
-            }
+            content: SwipeView {
+                id: swipeView
+                anchors.fill: parent
+                interactive: false
 
-            ListView {
-                id: apSelectionListView
-                height: swipeView.height
-                width: swipeView.width
-                model: networkManager.manager ? networkManager.manager.accessPoints : null
-                clip: true
-
-                delegate: BerryLanItemDelegate {
-                    width: parent.width
-                    text: model.ssid
-                    iconSource: "../images/wifi.svg"
-
-                    onClicked: {
-                        print("Connect to ", model.ssid, " --> ", model.macAddress)
-                        d.currentAP = networkManager.manager.accessPoints.get(index);
-
-                        swipeView.currentIndex++;
-                    }
+                WaitView {
+                    id: discoveringView
+                    height: swipeView.height
+                    width: swipeView.width
+                    text: qsTr("Searching for your Raspberry Pi")
                 }
-            }
 
-            Item {
-                id: authenticationView
-                width: swipeView.width
-                height: swipeView.height
-                ColumnLayout {
-                    anchors.centerIn: parent
-                    anchors.verticalCenterOffset: - swipeView.height / 4
-                    width: app.iconSize * 8
-                    spacing: app.margins
-                    RowLayout {
-                        TextField {
-                            id: passwordTextField
-                            Layout.fillWidth: true
-                            property bool showPassword: false
-                            echoMode: showPassword ? TextInput.Normal : TextInput.Password
-                        }
+                ListView {
+                    id: discoveryListView
+                    height: swipeView.height
+                    width: swipeView.width
+                    model: discovery.deviceInfos
+                    clip: true
 
-                        ColorIcon {
-                            Layout.preferredHeight: app.iconSize
-                            Layout.preferredWidth: app.iconSize
-                            name: "../images/eye.svg"
-                            color: passwordTextField.showPassword ? "#e71d36" : keyColor
-                            MouseArea {
-                                anchors.fill: parent
-                                onClicked: passwordTextField.showPassword = !passwordTextField.showPassword
-                            }
-                        }
-                    }
+                    delegate: BerryLanItemDelegate {
+                        width: parent.width
+                        text: name
+                        iconSource: "../images/bluetooth.svg"
 
-                    Button {
-                        Layout.fillWidth: true
-                        text: qsTr("OK")
-                        enabled: passwordTextField.displayText.length >= 8
                         onClicked: {
-                            connectingToWiFiView.text = qsTr("Connecting the Raspberry Pi to %1").arg(d.currentAP.ssid);
-                            connectingToWiFiView.buttonText = "";
-                            connectingToWiFiView.running = true
-                            networkManager.manager.connectWirelessNetwork(d.currentAP.ssid, passwordTextField.text)
-                            swipeView.currentIndex++
+                            networkManager.bluetoothDeviceInfo = discovery.deviceInfos.get(index);
+                            networkManager.connectDevice();
+                            swipeView.currentIndex++;
                         }
                     }
                 }
-            }
 
-            WaitView {
-                id: connectingToWiFiView
-                height: swipeView.height
-                width: swipeView.width
-                onButtonClicked: {
-                    swipeView.currentIndex--;
+                WaitView {
+                    id: connectingToPiView
+                    height: swipeView.height
+                    width: swipeView.width
+                    text: qsTr("Connecting to your Raspberry Pi")
                 }
-            }
 
-            Item {
-                id: resultsView
-                height: swipeView.height
-                width: swipeView.width
-                ColumnLayout {
-                    anchors.fill: parent
-                    Label {
-                        Layout.fillWidth: true
-                        text: d.currentAP ? "IP Address: " + d.currentAP.hostAddress : ""
-                        font.pixelSize: app.largeFont
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
+                ListView {
+                    id: apSelectionListView
+                    height: swipeView.height
+                    width: swipeView.width
+                    model: networkManager.manager ? networkManager.manager.accessPoints : null
+                    clip: true
+
+                    delegate: BerryLanItemDelegate {
+                        width: parent.width
+                        text: model.ssid
+                        iconSource: "../images/wifi.svg"
+
+                        onClicked: {
+                            print("Connect to ", model.ssid, " --> ", model.macAddress)
+                            d.currentAP = networkManager.manager.accessPoints.get(index);
+
+                            swipeView.currentIndex++;
+                        }
                     }
-                    Item {
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-                        ColumnLayout {
-                            anchors.centerIn: parent
-                            width: parent.width
-                            spacing: app.margins * 4
-                            Label {
-                                text: qsTr("Thanks for using BerryLan!")
-                                font.pixelSize: app.largeFont
+                }
+
+                Item {
+                    id: authenticationView
+                    width: swipeView.width
+                    height: swipeView.height
+                    ColumnLayout {
+                        anchors.centerIn: parent
+                        anchors.verticalCenterOffset: - swipeView.height / 4
+                        width: app.iconSize * 8
+                        spacing: app.margins
+                        RowLayout {
+                            TextField {
+                                id: passwordTextField
                                 Layout.fillWidth: true
-                                wrapMode: Text.WordWrap
-                                horizontalAlignment: Text.AlignHCenter
+                                property bool showPassword: false
+                                echoMode: showPassword ? TextInput.Normal : TextInput.Password
                             }
+
                             ColorIcon {
                                 Layout.preferredHeight: app.iconSize
                                 Layout.preferredWidth: app.iconSize
-                                anchors.horizontalCenter: parent.horizontalCenter
-                                name: "../images/github.svg"
+                                name: "../images/eye.svg"
+                                color: passwordTextField.showPassword ? "#e71d36" : keyColor
+                                MouseArea {
+                                    anchors.fill: parent
+                                    onClicked: passwordTextField.showPassword = !passwordTextField.showPassword
+                                }
+                            }
+                        }
+
+                        Button {
+                            Layout.fillWidth: true
+                            text: qsTr("OK")
+                            enabled: passwordTextField.displayText.length >= 8
+                            onClicked: {
+                                connectingToWiFiView.text = qsTr("Connecting the Raspberry Pi to %1").arg(d.currentAP.ssid);
+                                connectingToWiFiView.buttonText = "";
+                                connectingToWiFiView.running = true
+                                networkManager.manager.connectWirelessNetwork(d.currentAP.ssid, passwordTextField.text)
+                                swipeView.currentIndex++
+                            }
+                        }
+                    }
+                }
+
+                WaitView {
+                    id: connectingToWiFiView
+                    height: swipeView.height
+                    width: swipeView.width
+                    onButtonClicked: {
+                        swipeView.currentIndex--;
+                    }
+                }
+
+                Item {
+                    id: resultsView
+                    height: swipeView.height
+                    width: swipeView.width
+                    ColumnLayout {
+                        anchors.fill: parent
+                        Label {
+                            Layout.fillWidth: true
+                            text: d.currentAP ? "IP Address: " + d.currentAP.hostAddress : ""
+                            font.pixelSize: app.largeFont
+                            font.bold: true
+                            horizontalAlignment: Text.AlignHCenter
+                        }
+                        Item {
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            ColumnLayout {
+                                anchors.centerIn: parent
+                                width: parent.width
+                                spacing: app.margins * 4
+                                Label {
+                                    text: qsTr("Thanks for using BerryLan!")
+                                    font.pixelSize: app.largeFont
+                                    Layout.fillWidth: true
+                                    wrapMode: Text.WordWrap
+                                    horizontalAlignment: Text.AlignHCenter
+                                }
+                                ColorIcon {
+                                    Layout.preferredHeight: app.iconSize
+                                    Layout.preferredWidth: app.iconSize
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    name: "../images/github.svg"
+
+                                    MouseArea {
+                                        anchors.fill: parent
+                                        onClicked: {
+                                            Qt.openUrlExternally("https://github.com/guh/berrylan")
+                                        }
+                                    }
+                                }
                             }
                         }
                     }

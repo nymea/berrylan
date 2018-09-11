@@ -8,6 +8,8 @@ Page {
 
     property alias content: contentItemContainer.data
 
+    signal helpClicked()
+
     header: BerryLanHeader {
         text: root.title
     }
@@ -59,6 +61,11 @@ Page {
             height: app.iconSize
             anchors { right: parent.right; bottom: parent.bottom; margins: app.margins }
             name: "../images/help.svg"
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: root.helpClicked()
+            }
         }
     }
 }

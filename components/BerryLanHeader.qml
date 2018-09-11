@@ -4,17 +4,30 @@ import QtQuick.Layouts 1.3
 
 ColumnLayout {
     id: root
+    spacing: 0
+
     property string text
 
+    property bool backButtonVisible: false
+
+    signal backClicked()
+
     RowLayout {
-        Layout.topMargin: app.margins
+        Layout.margins: app.margins
 
         ColorIcon {
-            Layout.preferredHeight: app.iconSize
+            Layout.preferredHeight: app.iconSize * .8
             Layout.preferredWidth: height
+            name: "../images/back.svg"
+            visible: root.backButtonVisible
+            MouseArea {
+                anchors.fill: parent
+                onClicked: root.backClicked()
+            }
         }
         Label {
             Layout.fillWidth: true
+            Layout.preferredHeight: app.iconSize * .8
             text: root.text.toUpperCase()
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
@@ -22,9 +35,10 @@ ColumnLayout {
             font.family: "Rajdhani"
             font.weight: Font.DemiBold
         }
-        ColorIcon {
-            Layout.preferredHeight: app.iconSize
+        Item { // just to keep the label centered
+            Layout.preferredHeight: app.iconSize * .8
             Layout.preferredWidth: height
+            visible: root.backButtonVisible
         }
     }
 
