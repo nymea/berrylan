@@ -5,13 +5,17 @@ import QtQuick.Layouts 1.3
 Page {
     id: root
     property int step: 0
+    property bool backButtonVisible: false
 
     property alias content: contentItemContainer.data
 
     signal helpClicked()
+    signal backClicked()
 
     header: BerryLanHeader {
         text: root.title
+        backButtonVisible: root.backButtonVisible
+        onBackClicked: root.backClicked()
     }
 
     ColumnLayout {
@@ -31,7 +35,7 @@ Page {
 
     footer: Item {
         id: footer
-        height: app.iconSize * 2
+        height: app.iconSize * 2 + ((systemProductType === "ios" && Screen.height === 812) ? 14 : 0)
         RowLayout {
             anchors { bottom: parent.bottom; margins: app.margins; horizontalCenter: parent.horizontalCenter }
             height: app.iconSize

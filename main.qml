@@ -96,8 +96,10 @@ ApplicationWindow {
         anchors.fill: parent
         initialItem: BerryLanPage {
             title: qsTr("Devices")
+            backButtonVisible: swipeView.currentIndex === 4
 
             onHelpClicked: pageStack.push(Qt.resolvedUrl("components/HelpPage.qml"))
+            onBackClicked: swipeView.currentIndex--
 
             step: {
                 switch (swipeView.currentIndex) {
@@ -270,7 +272,7 @@ ApplicationWindow {
                                 ColorIcon {
                                     Layout.preferredHeight: app.iconSize
                                     Layout.preferredWidth: app.iconSize
-                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    Layout.alignment: Qt.AlignHCenter
                                     name: "../images/github.svg"
 
                                     MouseArea {

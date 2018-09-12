@@ -5,6 +5,8 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QQuickStyle>
+#include <QQmlContext>
+#include <QSysInfo>
 
 #ifdef Q_OS_ANDROID
 #include <QtAndroidExtras/QtAndroid>
@@ -51,6 +53,9 @@ int main(int argc, char *argv[])
     QGuiApplication::setFont(applicationFont);
 
     QQmlApplicationEngine engine;
+
+    engine.rootContext()->setContextProperty("systemProductType", QSysInfo::productType());
+
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;
