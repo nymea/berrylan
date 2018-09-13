@@ -132,7 +132,7 @@ ApplicationWindow {
             content: SwipeView {
                 id: swipeView
                 anchors.fill: parent
-//                interactive: false
+                interactive: false
 
                 WaitView {
                     id: discoveringView
