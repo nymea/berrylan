@@ -31,6 +31,9 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+                <string>UIInterfaceOrientationPortraitUpsideDown</string>
+                <string>UIInterfaceOrientationLandscapeLeft</string>
+                <string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
         <key>NSBluetoothPeripheralUsageDescription</key>
         <string>This app allows configuring WiFi on Raspberry Pi devices using a Bluetooth setup.</string>
