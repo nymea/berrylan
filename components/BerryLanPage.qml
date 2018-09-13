@@ -1,6 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
+import QtQuick.Window 2.3
 
 Page {
     id: root
@@ -35,9 +36,9 @@ Page {
 
     footer: Item {
         id: footer
-        height: app.iconSize * 2 + ((systemProductType === "ios" && Screen.height === 812) ? 14 : 0)
+        height: app.iconSize * 1.5 + ((systemProductType === "ios" && Screen.height === 812) ? 14 : 0)
         RowLayout {
-            anchors { bottom: parent.bottom; margins: app.margins; horizontalCenter: parent.horizontalCenter }
+            anchors { top: parent.top; margins: app.margins; horizontalCenter: parent.horizontalCenter }
             height: app.iconSize
             Label {
                 Layout.fillWidth: true
@@ -63,7 +64,7 @@ Page {
         ColorIcon {
             width: app.iconSize
             height: app.iconSize
-            anchors { right: parent.right; bottom: parent.bottom; margins: app.margins }
+            anchors { right: parent.right; top: parent.top; margins: app.margins }
             name: "../images/help.svg"
 
             MouseArea {
