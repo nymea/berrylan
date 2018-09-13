@@ -8,15 +8,18 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="256"
-   height="256"
-   viewBox="0 0 256 256"
+   width="1024"
+   height="512"
+   viewBox="0 0 1024 512"
    version="1.1"
-   id="svg38"
-   sodipodi:docname="AppIcon.svg"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+   id="svg9"
+   sodipodi:docname="logo.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   inkscape:export-filename="/home/micha/Develop/berrylan/android/res/drawable-mdpi/splashimage.png"
+   inkscape:export-xdpi="96.190475"
+   inkscape:export-ydpi="96.190475">
   <metadata
-     id="metadata42">
+     id="metadata13">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -34,29 +37,42 @@
      objecttolerance="10"
      gridtolerance="10"
      guidetolerance="10"
-     inkscape:pageopacity="1"
+     inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:window-width="2880"
      inkscape:window-height="1698"
-     id="namedview40"
+     id="namedview11"
      showgrid="true"
-     inkscape:zoom="3.7316456"
-     inkscape:cx="119.57517"
-     inkscape:cy="103.39369"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="1.4714286"
+     inkscape:cx="404.64094"
+     inkscape:cy="241.05656"
      inkscape:window-x="0"
      inkscape:window-y="44"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg38"
-     inkscape:pagecheckerboard="true">
+     inkscape:current-layer="svg9">
     <inkscape:grid
        type="xygrid"
-       id="grid848" />
+       id="grid835" />
   </sodipodi:namedview>
   <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
   <desc
      id="desc2">Created with Sketch.</desc>
   <defs
-     id="defs9">
+     id="defs4">
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient-1"
+       id="linearGradient849"
+       x1="85.5"
+       y1="-1.4210855e-14"
+       x2="85.5"
+       y2="171"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(117,131)" />
     <linearGradient
        x1="0.5"
        y1="0"
@@ -72,16 +88,6 @@
          offset="100%"
          id="stop6" />
     </linearGradient>
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient-1"
-       id="linearGradient849"
-       x1="85.5"
-       y1="-1.4210855e-14"
-       x2="85.5"
-       y2="171"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(117,131)" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient-1"
@@ -103,16 +109,9 @@
        gradientUnits="userSpaceOnUse"
        gradientTransform="translate(117,131)" />
   </defs>
-  <rect
-     style="fill:#fdfffc;fill-opacity:1;stroke:none;stroke-width:3.77952766;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     id="rect850"
-     width="256"
-     height="256"
-     x="0"
-     y="0" />
   <g
      id="g846"
-     transform="matrix(0.4789392,0,0,0.4789392,-39.389248,24.309663)">
+     transform="matrix(2.1176354,0,0,2.1176354,-228.11357,-202.46806)">
     <circle
        id="Oval-2"
        cx="202.5"
