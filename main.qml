@@ -108,7 +108,7 @@ ApplicationWindow {
                 case 1:
                     return 1;
                 case 2:
-                    return 2;
+                    return 3;
                 case 3:
                     if (!networkManager.manager || networkManager.manager.accessPoints.count == 0) {
                         return 3;
@@ -117,13 +117,13 @@ ApplicationWindow {
                 case 4:
                     return 4;
                 case 5:
-                    if (networkManager.manager.wirelessStatus < WirelessSetupManager.WirelessStatusPrepare) {
+                    if (networkManager.manager.wirelessStatus < WirelessSetupManager.WirelessStatusConfig) {
                         return 5;
                     }
-                    if (networkManager.manager.wirelessStatus < WirelessSetupManager.WirelessStatusIpConfig) {
+//                    if (networkManager.manager.wirelessStatus < WirelessSetupManager.WirelessStatusIpConfig) {
                         return 6;
-                    }
-                    return 7;
+//                    }
+//                    return 7;
                 case 6:
                     return 8;
                 }
@@ -132,13 +132,13 @@ ApplicationWindow {
             content: SwipeView {
                 id: swipeView
                 anchors.fill: parent
-                interactive: false
+//                interactive: false
 
                 WaitView {
                     id: discoveringView
                     height: swipeView.height
                     width: swipeView.width
-                    text: qsTr("Searching for your Raspberry Pi")
+                    text: qsTr("Searching for your\nRaspberry Pi")
                 }
 
                 ListView {

@@ -1,6 +1,8 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
+import BerryLan 1.0
+import QtQuick.Controls.Material 2.2
 
 Item {
     id: root
@@ -14,8 +16,14 @@ Item {
             Layout.preferredWidth: app.iconSize * 1.5
             Layout.preferredHeight: app.iconSize * 1.5
             radius: height / 2
-//            color: root.step > 1 ? "#e71d36" : "#D8D8D8"
             color: "#D8D8D8"
+            BerryLanBusyIndicator {
+                anchors.fill: parent
+                visible: step === 0
+                color: Material.accent
+                penWidth: 3
+            }
+
             Rectangle {
                 anchors.centerIn: parent
                 height: root.step > 1 ? parent.height : 0
@@ -34,7 +42,7 @@ Item {
                 anchors.centerIn: parent
                 color: "white"
             }
-            border.width: root.step > 0 ? 2 : 0
+            border.width: root.step > 0 ? 3 : 0
             border.color: "#e71d36"
 
             MouseArea {
@@ -64,6 +72,14 @@ Item {
             radius: height / 2
 //            color: root.step > 4 ? "#e71d36" : "#D8D8D8"
             color: "#D8D8D8"
+
+            BerryLanBusyIndicator {
+                anchors.fill: parent
+                visible: step === 3
+                color: Material.accent
+                penWidth: 3
+            }
+
             Rectangle {
                 anchors.centerIn: parent
                 height: root.step > 4 ? parent.height : 0
@@ -81,7 +97,7 @@ Item {
                 anchors.centerIn: parent
                 color: "white"
             }
-            border.width: root.step > 3 ? 2 : 0
+            border.width: root.step > 3 ? 3 : 0
             border.color: "#e71d36"
         }
         Rectangle {
@@ -104,6 +120,12 @@ Item {
             radius: height / 2
 //            color: root.step > 7 ? "#e71d36" : "#D8D8D8"
             color: "#D8D8D8"
+            BerryLanBusyIndicator {
+                anchors.fill: parent
+                visible: step === 6
+                color: Material.accent
+                penWidth: 3
+            }
             Rectangle {
                 anchors.centerIn: parent
                 height: root.step > 7 ? parent.height : 0
@@ -121,7 +143,7 @@ Item {
                 anchors.centerIn: parent
                 color: "white"
             }
-            border.width: root.step > 6 ? 2 : 0
+            border.width: root.step > 6 ? 3 : 0
             border.color: "#e71d36"
 
             MouseArea {
@@ -130,5 +152,4 @@ Item {
             }
         }
     }
-
 }

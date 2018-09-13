@@ -18,6 +18,7 @@
 #include "wifisetup/wirelessaccesspoint.h"
 #include "wifisetup/wirelessaccesspointsproxy.h"
 #include "wifisetup/wirelesssetupmanager.h"
+#include "styles/berrylanbusyindicator.h"
 
 int main(int argc, char *argv[])
 {
@@ -30,6 +31,8 @@ int main(int argc, char *argv[])
     qmlRegisterUncreatableType<WirelessAccessPoints>("BerryLan", 1, 0, "WirelessAccessPoints", "Get it from NetworkManagerController");
     qmlRegisterUncreatableType<WirelessAccessPoint>("BerryLan", 1, 0, "WirelessAccessPoint", "Get it from WirelessAccessPoints");
     qmlRegisterType<WirelessAccessPointsProxy>("BerryLan", 1, 0, "WirelessAccessPointsProxy");
+
+    qmlRegisterType<BerryLanBusyIndicator>("BerryLan", 1, 0, "BerryLanBusyIndicator");
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 

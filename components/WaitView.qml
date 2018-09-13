@@ -24,10 +24,10 @@ Item {
             font.pixelSize: app.largeFont
         }
 
-        BusyIndicator {
-            Layout.alignment: Qt.AlignHCenter
-            visible: root.running
-        }
+//        BusyIndicator {
+//            Layout.alignment: Qt.AlignHCenter
+//            visible: root.running
+//        }
 
         Button {
             Layout.alignment: Qt.AlignHCenter

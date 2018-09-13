@@ -1,4 +1,4 @@
-QT += quick bluetooth svg quickcontrols2
+QT += quick bluetooth svg quickcontrols2 quickcontrols2-private
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
@@ -22,7 +22,8 @@ SOURCES += \
     wifisetup/wirelessaccesspoints.cpp \
     wifisetup/wirelessaccesspointsproxy.cpp \
     wifisetup/wirelesssetupmanager.cpp \
-    wifisetup/networkmanagercontroller.cpp
+    wifisetup/networkmanagercontroller.cpp \
+    styles/berrylanbusyindicator.cpp
 
 HEADERS += \
     wifisetup/bluetoothdevice.h \
@@ -33,7 +34,8 @@ HEADERS += \
     wifisetup/wirelessaccesspoints.h \
     wifisetup/wirelessaccesspointsproxy.h \
     wifisetup/wirelesssetupmanager.h \
-    wifisetup/networkmanagercontroller.h
+    wifisetup/networkmanagercontroller.h \
+    styles/berrylanbusyindicator.h
 
 RESOURCES += qml.qrc
 

@@ -837,7 +837,10 @@ void WirelessSetupManager::onNetworkServiceCharacteristicChanged(const QLowEnerg
 {
     if (characteristic.uuid() == networkStatusCharacteristicUuid) {
         qDebug() << "Network status changed:" << value;
-        setNetworkStatus(value.toHex().toUInt(0, 16));
+        setNetworkStatus(value.toHex().toInt(nullptr, 16));
+        if (m_networkStatus == NetworkStatusGlobal) {
+            loadCurrentConnection();
+        }
         return;
     } else if (characteristic.uuid() == networkResponseCharacteristicUuid) {
         // Check if currently reading
@@ -966,6 +969,9 @@ void WirelessSetupManager::onWifiServiceCharacteristicChanged(const QLowEnergyCh
     if (characteristic.uuid() == wifiStatusCharacteristicUuid) {
         qDebug() << "Wireless status changed:" << value.toHex().toUInt(nullptr, 16) << "Old status:" << m_wirelessStatus;
         setWirelessStatus(value.toHex().toInt(nullptr, 16));
+        if (m_wirelessStatus == WirelessStatusActivated) {
+            loadCurrentConnection();
+        }
         return;
     }
 
