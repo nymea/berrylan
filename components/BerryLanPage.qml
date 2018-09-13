@@ -36,7 +36,7 @@ Page {
 
     footer: Item {
         id: footer
-        height: app.iconSize * 1.5 + ((systemProductType === "ios" && Screen.height === 812) ? 14 : 0)
+        height: app.iconSize * 1.5 + ((systemProductType === "ios" && Screen.height === 812) ? 10 : 0)
         RowLayout {
             anchors { top: parent.top; margins: app.margins; horizontalCenter: parent.horizontalCenter }
             height: app.iconSize
