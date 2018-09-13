@@ -95,7 +95,23 @@ ApplicationWindow {
         id: pageStack
         anchors.fill: parent
         initialItem: BerryLanPage {
-            title: qsTr("Devices")
+            title: {
+                switch (swipeView.currentIndex) {
+                case 0:
+                case 1:
+                case 2:
+                    return qsTr("Devices")
+                case 3:
+                    return qsTr("Network")
+                case 4:
+                    return qsTr("Login")
+                case 5:
+                    return qsTr("Connecting")
+                case 6:
+                    return qsTr("Connected")
+                }
+            }
+
             backButtonVisible: swipeView.currentIndex === 4
 
             onHelpClicked: pageStack.push(Qt.resolvedUrl("components/HelpPage.qml"))
@@ -134,6 +150,7 @@ ApplicationWindow {
                 anchors.fill: parent
                 interactive: false
 
+                // 0
                 WaitView {
                     id: discoveringView
                     height: swipeView.height
@@ -141,6 +158,7 @@ ApplicationWindow {
                     text: qsTr("Searching for your\nRaspberry Pi")
                 }
 
+                // 1
                 ListView {
                     id: discoveryListView
                     height: swipeView.height
@@ -161,6 +179,7 @@ ApplicationWindow {
                     }
                 }
 
+                // 2
                 WaitView {
                     id: connectingToPiView
                     height: swipeView.height
@@ -168,6 +187,7 @@ ApplicationWindow {
                     text: qsTr("Connecting to your Raspberry Pi")
                 }
 
+                // 3
                 ListView {
                     id: apSelectionListView
                     height: swipeView.height
@@ -189,6 +209,7 @@ ApplicationWindow {
                     }
                 }
 
+                // 4
                 Item {
                     id: authenticationView
                     width: swipeView.width
@@ -233,6 +254,7 @@ ApplicationWindow {
                     }
                 }
 
+                // 5
                 WaitView {
                     id: connectingToWiFiView
                     height: swipeView.height
@@ -242,6 +264,7 @@ ApplicationWindow {
                     }
                 }
 
+                // 6
                 Item {
                     id: resultsView
                     height: swipeView.height
