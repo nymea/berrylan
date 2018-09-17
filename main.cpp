@@ -7,6 +7,7 @@
 #include <QQuickStyle>
 #include <QQmlContext>
 #include <QSysInfo>
+#include <QtWebView>
 
 #ifdef Q_OS_ANDROID
 #include <QtAndroidExtras/QtAndroid>
@@ -35,7 +36,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<BerryLanBusyIndicator>("BerryLan", 1, 0, "BerryLanBusyIndicator");
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-
+    QtWebView::initialize();
     QGuiApplication app(argc, argv);
 
 //    QQuickStyle::setStyle(":/styles");
