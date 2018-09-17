@@ -12,6 +12,6 @@ Page {
 
     WebView {
         anchors.fill: parent
-        url: "http://www.berrylan.org/faq.html"
+        url: "https://www.berrylan.app/faq.html"
     }
 }
