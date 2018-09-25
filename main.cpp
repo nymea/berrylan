@@ -36,9 +36,9 @@ int main(int argc, char *argv[])
     qmlRegisterType<BerryLanBusyIndicator>("BerryLan", 1, 0, "BerryLanBusyIndicator");
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QtWebView::initialize();
     QGuiApplication app(argc, argv);
 
+    QtWebView::initialize();
 //    QQuickStyle::setStyle(":/styles");
     QQuickStyle::setStyle("Material");
 

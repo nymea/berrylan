@@ -52,6 +52,10 @@ Page {
                 Layout.preferredHeight: app.iconSize
                 sourceSize.height: app.iconSize
                 source: "../images/nymea.svg"
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: Qt.openUrlExternally("https://nymea.io")
+                }
             }
             Label {
                 Layout.preferredHeight: app.iconSize * .8
