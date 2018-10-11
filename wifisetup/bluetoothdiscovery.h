@@ -65,7 +65,7 @@ private slots:
     void discoveryCancelled();
     void onError(const QBluetoothDeviceDiscoveryAgent::Error &error);
 
-public slots:
+private slots:
     void start();
     void stop();
 
@@ -75,6 +75,9 @@ private:
     BluetoothDeviceInfos *m_deviceInfos;
 
     bool m_bluetoothAvailable = false;
+#ifdef Q_OS_IOS
+    bool m_bluetoothEnabled = false;
+#endif
     bool m_discoveryEnabled = false;
 };
 
