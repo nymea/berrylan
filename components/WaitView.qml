@@ -18,6 +18,7 @@ Item {
 
         Label {
             Layout.fillWidth: true
+            Layout.margins: app.margins
             text: root.text
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.WordWrap

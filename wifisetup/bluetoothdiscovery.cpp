@@ -35,41 +35,36 @@ BluetoothDiscovery::BluetoothDiscovery(QObject *parent) :
     QBluetoothLocalDevice localDevice;
     if (!localDevice.isValid()) {
         qWarning() << "BluetoothDiscovery: there is no bluetooth device available.";
-        setBluetoothAvailable(false);
+        m_bluetoothAvailable = false;
         return;
     }
 
     if (localDevice.allDevices().isEmpty()) {
         qWarning() << "BluetoothDiscovery: there is no bluetooth device available currently.";
-        setBluetoothAvailable(false);
+        m_bluetoothAvailable = false;
         return;
     }
 
-    setBluetoothAvailable(true);
+    m_bluetoothAvailable = true;
 
     // FIXME: check the device with the most capabilities and check if low energy is available
     QBluetoothHostInfo adapterHostInfo = localDevice.allDevices().first();
 
-    qDebug() << "BluetoothDiscovery: using bluetooth adapter" << adapterHostInfo.name() << adapterHostInfo.address().toString();
     m_localDevice = new QBluetoothLocalDevice(adapterHostInfo.address(), this);
     connect(m_localDevice, &QBluetoothLocalDevice::hostModeStateChanged, this, &BluetoothDiscovery::onBluetoothHostModeChanged);
     onBluetoothHostModeChanged(m_localDevice->hostMode());
 
-    m_discoveryAgent = new QBluetoothDeviceDiscoveryAgent(m_localDevice->address(), this);
 #else
     // Note: on iOS there is no QBluetoothLocalDevice available, therefore we have to assume there is one and
     //       start the discovery agent with the default constructor.
     // https://bugreports.qt.io/browse/QTBUG-65547
 
-    setBluetoothAvailable(true);
-    setBluetoothEnabled(true);
-    m_discoveryAgent = new QBluetoothDeviceDiscoveryAgent(this);
+    m_bluetoothAvailable = true;
+
+    onBluetoothHostModeChanged(QBluetoothLocalDevice::HostConnectable);
 #endif
 
-    connect(m_discoveryAgent, &QBluetoothDeviceDiscoveryAgent::deviceDiscovered, this, &BluetoothDiscovery::deviceDiscovered);
-    connect(m_discoveryAgent, &QBluetoothDeviceDiscoveryAgent::finished, this, &BluetoothDiscovery::discoveryFinished);
-    connect(m_discoveryAgent, &QBluetoothDeviceDiscoveryAgent::canceled, this, &BluetoothDiscovery::discoveryCancelled);
-    connect(m_discoveryAgent, SIGNAL(error(QBluetoothDeviceDiscoveryAgent::Error)), this, SLOT(onError(QBluetoothDeviceDiscoveryAgent::Error)));
+
 }
 
 bool BluetoothDiscovery::bluetoothAvailable() const
@@ -79,22 +74,26 @@ bool BluetoothDiscovery::bluetoothAvailable() const
 
 bool BluetoothDiscovery::bluetoothEnabled() const
 {
-    return m_bluetoothEnabled;
+    return m_bluetoothAvailable && m_localDevice->hostMode() != QBluetoothLocalDevice::HostPoweredOff;
+}
+void BluetoothDiscovery::setBluetoothEnabled(bool bluetoothEnabled) {
+    if (!m_bluetoothAvailable) {
+        return;
+    }
+    if (bluetoothEnabled) {
+        if (m_localDevice->hostMode() == QBluetoothLocalDevice::HostPoweredOff) {
+            m_localDevice->powerOn();
+        }
+    } else {
+        if (m_localDevice->hostMode() != QBluetoothLocalDevice::HostPoweredOff) {
+            m_localDevice->setHostMode(QBluetoothLocalDevice::HostPoweredOff);
+        }
+    }
 }
 
-void BluetoothDiscovery::setBluetoothEnabled(bool enabled)
+bool BluetoothDiscovery::discoveryEnabled() const
 {
-    m_bluetoothEnabled = enabled;
-    emit bluetoothEnabledChanged(m_bluetoothEnabled);
-
-    if (!m_localDevice)
-        return;
-
-    if (enabled) {
-        m_localDevice->powerOn();
-    } else {
-        m_localDevice->setHostMode(QBluetoothLocalDevice::HostPoweredOff);
-    }
+    return m_discoveryEnabled;
 }
 
 bool BluetoothDiscovery::discovering() const
@@ -102,14 +101,15 @@ bool BluetoothDiscovery::discovering() const
     return m_discoveryAgent && m_discoveryAgent->isActive();
 }
 
-void BluetoothDiscovery::setDiscovering(bool discovering)
+void BluetoothDiscovery::setDiscoveryEnabled(bool discoveryEnabled)
 {
-    if (discovering == this->discovering()) {
+    if (m_discoveryEnabled == discoveryEnabled) {
         return;
     }
+    m_discoveryEnabled = discoveryEnabled;
+    emit discoveringChanged();
 
-    qDebug() << "setDiscovering:" << discovering;
-    if (discovering) {
+    if (m_discoveryEnabled) {
         start();
     } else {
         stop();
@@ -121,27 +121,36 @@ BluetoothDeviceInfos *BluetoothDiscovery::deviceInfos()
     return m_deviceInfos;
 }
 
-void BluetoothDiscovery::setBluetoothAvailable(bool available)
-{
-    if (m_bluetoothAvailable == available)
-        return;
-
-    m_bluetoothAvailable = available;
-    emit bluetoothAvailableChanged(m_bluetoothAvailable);
-}
-
 void BluetoothDiscovery::onBluetoothHostModeChanged(const QBluetoothLocalDevice::HostMode &hostMode)
 {
     qDebug() << "BluetoothDiscovery: host mode changed" << hostMode;
     switch (hostMode) {
     case QBluetoothLocalDevice::HostPoweredOff:
-        setBluetoothEnabled(false);
-        stop();
+        if (m_discoveryAgent) {
+            stop();
+            m_discoveryAgent->deleteLater();
+            m_discoveryAgent = nullptr;
+        }
         m_deviceInfos->clearModel();
+        emit bluetoothEnabledChanged(false);
         break;
     default:
         // Note: discovery works in all other modes
-        setBluetoothEnabled(true);
+        emit bluetoothEnabledChanged(m_localDevice->hostMode() != QBluetoothLocalDevice::HostPoweredOff);
+        if (!m_discoveryAgent) {
+#ifdef Q_OS_ANDROID
+            m_discoveryAgent = new QBluetoothDeviceDiscoveryAgent(m_localDevice->address(), this);
+#else
+            m_discoveryAgent = new QBluetoothDeviceDiscoveryAgent(this);
+#endif
+            connect(m_discoveryAgent, &QBluetoothDeviceDiscoveryAgent::deviceDiscovered, this, &BluetoothDiscovery::deviceDiscovered);
+            connect(m_discoveryAgent, &QBluetoothDeviceDiscoveryAgent::finished, this, &BluetoothDiscovery::discoveryFinished);
+            connect(m_discoveryAgent, &QBluetoothDeviceDiscoveryAgent::canceled, this, &BluetoothDiscovery::discoveryCancelled);
+            connect(m_discoveryAgent, SIGNAL(error(QBluetoothDeviceDiscoveryAgent::Error)), this, SLOT(onError(QBluetoothDeviceDiscoveryAgent::Error)));
+        }
+        if (m_discoveryEnabled) {
+            start();
+        }
         break;
     }
 }
@@ -176,7 +185,8 @@ void BluetoothDiscovery::deviceDiscovered(const QBluetoothDeviceInfo &deviceInfo
 void BluetoothDiscovery::discoveryFinished()
 {
     qDebug() << "BluetoothDiscovery: Discovery finished";
-    if (m_enabled) {
+    if (m_discoveryEnabled) {
+        qDebug() << "BluetoothDiscovery: Restarting discovery";
         m_discoveryAgent->start();
     }
 }
@@ -194,11 +204,9 @@ void BluetoothDiscovery::onError(const QBluetoothDeviceDiscoveryAgent::Error &er
 
 void BluetoothDiscovery::start()
 {
-    if (!m_bluetoothEnabled) {
+    if (!m_discoveryAgent || !bluetoothEnabled()) {
         return;
     }
-
-    m_enabled = true;
 
     if (m_discoveryAgent->isActive()) {
         m_discoveryAgent->stop();
@@ -213,7 +221,9 @@ void BluetoothDiscovery::start()
 
 void BluetoothDiscovery::stop()
 {
-    m_enabled = false;
+    if (!m_discoveryAgent) {
+        return;
+    }
 
     qDebug() << "BluetoothDiscovery: Stop discovering.";
     m_discoveryAgent->stop();

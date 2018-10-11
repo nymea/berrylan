@@ -24,7 +24,12 @@ ApplicationWindow {
 
     BluetoothDiscovery {
         id: discovery
-        discovering: swipeView.currentIndex <= 1
+        discoveryEnabled: swipeView.currentIndex <= 1
+        onBluetoothEnabledChanged: {
+            if (!bluetoothEnabled) {
+                swipeView.currentIndex = 0;
+            }
+        }
     }
 
     NetworkManagerController {
@@ -155,7 +160,11 @@ ApplicationWindow {
                     id: discoveringView
                     height: swipeView.height
                     width: swipeView.width
-                    text: qsTr("Searching for your\nRaspberry Pi")
+                    text: !discovery.bluetoothAvailable
+                          ? qsTr("Bluetooth doesn't seem to be available on this device. BerryLan requires a working Bluetooth connection.")
+                          : !discovery.bluetoothEnabled
+                            ? qsTr("Bluetooth seems to be disabled. Please enable Bluetooth on your device in order to use BerryLan.")
+                            : qsTr("Searching for your\nRaspberry Pi")
                 }
 
                 // 1
@@ -273,7 +282,9 @@ ApplicationWindow {
                         anchors.fill: parent
                         Label {
                             Layout.fillWidth: true
+                            Layout.margins: app.margins
                             text: d.currentAP ? "IP Address: " + d.currentAP.hostAddress : ""
+                            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                             font.pixelSize: app.largeFont
                             font.bold: true
                             horizontalAlignment: Text.AlignHCenter

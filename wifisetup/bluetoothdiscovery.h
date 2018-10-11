@@ -33,39 +33,29 @@ class BluetoothDiscovery : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bool bluetoothAvailable READ bluetoothAvailable NOTIFY bluetoothAvailableChanged)
-    Q_PROPERTY(bool bluetoothEnabled READ bluetoothEnabled NOTIFY bluetoothEnabledChanged)
-    Q_PROPERTY(bool discovering READ discovering WRITE setDiscovering NOTIFY discoveringChanged)
+    Q_PROPERTY(bool bluetoothEnabled READ bluetoothEnabled WRITE setBluetoothEnabled NOTIFY bluetoothEnabledChanged)
+    Q_PROPERTY(bool discoveryEnabled READ discoveryEnabled WRITE setDiscoveryEnabled NOTIFY discoveryEnabledChanged)
+    Q_PROPERTY(bool discovering READ discovering NOTIFY discoveringChanged)
     Q_PROPERTY(BluetoothDeviceInfos *deviceInfos READ deviceInfos CONSTANT)
 
 public:
     explicit BluetoothDiscovery(QObject *parent = nullptr);
 
     bool bluetoothAvailable() const;
-
     bool bluetoothEnabled() const;
-    void setBluetoothEnabled(bool enabled);
+    void setBluetoothEnabled(bool bluetoothEnabled);
+
+    bool discoveryEnabled() const;
+    void setDiscoveryEnabled(bool discoveryEnabled);
 
     bool discovering() const;
-    void setDiscovering(bool discovering);
 
     BluetoothDeviceInfos *deviceInfos();
-
-private:
-    QBluetoothLocalDevice *m_localDevice = nullptr;
-    QBluetoothDeviceDiscoveryAgent *m_discoveryAgent  = nullptr;
-    BluetoothDeviceInfos *m_deviceInfos;
-
-    bool m_enabled = false;
-    bool m_bluetoothAvailable = false;
-    bool m_bluetoothEnabled = false;
-
-    void setBluetoothAvailable(bool available);
-//    void setDiscovering(bool discovering);
 
 signals:
     void bluetoothAvailableChanged(bool bluetoothAvailable);
     void bluetoothEnabledChanged(bool bluetoothEnabled);
-
+    void discoveryEnabledChanged(bool discoveryEnabled);
     void discoveringChanged();
 
 private slots:
@@ -76,9 +66,16 @@ private slots:
     void onError(const QBluetoothDeviceDiscoveryAgent::Error &error);
 
 public slots:
-    Q_INVOKABLE void start();
-    Q_INVOKABLE void stop();
+    void start();
+    void stop();
 
+private:
+    QBluetoothLocalDevice *m_localDevice = nullptr;
+    QBluetoothDeviceDiscoveryAgent *m_discoveryAgent  = nullptr;
+    BluetoothDeviceInfos *m_deviceInfos;
+
+    bool m_bluetoothAvailable = false;
+    bool m_discoveryEnabled = false;
 };
 
 #endif // BLUETOOTHDISCOVERY_H
