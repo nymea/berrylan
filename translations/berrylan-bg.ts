@@ -89,44 +89,45 @@
     </message>
     <message>
         <source>Try again</source>
-        <translation>Моля. опитайте отново.</translation>
+        <translation>Моля, опитайте отново.</translation>
     </message>
     <message>
         <source>Devices</source>
-        <translation></translation>
+        <translation>Устройства</translation>
     </message>
     <message>
         <source>Network</source>
-        <translation></translation>
+        <translation>Мрежа</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation></translation>
+        <translation>Логин</translation>
     </message>
     <message>
         <source>Connecting</source>
-        <translation></translation>
+        <translation>Свързване</translation>
     </message>
     <message>
         <source>Connected</source>
-        <translation></translation>
+        <translation>Успешно свързване</translation>
     </message>
     <message>
         <source>Bluetooth doesn&apos;t seem to be available on this device. BerryLan requires a working Bluetooth connection.</source>
-        <translation></translation>
+        <translation>Bluetooth не е налице на това устройство. BerryLan изисква работеща връзка с Bluetooth.</translation>
     </message>
     <message>
         <source>Bluetooth seems to be disabled. Please enable Bluetooth on your device in order to use BerryLan.</source>
-        <translation></translation>
+        <translation>Bluetooth не е налице на това устройство. Моля активирайте Bluetooth, за да продължите работата си с BerryLan.</translation>
     </message>
     <message>
         <source>Searching for your
 Raspberry Pi</source>
-        <translation></translation>
+        <translation>Търся твоя
+Raspberry Pi</translation>
     </message>
     <message>
         <source>Connecting to your Raspberry Pi</source>
-        <translation></translation>
+        <translation>Свързвам се с твоя Raspberry Pi</translation>
     </message>
     <message>
         <source>OK</source>
@@ -134,11 +135,11 @@ Raspberry Pi</source>
     </message>
     <message>
         <source>Connecting the Raspberry Pi to %1</source>
-        <translation></translation>
+        <translation>Свързвам твоя Raspberry Pi с %1</translation>
     </message>
     <message>
         <source>Thanks for using BerryLan!</source>
-        <translation></translation>
+        <translation>Благодаря ти, че използва BerryLan!</translation>
     </message>
 </context>
 </TS>
