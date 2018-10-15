@@ -1,4 +1,5 @@
-QT += quick bluetooth svg quickcontrols2 quickcontrols2-private webview
+QT += quick bluetooth svg quickcontrols2
+QT += quickcontrols2-private webview
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
@@ -84,3 +85,14 @@ ios: {
     ios_launch_images.files += $$files(ios/LaunchImage*.png) ios/LaunchScreen1.xib
     QMAKE_BUNDLE_DATA += ios_launch_images
 }
+
+TRANSLATIONS += $$files($$absolute_path(translations)/*.ts, true)
+# Run lrelease with the qmake run so we're ready to build
+system("lrelease $$TRANSLATIONS")
+
+# and add make targets for manual lupdate and lrelease runs
+for(ts, $$list($${SOURCES})) { ABS_SOURCES += $$absolute_path($${ts}) }
+for(qrc, $$list($${RESOURCES})) { ABS_RESOURCES += $$absolute_path($${qrc}) }
+lupdate.commands = lupdate $${ABS_SOURCES} $${ABS_RESOURCES} -ts $${TRANSLATIONS}
+lrelease.commands = lrelease $${TRANSLATIONS}
+QMAKE_EXTRA_TARGETS += lupdate lrelease

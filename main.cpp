@@ -8,6 +8,8 @@
 #include <QQmlContext>
 #include <QSysInfo>
 #include <QtWebView>
+#include <QTranslator>
+#include <QLibraryInfo>
 
 #ifdef Q_OS_ANDROID
 #include <QtAndroidExtras/QtAndroid>
@@ -55,6 +57,16 @@ int main(int argc, char *argv[])
     applicationFont.setPixelSize(20);
     applicationFont.setWeight(QFont::Light);
     QGuiApplication::setFont(applicationFont);
+
+    QTranslator qtTranslator;
+    qtTranslator.load("qt_" + QLocale::system().name(),
+            QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    app.installTranslator(&qtTranslator);
+
+    QTranslator appTranslator;
+    qDebug() << "Loading translation file:" << ":/translations/berrylan-" + QLocale::system().name();
+    appTranslator.load(":/translations/berrylan-" + QLocale::system().name());
+    app.installTranslator(&appTranslator);
 
     QQmlApplicationEngine engine;
 

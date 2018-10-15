@@ -45,5 +45,6 @@
         <file>fonts/Montserrat/OFL.txt</file>
         <file>components/HelpPage.qml</file>
         <file>images/back.svg</file>
+        <file>translations/berrylan-de_DE.qm</file>
     </qresource>
 </RCC>
