@@ -88,7 +88,7 @@
     <message>
         <location filename="../wifisetup/wirelesssetupmanager.cpp" line="534"/>
         <source>The wireless networking is disabled on the device.</source>
-        <translation>WLAN ist auf diesem Gerät deaktiviert.</translation>
+        <translation>Die Funkverbindung ist auf diesem Gerät deaktiviert.</translation>
     </message>
     <message>
         <location filename="../wifisetup/wirelesssetupmanager.cpp" line="537"/>
