@@ -5,76 +5,76 @@
     <name>BerryLanPage</name>
     <message>
         <source>an open source tool by</source>
-        <translation></translation>
+        <translation>създадено с отворен код от</translation>
     </message>
 </context>
 <context>
     <name>BluetoothDevice</name>
     <message>
         <source>Connecting to %1...</source>
-        <translation></translation>
+        <translation>Свързване с %1...</translation>
     </message>
     <message>
         <source>Connected to %1</source>
-        <translation></translation>
+        <translation>Връзка с %1 успешна</translation>
     </message>
     <message>
         <source>Disconnecting from %1...</source>
-        <translation></translation>
+        <translation>Прекратявам връзка с %1...</translation>
     </message>
     <message>
         <source>Discovering services of %1...</source>
-        <translation></translation>
+        <translation>Откривам услугите на %1...</translation>
     </message>
     <message>
         <source>%1 connected and discovered.</source>
-        <translation></translation>
+        <translation>%1 е открито и свързано.</translation>
     </message>
     <message>
         <source>%1 disconnected.</source>
-        <translation></translation>
+        <translation>%1 прекрати връзката.</translation>
     </message>
 </context>
 <context>
     <name>HelpPage</name>
     <message>
         <source>About BerryLan</source>
-        <translation></translation>
+        <translation>Относно BerryLan</translation>
     </message>
 </context>
 <context>
     <name>WirelessSetupManager</name>
     <message>
         <source>Invalid value.</source>
-        <translation></translation>
+        <translation>Невалидна стойност.</translation>
     </message>
     <message>
         <source>There is no networkmanager available on the device.</source>
-        <translation></translation>
+        <translation>Това устройство не поддържа networkmanager.</translation>
     </message>
     <message>
         <source>There is no wireless device available on the device.</source>
-        <translation></translation>
+        <translation>Това устройство не поддържа безжична връзка.</translation>
     </message>
     <message>
         <source>Unknown error occured.</source>
-        <translation></translation>
+        <translation>Възникна неизвестна грешка.</translation>
     </message>
     <message>
         <source>Invalid command.</source>
-        <translation></translation>
+        <translation>Неразпозната команда.</translation>
     </message>
     <message>
         <source>Invalid parameters.</source>
-        <translation></translation>
+        <translation>Грешни параметри.</translation>
     </message>
     <message>
         <source>The wireless networking is disabled on the device.</source>
-        <translation></translation>
+        <translation>Безжичната мрежа е деактивирана на устройството.</translation>
     </message>
     <message>
         <source>The networking is disabled on the device.</source>
-        <translation></translation>
+        <translation>Мрежовото свързване е деактивирано на устройството.</translation>
     </message>
 </context>
 <context>
@@ -85,11 +85,11 @@
     </message>
     <message>
         <source>Sorry, the password is wrong.</source>
-        <translation></translation>
+        <translation>Грешна парола.</translation>
     </message>
     <message>
         <source>Try again</source>
-        <translation></translation>
+        <translation>Моля. опитайте отново.</translation>
     </message>
     <message>
         <source>Devices</source>
