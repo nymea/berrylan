@@ -36,3 +36,9 @@ The app tells you if there might be an issue with the WLAN.
 
 #### Open Source
 We love Open Source & Qt. Contribute here.
+
+### Planed features
+
+- Add encryption (ECDH) in order to secure the data transfere.
+- Allow to install different packages (list of cool projects)
+
