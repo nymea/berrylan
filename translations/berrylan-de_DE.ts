@@ -19,7 +19,7 @@
     <message>
         <location filename="../wifisetup/bluetoothdevice.cpp" line="132"/>
         <source>Connected to %1</source>
-        <translation>Mit %1 verbunden</translation>
+        <translation>Verbunden mit %1</translation>
     </message>
     <message>
         <location filename="../wifisetup/bluetoothdevice.cpp" line="136"/>
@@ -29,12 +29,12 @@
     <message>
         <location filename="../wifisetup/bluetoothdevice.cpp" line="140"/>
         <source>Discovering services of %1...</source>
-        <translation>Lese Diense von %1...</translation>
+        <translation>Suche Dienste auf %1...</translation>
     </message>
     <message>
         <location filename="../wifisetup/bluetoothdevice.cpp" line="144"/>
         <source>%1 connected and discovered.</source>
-        <translation>%1 verbunden und erkannt.</translation>
+        <translation>%1 verbunden und durchsucht.</translation>
     </message>
     <message>
         <location filename="../wifisetup/bluetoothdevice.cpp" line="149"/>
@@ -61,19 +61,19 @@
         <location filename="../wifisetup/wirelesssetupmanager.cpp" line="489"/>
         <location filename="../wifisetup/wirelesssetupmanager.cpp" line="528"/>
         <source>There is no networkmanager available on the device.</source>
-        <translation>Auf diesem Gerät ist kein Netzwerk-Manager verfügbar.</translation>
+        <translation>Auf diesem Gerät ist keine Netzwerkverwaltung verfügbar.</translation>
     </message>
     <message>
         <location filename="../wifisetup/wirelesssetupmanager.cpp" line="492"/>
         <location filename="../wifisetup/wirelesssetupmanager.cpp" line="531"/>
         <source>There is no wireless device available on the device.</source>
-        <translation>Auf diesem Gerät gibt es keine WLAN Verbindungen.</translation>
+        <translation>Auf diesem Gerät ist kein Funkverbindungsmodul vorhanden.</translation>
     </message>
     <message>
         <location filename="../wifisetup/wirelesssetupmanager.cpp" line="495"/>
         <location filename="../wifisetup/wirelesssetupmanager.cpp" line="540"/>
         <source>Unknown error occured.</source>
-        <translation>Ein unbekannter Fehler ist aufgetreten.</translation>
+        <translation>Unbekannter Fehler aufgetreten.</translation>
     </message>
     <message>
         <location filename="../wifisetup/wirelesssetupmanager.cpp" line="522"/>
