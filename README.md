@@ -26,7 +26,7 @@ That's it, have fun!
 ## Features 
 
 ### Plain Raspbian
-Everything is like you are used to - we just add BerryLan (details).
+Everything is like you are used to - we just add BerryLan.
 
 #### IP Address
 The app displays you the IP Address at the end of the setup process.
@@ -36,3 +36,14 @@ The app tells you if there might be an issue with the WLAN.
 
 #### Open Source
 We love Open Source & Qt. Contribute here.
+
+## Installation on a plain Raspbian
+
+    sudo apt-get install dirmngr
+    echo "deb http://repository.nymea.io stretch main" | sudo tee /etc/apt/sources.list.d/nymea.list
+    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key A1A19ED6
+    sudo apt-get update
+    sudo apt-get install nymea-networkmanager
+    sudo systemctl disable dhcpcd
+    reboot
+
