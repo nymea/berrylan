@@ -46,5 +46,6 @@
         <file>components/HelpPage.qml</file>
         <file>images/back.svg</file>
         <file>translations/berrylan-de_DE.qm</file>
+        <file>translations/berrylan-bg.qm</file>
     </qresource>
 </RCC>
