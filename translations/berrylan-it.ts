@@ -5,18 +5,18 @@
     <name>BerryLanPage</name>
     <message>
         <source>an open source tool by</source>
-        <translation></translation>
+        <translation>un progetto open source da</translation>
     </message>
 </context>
 <context>
     <name>BluetoothDevice</name>
     <message>
         <source>Connecting to %1...</source>
-        <translation></translation>
+        <translation>Connettendo a %1...</translation>
     </message>
     <message>
         <source>Connected to %1</source>
-        <translation></translation>
+        <translation>Connesso a %1</translation>
     </message>
     <message>
         <source>Disconnecting from %1...</source>
