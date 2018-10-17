@@ -47,5 +47,6 @@
         <file>images/back.svg</file>
         <file>translations/berrylan-de_DE.qm</file>
         <file>translations/berrylan-bg.qm</file>
+        <file>translations/berrylan-it.qm</file>
     </qresource>
 </RCC>
