@@ -20,61 +20,61 @@
     </message>
     <message>
         <source>Disconnecting from %1...</source>
-        <translation></translation>
+        <translation>Disconnettendo da %1...</translation>
     </message>
     <message>
         <source>Discovering services of %1...</source>
-        <translation></translation>
+        <translation>Scoprendo i servizi di %1...</translation>
     </message>
     <message>
         <source>%1 connected and discovered.</source>
-        <translation></translation>
+        <translation>%1 connesso e trovato.</translation>
     </message>
     <message>
         <source>%1 disconnected.</source>
-        <translation></translation>
+        <translation>%1 disconnesso.</translation>
     </message>
 </context>
 <context>
     <name>HelpPage</name>
     <message>
         <source>About BerryLan</source>
-        <translation></translation>
+        <translation>Riguardo BerryLan</translation>
     </message>
 </context>
 <context>
     <name>WirelessSetupManager</name>
     <message>
         <source>Invalid value.</source>
-        <translation></translation>
+        <translation>Valore non valido.</translation>
     </message>
     <message>
         <source>There is no networkmanager available on the device.</source>
-        <translation></translation>
+        <translation>Non c&apos;é alcun gestore di rete disponibile sul dispositivo.</translation>
     </message>
     <message>
         <source>There is no wireless device available on the device.</source>
-        <translation></translation>
+        <translation>Non c&apos;é alcun dispositivo wireless disponibile.</translation>
     </message>
     <message>
         <source>Unknown error occured.</source>
-        <translation></translation>
+        <translation>Errore sconosciuto.</translation>
     </message>
     <message>
         <source>Invalid command.</source>
-        <translation></translation>
+        <translation>Comando non valido.</translation>
     </message>
     <message>
         <source>Invalid parameters.</source>
-        <translation></translation>
+        <translation>Parametri non validi.</translation>
     </message>
     <message>
         <source>The wireless networking is disabled on the device.</source>
-        <translation></translation>
+        <translation>La connettivitá wireless é disabilitata sul dispositivo.</translation>
     </message>
     <message>
         <source>The networking is disabled on the device.</source>
-        <translation></translation>
+        <translation>La connettivitá é disabilitata sul dispositivo.</translation>
     </message>
 </context>
 <context>
@@ -85,48 +85,49 @@
     </message>
     <message>
         <source>Sorry, the password is wrong.</source>
-        <translation></translation>
+        <translation>Mi dispiace, la password é sbagliata.</translation>
     </message>
     <message>
         <source>Try again</source>
-        <translation></translation>
+        <translation>Prova ancora</translation>
     </message>
     <message>
         <source>Devices</source>
-        <translation></translation>
+        <translation>Dispositivi</translation>
     </message>
     <message>
         <source>Network</source>
-        <translation></translation>
+        <translation>Rete</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation></translation>
+        <translation>Accesso</translation>
     </message>
     <message>
         <source>Connecting</source>
-        <translation></translation>
+        <translation>Connettendo</translation>
     </message>
     <message>
         <source>Connected</source>
-        <translation></translation>
+        <translation>Connesso</translation>
     </message>
     <message>
         <source>Bluetooth doesn&apos;t seem to be available on this device. BerryLan requires a working Bluetooth connection.</source>
-        <translation></translation>
+        <translation>Bluetooth non sembra disponibile su questo dispositivo. BerryLan richiede una connessione Bluetooth funzionante.</translation>
     </message>
     <message>
         <source>Bluetooth seems to be disabled. Please enable Bluetooth on your device in order to use BerryLan.</source>
-        <translation></translation>
+        <translation>Bluetooth sembra disabilitato. Per favore abilita Bluetooth sul tuo dispositivo per utilizzare BerryLan.</translation>
     </message>
     <message>
         <source>Searching for your
 Raspberry Pi</source>
-        <translation></translation>
+        <translation>Ricercando il tuo
+Raspberry Pi</translation>
     </message>
     <message>
         <source>Connecting to your Raspberry Pi</source>
-        <translation></translation>
+        <translation>Connettendo al tuo Raspberry Pi</translation>
     </message>
     <message>
         <source>OK</source>
@@ -134,11 +135,11 @@ Raspberry Pi</source>
     </message>
     <message>
         <source>Connecting the Raspberry Pi to %1</source>
-        <translation></translation>
+        <translation>Connettendo il Raspberry Pi a %1</translation>
     </message>
     <message>
         <source>Thanks for using BerryLan!</source>
-        <translation></translation>
+        <translation>Grazie per aver usato BerryLan!</translation>
     </message>
 </context>
 </TS>
