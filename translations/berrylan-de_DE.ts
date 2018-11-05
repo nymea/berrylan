@@ -168,7 +168,7 @@ Raspberry Pi</translation>
     <message>
         <location filename="../main.qml" line="256"/>
         <source>Connecting the Raspberry Pi to %1</source>
-        <translation>Verbinden den Raspberry Pi mit %1</translation>
+        <translation>Verbinde den Raspberry Pi mit %1</translation>
     </message>
     <message>
         <location filename="../main.qml" line="300"/>
