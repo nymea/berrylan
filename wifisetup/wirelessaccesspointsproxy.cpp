@@ -62,17 +62,6 @@ bool WirelessAccessPointsProxy::filterAcceptsRow(int source_row, const QModelInd
     return true;
 }
 
-bool WirelessAccessPointsProxy::lessThan(const QModelIndex &left, const QModelIndex &right) const
-{
-    WirelessAccessPoint *leftAccessPoint = m_accessPoints->get(left.row());
-    WirelessAccessPoint *rightAccessPoint = m_accessPoints->get(right.row());
-
-    if (leftAccessPoint->selectedNetwork())
-        return true;
-
-    return leftAccessPoint->signalStrength() > rightAccessPoint->signalStrength();
-}
-
 WirelessAccessPoint *WirelessAccessPointsProxy::get(int index) const
 {
     return m_accessPoints->get(mapToSource(this->index(index, 0)).row());

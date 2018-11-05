@@ -112,7 +112,7 @@ bool WirelessSetupManager::wirelessEnabled() const
     return m_wirelessEnabled;
 }
 
-WirelessAccessPoints *WirelessSetupManager::accessPoints()
+WirelessAccessPoints *WirelessSetupManager::accessPoints() const
 {
     return m_accessPoints;
 }
@@ -483,16 +483,16 @@ void WirelessSetupManager::processNetworkResponse(const QVariantMap &response)
 
         switch (responseCode) {
         case NetworkServiceResponseIvalidValue:
-            emit errorOccured(tr("Invalid value."));
+            emit errorOccurred(tr("Invalid value."));
             break;
         case NetworkServiceResponseNetworkManagerNotAvailable:
-            emit errorOccured(tr("There is no networkmanager available on the device."));
+            emit errorOccurred(tr("There is no networkmanager available on the device."));
             break;
         case NetworkServiceResponseWirelessNotAvailable:
-            emit errorOccured(tr("There is no wireless device available on the device."));
+            emit errorOccurred(tr("There is no wireless device available on the device."));
             break;
         default:
-            emit errorOccured(tr("Unknown error occured."));
+            emit errorOccurred(tr("Unknown error occurred."));
             break;
         }
 
@@ -519,25 +519,25 @@ void WirelessSetupManager::processWifiResponse(const QVariantMap &response)
 
         switch (responseCode) {
         case WirelessServiceResponseIvalidCommand:
-            emit errorOccured(tr("Invalid command."));
+            emit errorOccurred(tr("Invalid command."));
             break;
         case WirelessServiceResponseIvalidParameters:
-            emit errorOccured(tr("Invalid parameters."));
+            emit errorOccurred(tr("Invalid parameters."));
             break;
         case WirelessServiceResponseNetworkManagerNotAvailable:
-            emit errorOccured(tr("There is no networkmanager available on the device."));
+            emit errorOccurred(tr("There is no networkmanager available on the device."));
             break;
         case WirelessServiceResponseWirelessNotAvailable:
-            emit errorOccured(tr("There is no wireless device available on the device."));
+            emit errorOccurred(tr("There is no wireless device available on the device."));
             break;
         case WirelessServiceResponseWirelessNotEnabled:
-            emit errorOccured(tr("The wireless networking is disabled on the device."));
+            emit errorOccurred(tr("The wireless networking is disabled on the device."));
             break;
         case WirelessServiceResponseNetworkingNotEnabled:
-            emit errorOccured(tr("The networking is disabled on the device."));
+            emit errorOccurred(tr("The networking is disabled on the device."));
             break;
         default:
-            emit errorOccured(tr("Unknown error occured."));
+            emit errorOccurred(tr("Unknown error occurred."));
             break;
         }
 
@@ -561,7 +561,6 @@ void WirelessSetupManager::processWifiResponse(const QVariantMap &response)
             accessPoint->setMacAddress(accessPointVariantMap.value("m").toString());
             accessPoint->setSignalStrength(accessPointVariantMap.value("s").toInt());
             accessPoint->setProtected(accessPointVariantMap.value("p").toBool());
-            accessPoint->setSelectedNetwork(false);
             accessPoint->setHostAddress("");
 
             m_accessPoints->addWirelessAccessPoint(accessPoint);
@@ -590,14 +589,11 @@ void WirelessSetupManager::processWifiResponse(const QVariantMap &response)
         foreach (WirelessAccessPoint *accessPoint, m_accessPoints->wirelessAccessPoints()) {
             if (accessPoint->macAddress() == macAddress) {
                 // Set the current network
-                accessPoint->setSelectedNetwork(true);
+                m_currentConnection = accessPoint;
+                emit currentConnectionChanged();
                 accessPoint->setHostAddress(currentConnection.value("i").toString());
-            } else {
-                accessPoint->setSelectedNetwork(false);
-                accessPoint->setHostAddress(QString());
             }
         }
-
         break;
     }
     default:

@@ -41,6 +41,7 @@ class WirelessSetupManager : public BluetoothDevice
     Q_PROPERTY(bool initialized READ initialized NOTIFY initializedChanged)
 
     Q_PROPERTY(WirelessAccessPoints *accessPoints READ accessPoints CONSTANT)
+    Q_PROPERTY(WirelessAccessPoint *currentConnection READ currentConnection NOTIFY currentConnectionChanged)
 
     Q_PROPERTY(QString modelNumber READ modelNumber NOTIFY modelNumberChanged)
     Q_PROPERTY(QString manufacturer READ manufacturer NOTIFY manufacturerChanged)
@@ -158,7 +159,8 @@ public:
     bool networkingEnabled() const;
     bool wirelessEnabled() const;
 
-    WirelessAccessPoints *accessPoints();
+    WirelessAccessPoints *accessPoints() const;
+    WirelessAccessPoint *currentConnection() const;
 
     void reloadData();
 
@@ -179,6 +181,7 @@ private:
     QLowEnergyService *m_systemService = nullptr;
 
     WirelessAccessPoints *m_accessPoints = nullptr;
+    WirelessAccessPoint *m_currentConnection = nullptr;
 
     QString m_modelNumber;
     QString m_manufacturer;
@@ -244,7 +247,9 @@ signals:
     void networkingEnabledChanged();
     void wirelessEnabledChanged();
 
-    void errorOccured(const QString &errorMessage);
+    void currentConnectionChanged();
+
+    void errorOccurred(const QString &errorMessage);
 
 private slots:
     void onConnectedChanged();

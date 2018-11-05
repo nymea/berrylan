@@ -100,18 +100,3 @@ void WirelessAccessPoint::setProtected(const bool &isProtected)
     emit isProtectedChanged(m_isProtected);
 
 }
-
-bool WirelessAccessPoint::selectedNetwork() const
-{
-    return m_selectedNetwork;
-}
-
-void WirelessAccessPoint::setSelectedNetwork(bool selected)
-{
-    if (m_selectedNetwork == selected)
-        return;
-
-    qDebug() << "Selected network changed" << m_ssid << selected;
-    m_selectedNetwork = selected;
-    emit selectedNetworkChanged(m_selectedNetwork);
-}

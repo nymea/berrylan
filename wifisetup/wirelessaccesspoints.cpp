@@ -71,16 +71,9 @@ QVariant WirelessAccessPoints::data(const QModelIndex &index, int role) const
         return accessPoint->signalStrength();
     } else if (role == WirelessAccesspointRoleProtected) {
         return accessPoint->isProtected();
-    } else if (role == WirelessAccesspointRoleSelectedNetwork) {
-        return accessPoint->selectedNetwork();
     }
 
     return QVariant();
-}
-
-int WirelessAccessPoints::count() const
-{
-    return m_wirelessAccessPoints.count();
 }
 
 WirelessAccessPoint *WirelessAccessPoints::getAccessPoint(const QString &ssid) const
@@ -148,14 +141,6 @@ void WirelessAccessPoints::removeWirelessAccessPoint(WirelessAccessPoint *access
     endRemoveRows();
 
     emit countChanged();
-}
-
-void WirelessAccessPoints::clearSelectedNetwork()
-{
-    foreach (WirelessAccessPoint *accessPoint, m_wirelessAccessPoints) {
-        accessPoint->setSelectedNetwork(false);
-        accessPoint->setHostAddress(QString());
-    }
 }
 
 QHash<int, QByteArray> WirelessAccessPoints::roleNames() const
