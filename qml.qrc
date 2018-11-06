@@ -48,5 +48,9 @@
         <file>translations/berrylan-de_DE.qm</file>
         <file>translations/berrylan-bg.qm</file>
         <file>translations/berrylan-it.qm</file>
+        <file>images/wifi-33.svg</file>
+        <file>images/wifi-0.svg</file>
+        <file>images/wifi-66.svg</file>
+        <file>images/wifi-100.svg</file>
     </qresource>
 </RCC>

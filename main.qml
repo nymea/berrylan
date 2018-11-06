@@ -39,12 +39,12 @@ ApplicationWindow {
     QtObject {
         id: d
         property var currentAP: null
+        readonly property bool accessPointMode: networkManager.manager && networkManager.manager.wirelessDeviceMode == WirelessSetupManager.WirelessDeviceModeAccessPoint
     }
 
     Connections {
         target: discovery.deviceInfos
         onCountChanged: {
-            print("discovery count changed:", discovery.deviceInfos.count)
             if (swipeView.currentItem === discoveringView && discovery.deviceInfos.count > 0) {
                 swipeView.currentIndex++
             }
@@ -120,18 +120,23 @@ ApplicationWindow {
             backButtonVisible: swipeView.currentIndex === 4
 
             onHelpClicked: pageStack.push(Qt.resolvedUrl("components/HelpPage.qml"))
-            onBackClicked: swipeView.currentIndex--
+            onBackClicked: {
+                d.currentAP = null
+                swipeView.currentIndex--
+            }
 
             step: {
                 switch (swipeView.currentIndex) {
                 case 0:
-                    return 0;
                 case 1:
-                    return 1;
+                    return 0;
                 case 2:
                     return 3;
                 case 3:
-                    if (!networkManager.manager || networkManager.manager.accessPoints.count == 0) {
+                    if (!networkManager.manager) {
+                        return 2;
+                    }
+                    if (networkManager.manager.accessPoints.count == 0) {
                         return 3;
                     }
                     return 4;
@@ -197,26 +202,50 @@ ApplicationWindow {
                 }
 
                 // 3
-                ListView {
-                    id: apSelectionListView
+                ColumnLayout {
                     height: swipeView.height
                     width: swipeView.width
-                    model: networkManager.manager ? networkManager.manager.accessPoints : null
-                    clip: true
 
-                    delegate: BerryLanItemDelegate {
-                        width: parent.width
-                        text: model.ssid
-                        iconSource: "../images/wifi.svg"
+                    ListView {
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        id: apSelectionListView
+                        model: WirelessAccessPointsProxy {
+                            id: accessPointsProxy
+                            accessPoints: networkManager.manager ? networkManager.manager.accessPoints : null
+                        }
+                        clip: true
 
+                        delegate: BerryLanItemDelegate {
+                            width: parent.width
+                            text: model.ssid
+                            iconSource: model.signalStrength > 66
+                                        ? "../images/wifi-100.svg"
+                                        : model.signalStrength > 33
+                                          ? "../images/wifi-66.svg"
+                                          : model.signalStrength > 0
+                                            ? "../images/wifi-33.svg"
+                                            : "../images/wifi-0.svg"
+
+                            onClicked: {
+                                print("Connect to ", model.ssid, " --> ", model.macAddress)
+                                d.currentAP = accessPointsProxy.get(index);
+
+                                swipeView.currentIndex++;
+                            }
+                        }
+                    }
+
+                    Button {
+                        Layout.alignment: Qt.AlignHCenter
+                        visible: networkManager.manager.accessPointModeAvailable
+                        text: qsTr("Open Access Point")
                         onClicked: {
-                            print("Connect to ", model.ssid, " --> ", model.macAddress)
-                            d.currentAP = networkManager.manager.accessPoints.get(index);
-
-                            swipeView.currentIndex++;
+                            swipeView.currentIndex++
                         }
                     }
                 }
+
 
                 // 4
                 Item {
@@ -228,12 +257,37 @@ ApplicationWindow {
                         anchors.verticalCenterOffset: - swipeView.height / 4
                         width: app.iconSize * 8
                         spacing: app.margins
+                        Label {
+                            Layout.fillWidth: true
+                            text: qsTr("Name")
+                            visible: !d.currentAP
+                        }
+
+                        TextField {
+                            id: ssidTextField
+                            Layout.fillWidth: true
+                            visible: !d.currentAP
+                            maximumLength: 32
+                            onAccepted: {
+                                passwordTextField.focus = true
+                            }
+                        }
+
+                        Label {
+                            Layout.fillWidth: true
+                            text: qsTr("Password")
+                        }
+
                         RowLayout {
                             TextField {
                                 id: passwordTextField
                                 Layout.fillWidth: true
+                                maximumLength: 64
                                 property bool showPassword: false
                                 echoMode: showPassword ? TextInput.Normal : TextInput.Password
+                                onAccepted: {
+                                    okButton.clicked()
+                                }
                             }
 
                             ColorIcon {
@@ -249,14 +303,21 @@ ApplicationWindow {
                         }
 
                         Button {
+                            id: okButton
                             Layout.fillWidth: true
                             text: qsTr("OK")
                             enabled: passwordTextField.displayText.length >= 8
                             onClicked: {
-                                connectingToWiFiView.text = qsTr("Connecting the Raspberry Pi to %1").arg(d.currentAP.ssid);
+                                if (d.currentAP) {
+                                    connectingToWiFiView.text = qsTr("Connecting the Raspberry Pi to %1").arg(d.currentAP.ssid);
+                                    networkManager.manager.connectWirelessNetwork(d.currentAP.ssid, passwordTextField.text)
+                                } else {
+                                    connectingToWiFiView.text = qsTr("Opening access point \"%1\" on the Raspberry Pi").arg(ssidTextField.text);
+                                    networkManager.manager.startAccessPoint(ssidTextField.text, passwordTextField.text)
+                                }
                                 connectingToWiFiView.buttonText = "";
                                 connectingToWiFiView.running = true
-                                networkManager.manager.connectWirelessNetwork(d.currentAP.ssid, passwordTextField.text)
+
                                 swipeView.currentIndex++
                             }
                         }
@@ -278,17 +339,28 @@ ApplicationWindow {
                     id: resultsView
                     height: swipeView.height
                     width: swipeView.width
+
                     ColumnLayout {
                         anchors.fill: parent
                         Label {
                             Layout.fillWidth: true
                             Layout.margins: app.margins
-                            text: d.currentAP ? "IP Address: " + d.currentAP.hostAddress : ""
+                            text: d.currentAP ? qsTr("IP Address: %1").arg(d.currentAP.hostAddress)
+                                              : d.accessPointMode ? qsTr("Access point name: %1").arg(networkManager.manager.currentConnection.ssid) : ""
                             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                             font.pixelSize: app.largeFont
                             font.bold: true
                             horizontalAlignment: Text.AlignHCenter
                         }
+                        Button {
+                            Layout.alignment: Qt.AlignHCenter
+                            visible: d.accessPointMode
+                            text: qsTr("Close access point")
+                            onClicked: {
+                                networkManager.manager.disconnectWirelessNetwork();
+                            }
+                        }
+
                         Item {
                             Layout.fillWidth: true
                             Layout.fillHeight: true

@@ -66,7 +66,6 @@ signals:
     void hostAddressChanged(const QString &hostAddress);
     void signalStrengthChanged(int signalStrength);
     void isProtectedChanged(bool isProtected);
-    void selectedNetworkChanged(bool selectedNetwork);
 };
 
 #endif // WIRELESSACCESSPOINT_H

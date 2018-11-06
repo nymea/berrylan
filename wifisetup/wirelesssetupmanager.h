@@ -36,9 +36,8 @@ class WirelessSetupManager : public BluetoothDevice
 {
     Q_OBJECT
     Q_PROPERTY(bool working READ working NOTIFY workingChanged)
-    Q_PROPERTY(bool initializing READ initializing NOTIFY initializingChanged)
-
     Q_PROPERTY(bool initialized READ initialized NOTIFY initializedChanged)
+    Q_PROPERTY(bool accessPointModeAvailable READ accessPointModeAvailable NOTIFY accessPointModeAvailableChanged)
 
     Q_PROPERTY(WirelessAccessPoints *accessPoints READ accessPoints CONSTANT)
     Q_PROPERTY(WirelessAccessPoint *currentConnection READ currentConnection NOTIFY currentConnectionChanged)
@@ -51,6 +50,7 @@ class WirelessSetupManager : public BluetoothDevice
 
     Q_PROPERTY(NetworkStatus networkStatus READ networkStatus NOTIFY networkStatusChanged)
     Q_PROPERTY(WirelessStatus wirelessStatus READ wirelessStatus NOTIFY wirelessStatusChanged)
+    Q_PROPERTY(WirelessDeviceMode wirelessDeviceMode READ wirelessDeviceMode NOTIFY wirelessDeviceModeChanged)
     Q_PROPERTY(bool networkingEnabled READ networkingEnabled NOTIFY networkingEnabledChanged)
     Q_PROPERTY(bool wirelessEnabled READ wirelessEnabled NOTIFY wirelessEnabledChanged)
 
@@ -63,7 +63,8 @@ public:
         WirelessServiceCommandConnectHidden         = 0x02,
         WirelessServiceCommandDisconnect            = 0x03,
         WirelessServiceCommandScan                  = 0x04,
-        WirelessServiceCommandGetCurrentConnection  = 0x05
+        WirelessServiceCommandGetCurrentConnection  = 0x05,
+        WirelessServiceCommandStartAccessPoint      = 0x06
     };
     Q_ENUM(WirelessServiceCommand)
 
@@ -78,6 +79,14 @@ public:
         WirelessServiceResponseUnknownError                = 0x07
     };
     Q_ENUM(WirelessServiceResponse)
+
+    enum WirelessDeviceMode {
+        WirelessDeviceModeUnknown           = 0x00,
+        WirelessDeviceModeAdhoc             = 0x01,
+        WirelessDeviceModeInfrastructure    = 0x02,
+        WirelessDeviceModeAccessPoint       = 0x03
+    };
+    Q_ENUM(WirelessDeviceMode)
 
     enum NetworkServiceCommand {
         NetworkServiceCommandInvalid = -1,
@@ -150,11 +159,14 @@ public:
     QString hardwareRevision() const;
 
     bool initialized() const;
-    bool initializing() const;
     bool working() const;
+
+    // Note: for compatibility
+    bool accessPointModeAvailable() const;
 
     NetworkStatus networkStatus() const;
     WirelessSetupManager::WirelessStatus wirelessStatus() const;
+    WirelessDeviceMode wirelessDeviceMode() const;
 
     bool networkingEnabled() const;
     bool wirelessEnabled() const;
@@ -171,8 +183,10 @@ public:
     Q_INVOKABLE void enableNetworking(bool enable);
     Q_INVOKABLE void enableWireless(bool enable);
     Q_INVOKABLE void connectWirelessNetwork(const QString &ssid, const QString &password = QString());
+    Q_INVOKABLE void startAccessPoint(const QString &ssid, const QString &password);
     Q_INVOKABLE void disconnectWirelessNetwork();
     Q_INVOKABLE void pressPushButton();
+
 
 private:
     QLowEnergyService *m_deviceInformationService = nullptr;
@@ -194,10 +208,11 @@ private:
 
     bool m_working = false;
     bool m_initialized = false;
-    bool m_initializing = false;
+    bool m_accessPointModeAvailable = false;
 
     NetworkStatus m_networkStatus = NetworkStatusUnknown;
     WirelessStatus m_wirelessStatus = WirelessStatusUnknown;
+    WirelessDeviceMode m_wirelessDeviceMode = WirelessDeviceModeUnknown;
 
     bool m_readingResponse = false;
     QByteArray m_inputDataStream;
@@ -216,12 +231,9 @@ private:
     void setFirmwareRevision(const QString &firmwareRevision);
     void setHardwareRevision(const QString &hardwareRevision);
 
-    void setInitializing(bool initializing);
-    void setInitialized(bool initialized);
-    void setWorking(bool working);
-
     void setNetworkStatus(int networkStatus);
     void setWirelessStatus(int wirelessStatus);
+    void setWirelessDeviceMode(int wirelessDeviceMode);
     void setNetworkingEnabled(bool networkingEnabled);
     void setWirelessEnabled(bool wirelessEnabled);
 
@@ -238,12 +250,13 @@ signals:
     void firmwareRevisionChanged();
     void hardwareRevisionChanged();
 
-    void initializingChanged();
     void initializedChanged();
     void workingChanged();
+    void accessPointModeAvailableChanged();
 
     void networkStatusChanged();
     void wirelessStatusChanged();
+    void wirelessDeviceModeChanged();
     void networkingEnabledChanged();
     void wirelessEnabledChanged();
 

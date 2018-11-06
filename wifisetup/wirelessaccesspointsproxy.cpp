@@ -43,32 +43,11 @@ void WirelessAccessPointsProxy::setAccessPoints(WirelessAccessPoints *accessPoin
     emit accessPointsChanged();
     setSourceModel(m_accessPoints);
     connect(accessPoints, &WirelessAccessPoints::countChanged, this, &WirelessAccessPointsProxy::countChanged);
-    sort(0);
-    invalidate();
-}
-
-bool WirelessAccessPointsProxy::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
-{
-    Q_UNUSED(source_parent)
-    Q_UNUSED(source_row)
-
-    // Filter out the current selected network
-//    WirelessAccessPoint *accessPoint = m_accessPoints->get(source_row);
-
-//    // Filter out selected network
-//    if (accessPoint->selectedNetwork())
-//        return false;
-
-    return true;
+    setSortRole(WirelessAccessPoints::WirelessAccesspointRoleSignalStrength);
+    sort(0, Qt::DescendingOrder);
 }
 
 WirelessAccessPoint *WirelessAccessPointsProxy::get(int index) const
 {
     return m_accessPoints->get(mapToSource(this->index(index, 0)).row());
-}
-
-void WirelessAccessPointsProxy::invokeSort()
-{
-    sort(0);
-    invalidate();
 }

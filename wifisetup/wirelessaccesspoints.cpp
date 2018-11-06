@@ -113,11 +113,6 @@ void WirelessAccessPoints::addWirelessAccessPoint(WirelessAccessPoint *accessPoi
     m_wirelessAccessPoints.append(accessPoint);
     endInsertRows();
 
-    connect(accessPoint, &WirelessAccessPoint::selectedNetworkChanged, this, [accessPoint, this]() {
-        int idx = m_wirelessAccessPoints.indexOf(accessPoint);
-        if (idx < 0) return;
-        emit dataChanged(index(idx), index(idx), {WirelessAccesspointRoleSelectedNetwork});
-    });
     connect(accessPoint, &WirelessAccessPoint::signalStrengthChanged, this, [accessPoint, this]() {
         int idx = m_wirelessAccessPoints.indexOf(accessPoint);
         if (idx < 0) return;
@@ -151,7 +146,6 @@ QHash<int, QByteArray> WirelessAccessPoints::roleNames() const
     roles[WirelessAccesspointRoleHostAddress] = "hostAddress";
     roles[WirelessAccesspointRoleSignalStrength] = "signalStrength";
     roles[WirelessAccesspointRoleProtected] = "protected";
-    roles[WirelessAccesspointRoleSelectedNetwork] = "selectedNetwork";
     return roles;
 }
 

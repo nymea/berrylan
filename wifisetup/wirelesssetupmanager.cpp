@@ -31,6 +31,7 @@ static QBluetoothUuid wifiServiceUuid =                 QBluetoothUuid(QUuid("e0
 static QBluetoothUuid wifiCommanderCharacteristicUuid = QBluetoothUuid(QUuid("e081fec1-f757-4449-b9c9-bfa83133f7fc"));
 static QBluetoothUuid wifiResponseCharacteristicUuid =  QBluetoothUuid(QUuid("e081fec2-f757-4449-b9c9-bfa83133f7fc"));
 static QBluetoothUuid wifiStatusCharacteristicUuid =    QBluetoothUuid(QUuid("e081fec3-f757-4449-b9c9-bfa83133f7fc"));
+static QBluetoothUuid wifiModeCharacteristicUuid =      QBluetoothUuid(QUuid("e081fec4-f757-4449-b9c9-bfa83133f7fc"));
 
 static QBluetoothUuid networkServiceUuid =                  QBluetoothUuid(QUuid("ef6d6610-b8af-49e0-9eca-ab343513641c"));
 static QBluetoothUuid networkStatusCharacteristicUuid =     QBluetoothUuid(QUuid("ef6d6611-b8af-49e0-9eca-ab343513641c"));
@@ -42,7 +43,6 @@ static QBluetoothUuid wirelessEnabledCharacteristicUuid =   QBluetoothUuid(QUuid
 static QBluetoothUuid systemServiceUuid =                 QBluetoothUuid(QUuid("e081fed0-f757-4449-b9c9-bfa83133f7fc"));
 static QBluetoothUuid systemCommanderCharacteristicUuid = QBluetoothUuid(QUuid("e081fed1-f757-4449-b9c9-bfa83133f7fc"));
 static QBluetoothUuid systemResponseCharacteristicUuid =  QBluetoothUuid(QUuid("e081fed2-f757-4449-b9c9-bfa83133f7fc"));
-
 
 WirelessSetupManager::WirelessSetupManager(const QBluetoothDeviceInfo &deviceInfo, QObject *parent) :
     BluetoothDevice(deviceInfo, parent),
@@ -82,14 +82,14 @@ bool WirelessSetupManager::initialized() const
     return m_initialized;
 }
 
-bool WirelessSetupManager::initializing() const
-{
-    return m_initializing;
-}
-
 bool WirelessSetupManager::working() const
 {
     return m_working;
+}
+
+bool WirelessSetupManager::accessPointModeAvailable() const
+{
+    return m_accessPointModeAvailable;
 }
 
 WirelessSetupManager::NetworkStatus WirelessSetupManager::networkStatus() const
@@ -100,6 +100,11 @@ WirelessSetupManager::NetworkStatus WirelessSetupManager::networkStatus() const
 WirelessSetupManager::WirelessStatus WirelessSetupManager::wirelessStatus() const
 {
     return m_wirelessStatus;
+}
+
+WirelessSetupManager::WirelessDeviceMode WirelessSetupManager::wirelessDeviceMode() const
+{
+    return m_wirelessDeviceMode;
 }
 
 bool WirelessSetupManager::networkingEnabled() const
@@ -115,6 +120,11 @@ bool WirelessSetupManager::wirelessEnabled() const
 WirelessAccessPoints *WirelessSetupManager::accessPoints() const
 {
     return m_accessPoints;
+}
+
+WirelessAccessPoint *WirelessSetupManager::currentConnection() const
+{
+    return m_currentConnection;
 }
 
 void WirelessSetupManager::reloadData()
@@ -140,11 +150,12 @@ void WirelessSetupManager::loadNetworks()
     m_readingResponse = true;
     m_inputDataStream.clear();
 
-    setStatusText("WifiSetupManager: Loading wifi network list...");
-    setWorking(true);
+    setStatusText("Loading wifi network list...");
+    m_working = true;
+    emit workingChanged();
 
     QVariantMap request;
-    request.insert("c", (int)WirelessServiceCommandGetNetworks);
+    request.insert("c", static_cast<int>(WirelessServiceCommandGetNetworks));
     streamData(request);
 }
 
@@ -166,11 +177,12 @@ void WirelessSetupManager::loadCurrentConnection()
     m_readingResponse = false;
     m_inputDataStream.clear();
 
-    setStatusText("WifiSetupManager: Loading current connection data");
-    setWorking(true);
+    setStatusText("Loading current connection data");
+    m_working = true;
+    emit workingChanged();
 
     QVariantMap request;
-    request.insert("c", (int)WirelessServiceCommandGetCurrentConnection);
+    request.insert("c", static_cast<int>(WirelessServiceCommandGetCurrentConnection));
     streamData(request);
 }
 
@@ -189,11 +201,12 @@ void WirelessSetupManager::performWifiScan()
         return;
     }
 
-    setStatusText("WifiSetupManager: Perform refresh...");
-    setWorking(true);
+    setStatusText("Perform refresh...");
+    m_working = true;
+    emit workingChanged();
 
     QVariantMap request;
-    request.insert("c", (int)WirelessServiceCommandScan);
+    request.insert("c", static_cast<int>(WirelessServiceCommandScan));
     streamData(request);
 }
 
@@ -252,7 +265,35 @@ void WirelessSetupManager::connectWirelessNetwork(const QString &ssid, const QSt
     }
 
     QVariantMap request;
-    request.insert("c", (int)WirelessServiceCommandConnect);
+    request.insert("c", static_cast<int>(WirelessServiceCommandConnect));
+    QVariantMap parameters;
+    parameters.insert("e", ssid);
+    parameters.insert("p", password);
+    request.insert("p", parameters);
+
+    streamData(request);
+}
+
+void WirelessSetupManager::startAccessPoint(const QString &ssid, const QString &password)
+{
+    qDebug() << "WifiSetupManager: Start wireless access point using SSID:" << ssid << " password:" << password;
+
+    m_ssid = ssid;
+    m_password = password;
+
+    if (!m_wifiService) {
+        qWarning() << "WifiSetupManager: Could not set wireless network. Service not valid";
+        return;
+    }
+
+    QLowEnergyCharacteristic ssidCharacteristic = m_wifiService->characteristic(wifiCommanderCharacteristicUuid);
+    if (!ssidCharacteristic.isValid()) {
+        qWarning() << "WifiSetupManager: Could not connect. Characteristic is not valid";
+        return;
+    }
+
+    QVariantMap request;
+    request.insert("c", static_cast<int>(WirelessServiceCommandStartAccessPoint));
     QVariantMap parameters;
     parameters.insert("e", ssid);
     parameters.insert("p", password);
@@ -277,7 +318,7 @@ void WirelessSetupManager::disconnectWirelessNetwork()
     }
 
     QVariantMap request;
-    request.insert("c", (int)WirelessServiceCommandDisconnect);
+    request.insert("c", static_cast<int>(WirelessServiceCommandDisconnect));
     streamData(request);
 }
 
@@ -297,7 +338,7 @@ void WirelessSetupManager::pressPushButton()
     }
 
     QVariantMap request;
-    request.insert("c", (int)SystemServiceCommandPushAuthentication);
+    request.insert("c", static_cast<int>(SystemServiceCommandPushAuthentication));
 
     QByteArray data = QJsonDocument::fromVariant(request).toJson(QJsonDocument::Compact) + '\n';
     qDebug() << "WifiSetupManager: SystemService: Start streaming response data:" << data.count() << "bytes";
@@ -328,12 +369,6 @@ void WirelessSetupManager::checkInitialized()
                 && m_netwokService->state() == QLowEnergyService::ServiceDiscovered
                 && m_wifiService->state() == QLowEnergyService::ServiceDiscovered;
     }
-
-    if (initialized && m_wirelessEnabled && m_networkingEnabled) {
-        loadNetworks();
-    }
-
-    setInitialized(initialized);
 }
 
 void WirelessSetupManager::setModelNumber(const QString &modelNumber)
@@ -366,36 +401,6 @@ void WirelessSetupManager::setHardwareRevision(const QString &hardwareRevision)
     emit hardwareRevisionChanged();
 }
 
-void WirelessSetupManager::setInitializing(bool initializing)
-{
-    if (m_initializing == initializing)
-        return;
-
-    qDebug() << "WifiSetupManager:" << (initializing ? "initializing" : "not initializing");
-    m_initializing = initializing;
-    emit initializingChanged();
-}
-
-void WirelessSetupManager::setInitialized(bool initialized)
-{
-    if (m_initialized == initialized)
-        return;
-
-    qDebug() << "WifiSetupManager:" << (initialized ? "initialized" : "not initialized");
-    m_initialized = initialized;
-    emit initializedChanged();
-}
-
-void WirelessSetupManager::setWorking(bool working)
-{
-    if (m_working == working)
-        return;
-
-    qDebug() << "WifiSetupManager:" << (working ? "working" : "not working");
-    m_working = working;
-    emit workingChanged();
-}
-
 void WirelessSetupManager::setNetworkStatus(int networkStatus)
 {
     if (m_networkStatus == networkStatus)
@@ -414,6 +419,27 @@ void WirelessSetupManager::setWirelessStatus(int wirelessStatus)
     m_wirelessStatus = static_cast<WirelessStatus>(wirelessStatus);
     qDebug() << "-->" << m_wirelessStatus;
     emit wirelessStatusChanged();
+}
+
+void WirelessSetupManager::setWirelessDeviceMode(int wirelessDeviceMode)
+{
+    if (m_wirelessDeviceMode == wirelessDeviceMode)
+        return;
+
+    m_wirelessDeviceMode = static_cast<WirelessDeviceMode>(wirelessDeviceMode);
+    qDebug() << "-->" << m_wirelessDeviceMode;
+    emit wirelessDeviceModeChanged();
+
+    switch (m_wirelessDeviceMode) {
+    case WirelessDeviceModeAccessPoint:
+        loadCurrentConnection();
+        break;
+    case WirelessDeviceModeInfrastructure:
+        loadNetworks();
+        break;
+    default:
+        break;
+    }
 }
 
 void WirelessSetupManager::setNetworkingEnabled(bool networkingEnabled)
@@ -474,8 +500,8 @@ void WirelessSetupManager::processNetworkResponse(const QVariantMap &response)
         return;
     }
 
-    NetworkServiceCommand command = (NetworkServiceCommand)response.value("c").toInt();
-    NetworkServiceResponse responseCode = (NetworkServiceResponse)response.value("r").toInt();
+    NetworkServiceCommand command = static_cast<NetworkServiceCommand>(response.value("c").toInt());
+    NetworkServiceResponse responseCode = static_cast<NetworkServiceResponse>(response.value("r").toInt());
 
     if (responseCode != NetworkServiceResponseSuccess) {
         qWarning() << "WifiSetupManager: Got error for command" << command << responseCode;
@@ -492,7 +518,7 @@ void WirelessSetupManager::processNetworkResponse(const QVariantMap &response)
             emit errorOccurred(tr("There is no wireless device available on the device."));
             break;
         default:
-            emit errorOccurred(tr("Unknown error occurred."));
+            emit errorOccurred(tr("Unknown error occured."));
             break;
         }
 
@@ -504,15 +530,16 @@ void WirelessSetupManager::processNetworkResponse(const QVariantMap &response)
 
 void WirelessSetupManager::processWifiResponse(const QVariantMap &response)
 {
-    setWorking(false);
+    m_working = false;
+    emit workingChanged();
 
     if (!response.contains("c") || !response.contains("r")) {
         qWarning() << "WifiSetupManager: Got invalid response map.";
         return;
     }
 
-    WirelessServiceCommand command = (WirelessServiceCommand)response.value("c").toInt();
-    WirelessServiceResponse responseCode = (WirelessServiceResponse)response.value("r").toInt();
+    WirelessServiceCommand command = static_cast<WirelessServiceCommand>(response.value("c").toInt());
+    WirelessServiceResponse responseCode = static_cast<WirelessServiceResponse>(response.value("r").toInt());
 
     if (responseCode != WirelessServiceResponseSuccess) {
         qWarning() << "WifiSetupManager: Got error for command" << command << responseCode;
@@ -537,7 +564,7 @@ void WirelessSetupManager::processWifiResponse(const QVariantMap &response)
             emit errorOccurred(tr("The networking is disabled on the device."));
             break;
         default:
-            emit errorOccurred(tr("Unknown error occurred."));
+            emit errorOccurred(tr("Unknown error occured."));
             break;
         }
 
@@ -585,15 +612,30 @@ void WirelessSetupManager::processWifiResponse(const QVariantMap &response)
         QVariantMap currentConnection = response.value("p").toMap();;
 
         // Find current network
+        m_currentConnection = nullptr;
         QString macAddress = currentConnection.value("m").toString();
         foreach (WirelessAccessPoint *accessPoint, m_accessPoints->wirelessAccessPoints()) {
             if (accessPoint->macAddress() == macAddress) {
                 // Set the current network
                 m_currentConnection = accessPoint;
-                emit currentConnectionChanged();
                 accessPoint->setHostAddress(currentConnection.value("i").toString());
             }
         }
+        if (!m_currentConnection) {
+            // Looks like we are not connected to a network which doesn't show up in the wifi scan. perhaps we opened up our own ap or connected to a hidden network. Let's add it now
+            m_currentConnection = new WirelessAccessPoint();
+            m_currentConnection->setSsid(currentConnection.value("e").toString());
+            m_currentConnection->setMacAddress(macAddress);
+            m_currentConnection->setHostAddress(currentConnection.value("i").toString());
+            m_currentConnection->setSignalStrength(currentConnection.value("s").toInt());
+            m_currentConnection->setProtected(currentConnection.value("p").toBool());
+        }
+        qDebug() << "Current connection is:" << m_currentConnection;
+        emit currentConnectionChanged();
+
+        m_initialized = true;
+        emit initializedChanged();
+
         break;
     }
     default:
@@ -603,15 +645,16 @@ void WirelessSetupManager::processWifiResponse(const QVariantMap &response)
 
 void WirelessSetupManager::processSystemResponse(const QVariantMap &response)
 {
-    setWorking(false);
+    m_working = false;
+    emit workingChanged();
 
     if (!response.contains("c") || !response.contains("r")) {
         qWarning() << "WifiSetupManager: Got invalid response map.";
         return;
     }
 
-    SystemServiceCommand command = (SystemServiceCommand)response.value("c").toInt();
-    SystemServiceResponse responseCode = (SystemServiceResponse)response.value("r").toInt();
+    SystemServiceCommand command = static_cast<SystemServiceCommand>(response.value("c").toInt());
+    SystemServiceResponse responseCode = static_cast<SystemServiceResponse>(response.value("r").toInt());
 
     if (responseCode != SystemServiceResponseSuccess) {
         qWarning() << "WifiSetupManager: Got error for command" << command << responseCode;
@@ -646,9 +689,10 @@ void WirelessSetupManager::onConnectedChanged()
 
         m_accessPoints->clearModel();
 
-        setInitialized(false);
-        setInitializing(false);
-        setWorking(false);
+        m_initialized = false;
+        emit initializedChanged();
+        m_working = false;
+        emit workingChanged();
 
         setManufacturer("");
         setModelNumber("");
@@ -660,8 +704,6 @@ void WirelessSetupManager::onConnectedChanged()
 
 void WirelessSetupManager::onServiceDiscoveryFinished()
 {
-    setInitializing(true);
-
     foreach (const QBluetoothUuid &serviceUuid, controller()->services()) {
         qDebug() << "WifiSetupManager: -->" << serviceUuid.toString();
     }
@@ -799,12 +841,13 @@ void WirelessSetupManager::onNetworkServiceStateChanged(const QLowEnergyService:
     m_netwokService->writeDescriptor(wirelessEnabledCharacteristic.descriptor(QBluetoothUuid::ClientCharacteristicConfiguration), QByteArray::fromHex("0100"));
 
     setStatusText("Connected and ready");
-    setWorking(false);
+    m_working = false;
+    emit workingChanged();
 
     // Done with discovery
-    setNetworkStatus(networkCharacteristic.value().toHex().toUInt(0, 16));
-    setNetworkingEnabled((bool)networkingEnabledCharacteristic.value().toHex().toUInt(0, 16));
-    setWirelessEnabled((bool)wirelessEnabledCharacteristic.value().toHex().toUInt(0, 16));
+    setNetworkStatus(static_cast<int>(networkCharacteristic.value().toHex().toUInt(nullptr, 16)));
+    setNetworkingEnabled(static_cast<bool>(networkingEnabledCharacteristic.value().toHex().toUInt(nullptr, 16)));
+    setWirelessEnabled(static_cast<bool>(wirelessEnabledCharacteristic.value().toHex().toUInt(nullptr, 16)));
 
     // Wifi service
     if (!m_wifiService) {
@@ -868,12 +911,14 @@ void WirelessSetupManager::onNetworkServiceCharacteristicChanged(const QLowEnerg
             return;
         }
     } else if (characteristic.uuid() == networkingEnabledCharacteristicUuid) {
-        qDebug() << "Networking enabled changed" << (bool)value.toHex().toUInt(0, 16);
-        setNetworkingEnabled((bool)value.toHex().toUInt(0, 16));
+        bool networkingEnabled = static_cast<bool>(value.toHex().toUInt(nullptr, 16));
+        qDebug() << "Networking enabled changed" << networkingEnabled;
+        setNetworkingEnabled(networkingEnabled);
         return;
     } else if (characteristic.uuid() == wirelessEnabledCharacteristicUuid) {
-        qDebug() << "Wireless enabled changed" << (bool)value.toHex().toUInt(0, 16);
-        setWirelessEnabled((bool)value.toHex().toUInt(0, 16));
+        bool wirelessEnabled = static_cast<bool>(value.toHex().toUInt(nullptr, 16));
+        qDebug() << "Wireless enabled changed" << wirelessEnabled;
+        setWirelessEnabled(wirelessEnabled);
         return;
     }
 
@@ -895,16 +940,29 @@ void WirelessSetupManager::onWifiServiceStateChanged(const QLowEnergyService::Se
 
     foreach (const QLowEnergyCharacteristic &characteristic, m_wifiService->characteristics()) {
         qDebug() << "    -->" << characteristic.name() << characteristic.uuid().toString() << characteristic.value();
+
+        if (characteristic.uuid() == wifiModeCharacteristicUuid) {
+            m_accessPointModeAvailable = true;
+            emit accessPointModeAvailableChanged();
+        }
+
         foreach (const QLowEnergyDescriptor &descriptor, characteristic.descriptors()) {
             qDebug() << "        -->" << descriptor.name() << descriptor.uuid().toString() << descriptor.value();
         }
     }
 
+
     // Enable notifications
     m_wifiService->writeDescriptor(m_wifiService->characteristic(wifiResponseCharacteristicUuid).descriptor(QBluetoothUuid::ClientCharacteristicConfiguration), QByteArray::fromHex("0100"));
     m_wifiService->writeDescriptor(m_wifiService->characteristic(wifiStatusCharacteristicUuid).descriptor(QBluetoothUuid::ClientCharacteristicConfiguration), QByteArray::fromHex("0100"));
 
-    setWirelessStatus(m_wifiService->characteristic(wifiStatusCharacteristicUuid).value().toHex().toUInt(0, 16));
+    // Note: For compatibility
+    if (m_accessPointModeAvailable) {
+        m_wifiService->writeDescriptor(m_wifiService->characteristic(wifiModeCharacteristicUuid).descriptor(QBluetoothUuid::ClientCharacteristicConfiguration), QByteArray::fromHex("0100"));
+        setWirelessDeviceMode(static_cast<int>(m_wifiService->characteristic(wifiModeCharacteristicUuid).value().toHex().toUInt(nullptr, 16)));
+    }
+
+    setWirelessStatus(static_cast<int>(m_wifiService->characteristic(wifiStatusCharacteristicUuid).value().toHex().toUInt(nullptr, 16)));
 
     // System service
     if (!m_systemService) {
@@ -971,8 +1029,13 @@ void WirelessSetupManager::onWifiServiceCharacteristicChanged(const QLowEnergyCh
         return;
     }
 
-    qWarning() << "Bluetooth: Unhandled service characteristic changed" << characteristic.uuid() << value;
+    if (characteristic.uuid() == wifiModeCharacteristicUuid) {
+        qDebug() << "Wireless mode changed:" << value.toHex().toUInt(nullptr, 16); // << "Old status:" << m_wirelessStatus;
+        setWirelessDeviceMode(value.toHex().toInt(nullptr, 16));
+        return;
+    }
 
+    qWarning() << "Bluetooth: Unhandled service characteristic changed" << characteristic.uuid() << value;
 }
 
 void WirelessSetupManager::onWifiServiceReadFinished(const QLowEnergyCharacteristic &characteristic, const QByteArray &value)
