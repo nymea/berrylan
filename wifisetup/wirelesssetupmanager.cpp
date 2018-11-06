@@ -612,7 +612,10 @@ void WirelessSetupManager::processWifiResponse(const QVariantMap &response)
         QVariantMap currentConnection = response.value("p").toMap();;
 
         // Find current network
-        m_currentConnection = nullptr;
+        if (m_currentConnection && m_currentConnection->parent() == this) {
+            m_currentConnection->deleteLater();
+            m_currentConnection = nullptr;
+        }
         QString macAddress = currentConnection.value("m").toString();
         foreach (WirelessAccessPoint *accessPoint, m_accessPoints->wirelessAccessPoints()) {
             if (accessPoint->macAddress() == macAddress) {
@@ -621,9 +624,9 @@ void WirelessSetupManager::processWifiResponse(const QVariantMap &response)
                 accessPoint->setHostAddress(currentConnection.value("i").toString());
             }
         }
-        if (!m_currentConnection) {
-            // Looks like we are not connected to a network which doesn't show up in the wifi scan. perhaps we opened up our own ap or connected to a hidden network. Let's add it now
-            m_currentConnection = new WirelessAccessPoint();
+        if (!macAddress.isEmpty() && !m_currentConnection) {
+            // Looks like we are connected to a network which doesn't show up in the wifi scan. perhaps we opened up our own ap or connected to a hidden network. Let's add it now
+            m_currentConnection = new WirelessAccessPoint(this);
             m_currentConnection->setSsid(currentConnection.value("e").toString());
             m_currentConnection->setMacAddress(macAddress);
             m_currentConnection->setHostAddress(currentConnection.value("i").toString());
