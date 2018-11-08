@@ -345,8 +345,9 @@ ApplicationWindow {
                         Label {
                             Layout.fillWidth: true
                             Layout.margins: app.margins
-                            text: d.currentAP ? qsTr("IP Address: %1").arg(d.currentAP.hostAddress)
-                                              : d.accessPointMode ? qsTr("Access point name: %1").arg(networkManager.manager.currentConnection.ssid) : ""
+                            text: d.accessPointMode
+                                  ? qsTr("Access point name: %1").arg(networkManager.manager.currentConnection.ssid)
+                                  : networkManager.manager.currentConnection ? qsTr("IP Address: %1").arg(networkManager.manager.currentConnection.hostAddress) : ""
                             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                             font.pixelSize: app.largeFont
                             font.bold: true

@@ -187,7 +187,6 @@ public:
     Q_INVOKABLE void disconnectWirelessNetwork();
     Q_INVOKABLE void pressPushButton();
 
-
 private:
     QLowEnergyService *m_deviceInformationService = nullptr;
     QLowEnergyService *m_netwokService = nullptr;
