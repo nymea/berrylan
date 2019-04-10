@@ -5,68 +5,68 @@
     <name>BerryLanPage</name>
     <message>
         <source>an open source tool by</source>
-        <translation></translation>
+        <translation>una herramienta de codigo abierto por</translation>
     </message>
 </context>
 <context>
     <name>BluetoothDevice</name>
     <message>
         <source>Connecting to %1...</source>
-        <translation></translation>
+        <translation>Conectando a %1...</translation>
     </message>
     <message>
         <source>Connected to %1</source>
-        <translation></translation>
+        <translation>Conectado a %1</translation>
     </message>
     <message>
         <source>Disconnecting from %1...</source>
-        <translation></translation>
+        <translation>Desconectandose de %1...</translation>
     </message>
     <message>
         <source>Discovering services of %1...</source>
-        <translation></translation>
+        <translation>Descubriendo servicios de %1...</translation>
     </message>
     <message>
         <source>%1 connected and discovered.</source>
-        <translation></translation>
+        <translation>%1 conectado y descubierto.</translation>
     </message>
     <message>
         <source>%1 disconnected.</source>
-        <translation></translation>
+        <translation>%1 desconectado.</translation>
     </message>
 </context>
 <context>
     <name>HelpPage</name>
     <message>
         <source>About BerryLan</source>
-        <translation></translation>
+        <translation>Sobre BerryLan</translation>
     </message>
 </context>
 <context>
     <name>WirelessSetupManager</name>
     <message>
         <source>Invalid value.</source>
-        <translation></translation>
+        <translation>Valor invalido.</translation>
     </message>
     <message>
         <source>There is no networkmanager available on the device.</source>
-        <translation></translation>
+        <translation>No hay networkmanager disponible en el dispositivo.</translation>
     </message>
     <message>
         <source>There is no wireless device available on the device.</source>
-        <translation></translation>
+        <translation>No hay dispositivo wireless disponible en el dispositivo.</translation>
     </message>
     <message>
         <source>Unknown error occured.</source>
-        <translation></translation>
+        <translation>Ocurrió un error desconocido.</translation>
     </message>
     <message>
         <source>Invalid command.</source>
-        <translation></translation>
+        <translation>Comando invalido.</translation>
     </message>
     <message>
         <source>Invalid parameters.</source>
-        <translation></translation>
+        <translation>Parámetros invalidos.</translation>
     </message>
     <message>
         <source>The wireless networking is disabled on the device.</source>
