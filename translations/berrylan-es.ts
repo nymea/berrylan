@@ -5,7 +5,7 @@
     <name>BerryLanPage</name>
     <message>
         <source>an open source tool by</source>
-        <translation>una herramienta de codigo abierto por</translation>
+        <translation>una herramienta de código abierto por</translation>
     </message>
 </context>
 <context>
@@ -20,7 +20,7 @@
     </message>
     <message>
         <source>Disconnecting from %1...</source>
-        <translation>Desconectandose de %1...</translation>
+        <translation>Desconectándose de %1...</translation>
     </message>
     <message>
         <source>Discovering services of %1...</source>
@@ -54,7 +54,7 @@
     </message>
     <message>
         <source>There is no wireless device available on the device.</source>
-        <translation>No hay dispositivo wireless disponible en el dispositivo.</translation>
+        <translation>No hay dispositivo inalámbrico disponible en el dispositivo.</translation>
     </message>
     <message>
         <source>Unknown error occured.</source>
@@ -70,7 +70,7 @@
     </message>
     <message>
         <source>The wireless networking is disabled on the device.</source>
-        <translation>Red inalambrica desabilitada en el dispositivo.</translation>
+        <translation>Red inalámbrica inhabilitada en el dispositivo.</translation>
     </message>
     <message>
         <source>The networking is disabled on the device.</source>
@@ -127,7 +127,7 @@ Raspberry Pi</translation>
     </message>
     <message>
         <source>Connecting to your Raspberry Pi</source>
-        <translation>Conectandose a tu Raspberry Pi</translation>
+        <translation>Conectándose a tu Raspberry Pi</translation>
     </message>
     <message>
         <source>OK</source>
@@ -135,11 +135,11 @@ Raspberry Pi</translation>
     </message>
     <message>
         <source>Connecting the Raspberry Pi to %1</source>
-        <translation></translation>
+        <translation>Conectando la Raspberry Pi a %1</translation>
     </message>
     <message>
         <source>Thanks for using BerryLan!</source>
-        <translation></translation>
+        <translation>Gracias por usar BerryLan!</translation>
     </message>
 </context>
 </TS>
