@@ -5,7 +5,7 @@
     <name>BerryLanPage</name>
     <message>
         <source>an open source tool by</source>
-        <translation type="unfinished">un programme accessible et modifiable</translation>
+        <translation>un outil open source de</translation>
     </message>
 </context>
 <context>
