@@ -5,7 +5,7 @@
     <name>BerryLanPage</name>
     <message>
         <source>an open source tool by</source>
-        <translation>오픈소스 도구</translation>
+        <translation>오픈소스 도구.</translation>
     </message>
 </context>
 <context>
