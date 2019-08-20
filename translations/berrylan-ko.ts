@@ -12,11 +12,11 @@
     <name>BluetoothDevice</name>
     <message>
         <source>Connecting to %1...</source>
-        <translation>%1 서버에 연결 중.....</translation>
+        <translation>%1 에 연결 중.....</translation>
     </message>
     <message>
         <source>Connected to %1</source>
-        <translation>%1 에 연결 되었습니다.</translation>
+        <translation>%1 에 연결 되었습니다</translation>
     </message>
     <message>
         <source>Disconnecting from %1...</source>
@@ -46,7 +46,7 @@
     <name>WirelessSetupManager</name>
     <message>
         <source>Invalid value.</source>
-        <translation>잘못된 값</translation>
+        <translation>잘못된 값.</translation>
     </message>
     <message>
         <source>There is no networkmanager available on the device.</source>
@@ -62,11 +62,11 @@
     </message>
     <message>
         <source>Invalid command.</source>
-        <translation>유효하지 않은 명령</translation>
+        <translation>유효하지 않은 명령.</translation>
     </message>
     <message>
         <source>Invalid parameters.</source>
-        <translation>유효하지 않은 매개 변수</translation>
+        <translation>유효하지 않은 매개 변수.</translation>
     </message>
     <message>
         <source>The wireless networking is disabled on the device.</source>
@@ -81,7 +81,7 @@
     <name>main</name>
     <message>
         <source>BerryLan</source>
-        <translation></translation>
+        <translation>베리랜</translation>
     </message>
     <message>
         <source>Sorry, the password is wrong.</source>
@@ -89,11 +89,11 @@
     </message>
     <message>
         <source>Try again</source>
-        <translation>다시 입력해 주세요.</translation>
+        <translation>다시 입력해 주세요</translation>
     </message>
     <message>
         <source>Devices</source>
-        <translation></translation>
+        <translation>장치들</translation>
     </message>
     <message>
         <source>Network</source>
@@ -109,7 +109,7 @@
     </message>
     <message>
         <source>Connected</source>
-        <translation>연결 되었습니다.</translation>
+        <translation>연결 되었습니다</translation>
     </message>
     <message>
         <source>Bluetooth doesn&apos;t seem to be available on this device. BerryLan requires a working Bluetooth connection.</source>
@@ -122,11 +122,11 @@
     <message>
         <source>Searching for your
 Raspberry Pi</source>
-        <translation>라즈베리 파이를 검색중입니다...</translation>
+        <translation>라즈베리 파이를 검색중입니다</translation>
     </message>
     <message>
         <source>Connecting to your Raspberry Pi</source>
-        <translation>라즈베리 파이에 연결중...</translation>
+        <translation>라즈베리 파이에 연결중</translation>
     </message>
     <message>
         <source>OK</source>
@@ -138,7 +138,7 @@ Raspberry Pi</source>
     </message>
     <message>
         <source>Thanks for using BerryLan!</source>
-        <translation>BerryLan 을 사용 해 주셔서 감사합니다.</translation>
+        <translation>BerryLan 을 사용 해 주셔서 감사합니다!</translation>
     </message>
 </context>
 </TS>
