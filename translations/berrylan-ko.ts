@@ -70,11 +70,11 @@
     </message>
     <message>
         <source>The wireless networking is disabled on the device.</source>
-        <translation>무선 네트워킹이 장치에서 비활성화되어 있습니다.</translation>
+        <translation>무선 네트워킹이 장치에서 비활성화 되어 있습니다.</translation>
     </message>
     <message>
         <source>The networking is disabled on the device.</source>
-        <translation></translation>
+        <translation>장치에서 네트워킹이 사용되지 않도록 설정됨.</translation>
     </message>
 </context>
 <context>
@@ -85,11 +85,11 @@
     </message>
     <message>
         <source>Sorry, the password is wrong.</source>
-        <translation></translation>
+        <translation>죄송하지만, 올바른 암호를 입력해 주세요.</translation>
     </message>
     <message>
         <source>Try again</source>
-        <translation></translation>
+        <translation>다시 입력해 주세요.</translation>
     </message>
     <message>
         <source>Devices</source>
@@ -105,28 +105,28 @@
     </message>
     <message>
         <source>Connecting</source>
-        <translation></translation>
+        <translation>연결중</translation>
     </message>
     <message>
         <source>Connected</source>
-        <translation></translation>
+        <translation>연결 되었습니다.</translation>
     </message>
     <message>
         <source>Bluetooth doesn&apos;t seem to be available on this device. BerryLan requires a working Bluetooth connection.</source>
-        <translation></translation>
+        <translation>이 장치에서는 블루투스를 사용할 수 없는 것 같습니다.  BerryLan은 작동하는 Bluetooth 연결이 필요합니다.</translation>
     </message>
     <message>
         <source>Bluetooth seems to be disabled. Please enable Bluetooth on your device in order to use BerryLan.</source>
-        <translation></translation>
+        <translation>블루투스가 비활성화된 것 같습니다. BerryLan을 사용하려면 장치에서 Bluetooth를 활성화 하십시오.</translation>
     </message>
     <message>
         <source>Searching for your
 Raspberry Pi</source>
-        <translation></translation>
+        <translation>라즈베리 파이를 검색중입니다...</translation>
     </message>
     <message>
         <source>Connecting to your Raspberry Pi</source>
-        <translation></translation>
+        <translation>라즈베리 파이에 연결중...</translation>
     </message>
     <message>
         <source>OK</source>
@@ -134,11 +134,11 @@ Raspberry Pi</source>
     </message>
     <message>
         <source>Connecting the Raspberry Pi to %1</source>
-        <translation></translation>
+        <translation>%1 에 라즈베리 파이 연결중</translation>
     </message>
     <message>
         <source>Thanks for using BerryLan!</source>
-        <translation></translation>
+        <translation>BerryLan을 사용해 주셔서 감사합니다. ^^</translation>
     </message>
 </context>
 </TS>
