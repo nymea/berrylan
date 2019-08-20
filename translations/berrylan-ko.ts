@@ -46,7 +46,7 @@
     <name>WirelessSetupManager</name>
     <message>
         <source>Invalid value.</source>
-        <translation>잘못 된 값</translation>
+        <translation>잘못된 값</translation>
     </message>
     <message>
         <source>There is no networkmanager available on the device.</source>
