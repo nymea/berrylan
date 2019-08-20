@@ -5,41 +5,41 @@
     <name>BerryLanPage</name>
     <message>
         <source>an open source tool by</source>
-        <translation></translation>
+        <translation>오픈소스 도구</translation>
     </message>
 </context>
 <context>
     <name>BluetoothDevice</name>
     <message>
         <source>Connecting to %1...</source>
-        <translation></translation>
+        <translation>%1 서버에 연결중.....</translation>
     </message>
     <message>
         <source>Connected to %1</source>
-        <translation></translation>
+        <translation>%1 서버에 연결 되었습니다.</translation>
     </message>
     <message>
         <source>Disconnecting from %1...</source>
-        <translation></translation>
+        <translation>%1 서버로 부터 연결 해제 중...</translation>
     </message>
     <message>
         <source>Discovering services of %1...</source>
-        <translation></translation>
+        <translation>%1 서비스를 검색 중...</translation>
     </message>
     <message>
         <source>%1 connected and discovered.</source>
-        <translation></translation>
+        <translation>%1 서비스가 검색되고 연결 되었습니다.</translation>
     </message>
     <message>
         <source>%1 disconnected.</source>
-        <translation></translation>
+        <translation>%1 에 연결이 끊어 졌습니다.</translation>
     </message>
 </context>
 <context>
     <name>HelpPage</name>
     <message>
         <source>About BerryLan</source>
-        <translation></translation>
+        <translation>BerryLan에  대하여</translation>
     </message>
 </context>
 <context>
