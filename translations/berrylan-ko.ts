@@ -5,22 +5,22 @@
     <name>BerryLanPage</name>
     <message>
         <source>an open source tool by</source>
-        <translation>오픈소스 도구.</translation>
+        <translation>오픈 소스 도구</translation>
     </message>
 </context>
 <context>
     <name>BluetoothDevice</name>
     <message>
         <source>Connecting to %1...</source>
-        <translation>%1 서버에 연결중.....</translation>
+        <translation>%1 서버에 연결 중.....</translation>
     </message>
     <message>
         <source>Connected to %1</source>
-        <translation>%1 서버에 연결 되었습니다.</translation>
+        <translation>%1 에 연결 되었습니다.</translation>
     </message>
     <message>
         <source>Disconnecting from %1...</source>
-        <translation>%1 서버로 부터 연결 해제 중...</translation>
+        <translation>%1 로 부터 연결 해제 중...</translation>
     </message>
     <message>
         <source>Discovering services of %1...</source>
@@ -46,7 +46,7 @@
     <name>WirelessSetupManager</name>
     <message>
         <source>Invalid value.</source>
-        <translation>유효하지 않은 값</translation>
+        <translation>잘못 된 값</translation>
     </message>
     <message>
         <source>There is no networkmanager available on the device.</source>
