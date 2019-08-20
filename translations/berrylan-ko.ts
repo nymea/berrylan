@@ -39,38 +39,38 @@
     <name>HelpPage</name>
     <message>
         <source>About BerryLan</source>
-        <translation>BerryLan에  대하여</translation>
+        <translation>BerryLan 에  대하여</translation>
     </message>
 </context>
 <context>
     <name>WirelessSetupManager</name>
     <message>
         <source>Invalid value.</source>
-        <translation></translation>
+        <translation>유효하지 않은 값</translation>
     </message>
     <message>
         <source>There is no networkmanager available on the device.</source>
-        <translation></translation>
+        <translation>장치에는 사용 가능한 네트워크 관리자가 없습니다.</translation>
     </message>
     <message>
         <source>There is no wireless device available on the device.</source>
-        <translation></translation>
+        <translation>이 장치에는 사용할 수 있는 무선 장치가 없습니다.</translation>
     </message>
     <message>
         <source>Unknown error occured.</source>
-        <translation></translation>
+        <translation>알 수 없는 오류가 발생했습니다.</translation>
     </message>
     <message>
         <source>Invalid command.</source>
-        <translation></translation>
+        <translation>유효하지 않은 명령</translation>
     </message>
     <message>
         <source>Invalid parameters.</source>
-        <translation></translation>
+        <translation>유효하지 않은 매개 변수</translation>
     </message>
     <message>
         <source>The wireless networking is disabled on the device.</source>
-        <translation></translation>
+        <translation>무선 네트워킹이 장치에서 비활성화되어 있습니다.</translation>
     </message>
     <message>
         <source>The networking is disabled on the device.</source>
