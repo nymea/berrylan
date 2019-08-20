@@ -138,7 +138,7 @@ Raspberry Pi</source>
     </message>
     <message>
         <source>Thanks for using BerryLan!</source>
-        <translation>BerryLan 을 사용해 주셔서 감사합니다. ^^</translation>
+        <translation>BerryLan 을 사용 해 주셔서 감사합니다. ^^</translation>
     </message>
 </context>
 </TS>
