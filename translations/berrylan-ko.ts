@@ -16,100 +16,100 @@
     </message>
     <message>
         <source>Connected to %1</source>
-        <translation>%1 에 연결 되었습니다</translation>
+        <translation type="unfinished">%1 에 연결 되었습니다</translation>
     </message>
     <message>
         <source>Disconnecting from %1...</source>
-        <translation>%1 로 부터 연결 해제 중...</translation>
+        <translation type="unfinished">%1 로 부터 연결 해제 중...</translation>
     </message>
     <message>
         <source>Discovering services of %1...</source>
-        <translation>%1 서비스를 검색 중...</translation>
+        <translation type="unfinished">%1 서비스를 검색 중...</translation>
     </message>
     <message>
         <source>%1 connected and discovered.</source>
-        <translation>%1 서비스가 검색되고 연결 되었습니다.</translation>
+        <translation type="unfinished">%1 검색되고 연결 되었습니다.</translation>
     </message>
     <message>
         <source>%1 disconnected.</source>
-        <translation>%1 에 연결이 끊어 졌습니다.</translation>
+        <translation type="unfinished">%1 에 연결이 끊어 졌습니다.</translation>
     </message>
 </context>
 <context>
     <name>HelpPage</name>
     <message>
         <source>About BerryLan</source>
-        <translation>BerryLan 에  대하여</translation>
+        <translation type="unfinished">BerryLan 에  대하여</translation>
     </message>
 </context>
 <context>
     <name>WirelessSetupManager</name>
     <message>
         <source>Invalid value.</source>
-        <translation>잘못된 값.</translation>
+        <translation type="unfinished">잘못된 값.</translation>
     </message>
     <message>
         <source>There is no networkmanager available on the device.</source>
-        <translation>장치에는 사용 가능한 네트워크 관리자가 없습니다.</translation>
+        <translation type="unfinished">장치에는 네트워크 관리자가 없습니다.</translation>
     </message>
     <message>
         <source>There is no wireless device available on the device.</source>
-        <translation>이 장치에는 사용할 수 있는 무선 장치가 없습니다.</translation>
+        <translation type="unfinished">이 장치에는 사용할 수 있는 무선 장치가 없습니다.</translation>
     </message>
     <message>
         <source>Unknown error occured.</source>
-        <translation>알 수 없는 오류가 발생했습니다.</translation>
+        <translation type="unfinished">알 수 없는 오류가 발생했습니다.</translation>
     </message>
     <message>
         <source>Invalid command.</source>
-        <translation>유효하지 않은 명령.</translation>
+        <translation type="unfinished">유효하지 않은 명령.</translation>
     </message>
     <message>
         <source>Invalid parameters.</source>
-        <translation>유효하지 않은 매개 변수.</translation>
+        <translation type="unfinished">유효하지 않은 매개 변수.</translation>
     </message>
     <message>
         <source>The wireless networking is disabled on the device.</source>
-        <translation>무선 네트워킹이 장치에서 비활성화 되어 있습니다.</translation>
+        <translation type="unfinished">무선 네트워킹이 장치에서 비활성화 되어 있습니다.</translation>
     </message>
     <message>
         <source>The networking is disabled on the device.</source>
-        <translation>장치에서 네트워킹이 사용되지 않도록 설정됨.</translation>
+        <translation type="unfinished">장치에서 네트워킹이 불가능 합니다.</translation>
     </message>
 </context>
 <context>
     <name>main</name>
     <message>
         <source>BerryLan</source>
-        <translation>베리랜</translation>
+        <translation type="unfinished">BerryLan</translation>
     </message>
     <message>
         <source>Sorry, the password is wrong.</source>
-        <translation>죄송하지만, 올바른 암호를 입력해 주세요.</translation>
+        <translation type="unfinished">죄송하지만, 올바른 암호를 입력해 주세요.</translation>
     </message>
     <message>
         <source>Try again</source>
-        <translation>다시 입력해 주세요</translation>
+        <translation type="unfinished">다시 입력해 주세요</translation>
     </message>
     <message>
         <source>Devices</source>
-        <translation>장치들</translation>
+        <translation type="unfinished">장치들</translation>
     </message>
     <message>
         <source>Network</source>
-        <translation></translation>
+        <translation type="unfinished">Network</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation></translation>
+        <translation type="unfinished">Login</translation>
     </message>
     <message>
         <source>Connecting</source>
-        <translation>연결중</translation>
+        <translation type="unfinished">연결중</translation>
     </message>
     <message>
         <source>Connected</source>
-        <translation>연결 되었습니다</translation>
+        <translation type="unfinished">연결 되었습니다</translation>
     </message>
     <message>
         <source>Bluetooth doesn&apos;t seem to be available on this device. BerryLan requires a working Bluetooth connection.</source>
