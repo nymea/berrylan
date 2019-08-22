@@ -85,31 +85,31 @@
     </message>
     <message>
         <source>Sorry, the password is wrong.</source>
-        <translation type="unfinished">죄송하지만, 올바른 암호를 입력해 주세요.</translation>
+        <translation>죄송하지만, 올바른 암호를 입력해 주세요.</translation>
     </message>
     <message>
         <source>Try again</source>
-        <translation type="unfinished">다시 입력해 주세요</translation>
+        <translation>다시 입력해 주세요</translation>
     </message>
     <message>
         <source>Devices</source>
-        <translation type="unfinished">장치들</translation>
+        <translation>장치들</translation>
     </message>
     <message>
         <source>Network</source>
-        <translation type="unfinished">Network</translation>
+        <translation>Network</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation type="unfinished">Login</translation>
+        <translation>Login</translation>
     </message>
     <message>
         <source>Connecting</source>
-        <translation type="unfinished">연결중</translation>
+        <translation>연결중</translation>
     </message>
     <message>
         <source>Connected</source>
-        <translation type="unfinished">연결 되었습니다</translation>
+        <translation>연결 되었습니다</translation>
     </message>
     <message>
         <source>Bluetooth doesn&apos;t seem to be available on this device. BerryLan requires a working Bluetooth connection.</source>
