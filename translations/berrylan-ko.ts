@@ -12,7 +12,7 @@
     <name>BluetoothDevice</name>
     <message>
         <source>Connecting to %1...</source>
-        <translation>%1 에 연결 중.....</translation>
+        <translation>%1 에 연결 중...</translation>
     </message>
     <message>
         <source>Connected to %1</source>
