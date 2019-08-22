@@ -16,72 +16,72 @@
     </message>
     <message>
         <source>Connected to %1</source>
-        <translation type="unfinished">%1 에 연결 되었습니다</translation>
+        <translation>%1 에 연결 되었습니다</translation>
     </message>
     <message>
         <source>Disconnecting from %1...</source>
-        <translation type="unfinished">%1 로 부터 연결 해제 중...</translation>
+        <translation>%1 로 부터 연결 해제 중...</translation>
     </message>
     <message>
         <source>Discovering services of %1...</source>
-        <translation type="unfinished">%1 서비스를 검색 중...</translation>
+        <translation>%1 검색 중...</translation>
     </message>
     <message>
         <source>%1 connected and discovered.</source>
-        <translation type="unfinished">%1 검색되고 연결 되었습니다.</translation>
+        <translation>%1 검색 되고 연결 되었습니다.</translation>
     </message>
     <message>
         <source>%1 disconnected.</source>
-        <translation type="unfinished">%1 에 연결이 끊어 졌습니다.</translation>
+        <translation>%1 에 연결이 끊어 졌습니다.</translation>
     </message>
 </context>
 <context>
     <name>HelpPage</name>
     <message>
         <source>About BerryLan</source>
-        <translation type="unfinished">BerryLan 에  대하여</translation>
+        <translation>BerryLan 에  대하여</translation>
     </message>
 </context>
 <context>
     <name>WirelessSetupManager</name>
     <message>
         <source>Invalid value.</source>
-        <translation type="unfinished">잘못된 값.</translation>
+        <translation>유효하지 않은 값.</translation>
     </message>
     <message>
         <source>There is no networkmanager available on the device.</source>
-        <translation type="unfinished">장치에는 네트워크 관리자가 없습니다.</translation>
+        <translation>장치에는 네트워크 관리자가 없습니다.</translation>
     </message>
     <message>
         <source>There is no wireless device available on the device.</source>
-        <translation type="unfinished">이 장치에는 사용할 수 있는 무선 장치가 없습니다.</translation>
+        <translation>이 장치에는 사용할 수 있는 무선 장치가 없습니다.</translation>
     </message>
     <message>
         <source>Unknown error occured.</source>
-        <translation type="unfinished">알 수 없는 오류가 발생했습니다.</translation>
+        <translation>알 수 없는 오류가 발생했습니다.</translation>
     </message>
     <message>
         <source>Invalid command.</source>
-        <translation type="unfinished">유효하지 않은 명령.</translation>
+        <translation>유효하지 않은 명령.</translation>
     </message>
     <message>
         <source>Invalid parameters.</source>
-        <translation type="unfinished">유효하지 않은 매개 변수.</translation>
+        <translation>유효하지 않은 매개 변수.</translation>
     </message>
     <message>
         <source>The wireless networking is disabled on the device.</source>
-        <translation type="unfinished">무선 네트워킹이 장치에서 비활성화 되어 있습니다.</translation>
+        <translation>무선 네트워킹이 장치에서 비활성화 되어 있습니다.</translation>
     </message>
     <message>
         <source>The networking is disabled on the device.</source>
-        <translation type="unfinished">장치에서 네트워킹이 불가능 합니다.</translation>
+        <translation>장치에서 네트워킹이 불가능 합니다.</translation>
     </message>
 </context>
 <context>
     <name>main</name>
     <message>
         <source>BerryLan</source>
-        <translation type="unfinished">BerryLan</translation>
+        <translation>BerryLan</translation>
     </message>
     <message>
         <source>Sorry, the password is wrong.</source>
