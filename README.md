@@ -41,6 +41,7 @@ We love Open Source & Qt. Contribute here.
 
 Add the nymea repository to your system:
 
+    sudo apt install dirmngr
     echo "deb http://repository.nymea.io stretch main raspbian" | sudo tee /etc/apt/sources.list.d/nymea.list
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key A1A19ED6
 
