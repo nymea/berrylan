@@ -32,6 +32,7 @@ ItemDelegate {
                 Layout.fillWidth: true
                 text: root.text
                 font.pixelSize: app.largeFont
+                elide: Text.ElideRight
             }
 
             ColorIcon {
