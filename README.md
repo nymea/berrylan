@@ -8,7 +8,7 @@ Get your headless Raspian into your WIFI without the Console
 
 ## Download & installation 
 
-You can set-up the wireless lan of your headless Raspberry PI in just three steps.
+You can setup the wireless LAN of your headless Raspberry PI in just three steps.
 
 #### Etch the image
 
@@ -44,7 +44,7 @@ Add the nymea repository to your system:
     echo "deb http://repository.nymea.io stretch main raspbian" | sudo tee /etc/apt/sources.list.d/nymea.list
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key A1A19ED6
 
-Configure apt to prefere packages from the raspbian section of the repository
+Configure apt to prefer packages from the raspbian section of the repository
 
 > Note: the **Raspberry Pi Zero W** requires packages from the `raspbian` section, since they are not plain `armhf`, but specially built for all Raspberry Pi versions. If you are on Raspberry Pi 2/3 you can skip this step.
 
@@ -71,4 +71,4 @@ Disable dhcpcd:
     sudo systemctl disable dhcpcd
     reboot
 
-Thats it! Have fun with berrylan!
+Thats it! Have fun with BerryLan!
