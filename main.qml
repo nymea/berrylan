@@ -385,7 +385,7 @@ ApplicationWindow {
                                     MouseArea {
                                         anchors.fill: parent
                                         onClicked: {
-                                            Qt.openUrlExternally("https://github.com/guh/berrylan")
+                                            Qt.openUrlExternally("https://github.com/nymea/berrylan")
                                         }
                                     }
                                 }
