@@ -94,6 +94,14 @@ ApplicationWindow {
                 }
             }
         }
+
+        onErrorOccurred: {
+            if (swipeView.currentItem === connectingToWiFiView) {
+                connectingToWiFiView.running = false
+                connectingToWiFiView.text = qsTr("Sorry, an unexpected error happened.")
+                connectingToWiFiView.buttonText = qsTr("Try again")
+            }
+        }
     }
 
     StackView {
@@ -231,6 +239,10 @@ ApplicationWindow {
                                 print("Connect to ", model.ssid, " --> ", model.macAddress)
                                 d.currentAP = accessPointsProxy.get(index);
 
+                                if (!d.currentAP.isProtected) {
+                                    networkManager.manager.connectWirelessNetwork(d.currentAP.ssid)
+                                    swipeView.currentIndex++;
+                                }
                                 swipeView.currentIndex++;
                             }
                         }
@@ -331,6 +343,9 @@ ApplicationWindow {
                     width: swipeView.width
                     onButtonClicked: {
                         swipeView.currentIndex--;
+                        if (!d.currentAP.isProtected) {
+                            swipeView.currentIndex--;
+                        }
                     }
                 }
 
