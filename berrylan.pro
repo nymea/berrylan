@@ -19,7 +19,8 @@ APP_REVISION=$$member(VERSION_INFO, 1)
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        main.cpp \
+    main.cpp \
+    styles/berrylanbusyindicator.cpp \
     wifisetup/bluetoothdevice.cpp \
     wifisetup/bluetoothdeviceinfo.cpp \
     wifisetup/bluetoothdeviceinfos.cpp \
@@ -29,9 +30,20 @@ SOURCES += \
     wifisetup/wirelessaccesspointsproxy.cpp \
     wifisetup/wirelesssetupmanager.cpp \
     wifisetup/networkmanagercontroller.cpp \
-    styles/berrylanbusyindicator.cpp
+
+SOURCES += \
+    wifisetupmock/networkmanagercontrollermock.cpp \
+    wifisetupmock/bluetoothdiscoverymock.cpp \
+    wifisetupmock/bluetoothdevicemock.cpp \
+    wifisetupmock/bluetoothdeviceinfosmock.cpp \
+    wifisetupmock/bluetoothdeviceinfomock.cpp \
+    wifisetupmock/wirelessaccesspointmock.cpp \
+    wifisetupmock/wirelessaccesspointsmock.cpp \
+    wifisetupmock/wirelessaccesspointsproxymock.cpp \
+    wifisetupmock/wirelesssetupmanagermock.cpp \
 
 HEADERS += \
+    styles/berrylanbusyindicator.h \
     wifisetup/bluetoothdevice.h \
     wifisetup/bluetoothdeviceinfo.h \
     wifisetup/bluetoothdeviceinfos.h \
@@ -41,7 +53,17 @@ HEADERS += \
     wifisetup/wirelessaccesspointsproxy.h \
     wifisetup/wirelesssetupmanager.h \
     wifisetup/networkmanagercontroller.h \
-    styles/berrylanbusyindicator.h
+
+HEADERS += \
+    wifisetupmock/networkmanagercontrollermock.h \
+    wifisetupmock/bluetoothdiscoverymock.h \
+    wifisetupmock/bluetoothdevicemock.h \
+    wifisetupmock/bluetoothdeviceinfosmock.h \
+    wifisetupmock/bluetoothdeviceinfomock.h \
+    wifisetupmock/wirelessaccesspointmock.h \
+    wifisetupmock/wirelessaccesspointsmock.h \
+    wifisetupmock/wirelessaccesspointsproxymock.h \
+    wifisetupmock/wirelesssetupmanagermock.h \
 
 RESOURCES += qml.qrc
 
