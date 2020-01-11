@@ -367,6 +367,13 @@ ApplicationWindow {
                             font.pixelSize: app.largeFont
                             font.bold: true
                             horizontalAlignment: Text.AlignHCenter
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked: {
+                                    clipBoard.text = networkManager.manager.currentConnection.hostAddress
+                                    parent.ToolTip.show(qsTr("IP address copied to clipboard."), 2000)
+                                }
+                            }
                         }
                         Button {
                             Layout.alignment: Qt.AlignHCenter

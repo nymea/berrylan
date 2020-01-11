@@ -19,6 +19,7 @@ APP_REVISION=$$member(VERSION_INFO, 1)
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    clipboardhelper.cpp \
     main.cpp \
     styles/berrylanbusyindicator.cpp \
     wifisetup/bluetoothdevice.cpp \
@@ -43,6 +44,7 @@ SOURCES += \
     wifisetupmock/wirelesssetupmanagermock.cpp \
 
 HEADERS += \
+    clipboardhelper.h \
     styles/berrylanbusyindicator.h \
     wifisetup/bluetoothdevice.h \
     wifisetup/bluetoothdeviceinfo.h \

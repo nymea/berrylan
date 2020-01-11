@@ -30,6 +30,7 @@
 #include "wifisetupmock/wirelesssetupmanagermock.h"
 
 #include "styles/berrylanbusyindicator.h"
+#include "clipboardhelper.h"
 
 int main(int argc, char *argv[])
 {
@@ -94,7 +95,10 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
+    ClipboardHelper clipBoard;
+
     engine.rootContext()->setContextProperty("systemProductType", QSysInfo::productType());
+    engine.rootContext()->setContextProperty("clipBoard", &clipBoard);
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
