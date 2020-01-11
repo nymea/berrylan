@@ -36,6 +36,33 @@
     </message>
 </context>
 <context>
+    <name>BluetoothDeviceMock</name>
+    <message>
+        <source>Connecting to %1...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connected to %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Discovering services of %1...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 connected and discovered.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disconnecting from %1...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 disconnected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>HelpPage</name>
     <message>
         <source>About BerryLan</source>
@@ -139,6 +166,42 @@ Raspberry Pi</source>
     <message>
         <source>Thanks for using BerryLan!</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Sorry, an unexpected error happened.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Access Point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opening access point &quot;%1&quot; on the Raspberry Pi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Access point name: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IP Address: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IP address copied to clipboard.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close access point</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

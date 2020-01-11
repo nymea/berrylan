@@ -36,6 +36,33 @@
     </message>
 </context>
 <context>
+    <name>BluetoothDeviceMock</name>
+    <message>
+        <source>Connecting to %1...</source>
+        <translation type="unfinished">Connecte à %1...</translation>
+    </message>
+    <message>
+        <source>Connected to %1</source>
+        <translation type="unfinished">Connecté à %1</translation>
+    </message>
+    <message>
+        <source>Discovering services of %1...</source>
+        <translation type="unfinished">Cherche service à %1...</translation>
+    </message>
+    <message>
+        <source>%1 connected and discovered.</source>
+        <translation type="unfinished">%1 connecté et exploré.</translation>
+    </message>
+    <message>
+        <source>Disconnecting from %1...</source>
+        <translation type="unfinished">Déconnecte de %1...</translation>
+    </message>
+    <message>
+        <source>%1 disconnected.</source>
+        <translation type="unfinished">%1 déconnecté.</translation>
+    </message>
+</context>
+<context>
     <name>HelpPage</name>
     <message>
         <source>About BerryLan</source>
@@ -140,6 +167,42 @@ Raspberry Pi</translation>
     <message>
         <source>Thanks for using BerryLan!</source>
         <translation>Merci beaucoup d’utiliser BerryLan!</translation>
+    </message>
+    <message>
+        <source>Sorry, an unexpected error happened.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Access Point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opening access point &quot;%1&quot; on the Raspberry Pi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Access point name: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IP Address: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IP address copied to clipboard.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close access point</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
