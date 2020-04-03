@@ -108,6 +108,9 @@ ios: {
     OTHER_FILES += ios/Info.plist.in
     ios_launch_images.files += $$files(ios/LaunchImage*.png) ios/LaunchScreen1.xib
     QMAKE_BUNDLE_DATA += ios_launch_images
+
+    ios_icon_files.files += $$files(ios/AppIcons.xcassets/AppIcon.appiconset/AppIcon*.png)
+    QMAKE_BUNDLE_DATA += ios_icon_files
 }
 
 TRANSLATIONS += $$files($$absolute_path(translations)/*.ts, true)
