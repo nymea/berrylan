@@ -108,6 +108,10 @@ ios: {
     OTHER_FILES += ios/Info.plist.in
     ios_launch_images.files += $$files(ios/LaunchImage*.png) ios/LaunchScreen1.xib
     QMAKE_BUNDLE_DATA += ios_launch_images
+
+    IOS_DEVELOPMENT_TEAM.name = DEVELOPMENT_TEAM
+    IOS_DEVELOPMENT_TEAM.value = Z45PLKLTHM
+    QMAKE_MAC_XCODE_SETTINGS += IOS_DEVELOPMENT_TEAM
 }
 
 TRANSLATIONS += $$files($$absolute_path(translations)/*.ts, true)
