@@ -56,4 +56,8 @@ android {
     lintOptions {
         abortOnError false
     }
+
+    defaultConfig {
+        resConfigs "en", "de"
+    }
 }
