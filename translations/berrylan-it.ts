@@ -97,11 +97,11 @@
     </message>
     <message>
         <source>The wireless networking is disabled on the device.</source>
-        <translation>La connettivitá wireless é disabilitata sul dispositivo.</translation>
+        <translation>La connettività wireless è disabilitata sul dispositivo.</translation>
     </message>
     <message>
         <source>The networking is disabled on the device.</source>
-        <translation>La connettivitá é disabilitata sul dispositivo.</translation>
+        <translation>La connettività è disabilitata sul dispositivo.</translation>
     </message>
 </context>
 <context>
