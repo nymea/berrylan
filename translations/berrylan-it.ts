@@ -108,7 +108,7 @@
     <name>main</name>
     <message>
         <source>BerryLan</source>
-        <translation></translation>
+        <translation>BerryLan.</translation>
     </message>
     <message>
         <source>Sorry, the password is wrong.</source>
@@ -182,7 +182,7 @@ Raspberry Pi</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished">Password</translation>
+        <translation>Password</translation>
     </message>
     <message>
         <source>Opening access point &quot;%1&quot; on the Raspberry Pi</source>
