@@ -24,7 +24,7 @@
     </message>
     <message>
         <source>Discovering services of %1...</source>
-        <translation>Trovando servizi di %1...</translation>
+        <translation>Trovando i servizi di %1...</translation>
     </message>
     <message>
         <source>%1 connected and discovered.</source>
@@ -39,27 +39,27 @@
     <name>BluetoothDeviceMock</name>
     <message>
         <source>Connecting to %1...</source>
-        <translation type="unfinished">Connettendo a %1...</translation>
+        <translation>Connettendo a %1...</translation>
     </message>
     <message>
         <source>Connected to %1</source>
-        <translation type="unfinished">Connesso a %1</translation>
+        <translation>Connesso a %1</translation>
     </message>
     <message>
         <source>Discovering services of %1...</source>
-        <translation type="unfinished">Scoprendo i servizi di %1...</translation>
+        <translation>Trovando i servizi di %1...</translation>
     </message>
     <message>
         <source>%1 connected and discovered.</source>
-        <translation type="unfinished">%1 connesso e trovato.</translation>
+        <translation>%1 connesso e trovato.</translation>
     </message>
     <message>
         <source>Disconnecting from %1...</source>
-        <translation type="unfinished">Disconnettendo da %1...</translation>
+        <translation>Disconnettendo da %1...</translation>
     </message>
     <message>
         <source>%1 disconnected.</source>
-        <translation type="unfinished">%1 disconnesso.</translation>
+        <translation>%1 disconnesso.</translation>
     </message>
 </context>
 <context>
@@ -170,7 +170,7 @@ Raspberry Pi</translation>
     </message>
     <message>
         <source>Sorry, an unexpected error happened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiacente, si è verificato un errore inaspettato.</translation>
     </message>
     <message>
         <source>Open Access Point</source>
@@ -178,11 +178,11 @@ Raspberry Pi</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Password</translation>
     </message>
     <message>
         <source>Opening access point &quot;%1&quot; on the Raspberry Pi</source>
@@ -194,11 +194,11 @@ Raspberry Pi</translation>
     </message>
     <message>
         <source>IP Address: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Indirizzo IP: %1</translation>
     </message>
     <message>
         <source>IP address copied to clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>Indirizzo IP copiato negli appunti.</translation>
     </message>
     <message>
         <source>Close access point</source>
