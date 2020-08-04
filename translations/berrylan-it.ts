@@ -108,7 +108,7 @@
     <name>main</name>
     <message>
         <source>BerryLan</source>
-        <translation>BerryLan.</translation>
+        <translation>BerryLan</translation>
     </message>
     <message>
         <source>Sorry, the password is wrong.</source>
