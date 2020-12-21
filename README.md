@@ -34,8 +34,10 @@ The app displays you the IP Address at the end of the setup process.
 #### Instant Feedback
 The app tells you if there might be an issue with the WLAN.
 
-#### Open Source
-We love Open Source & Qt. Contribute here.
+## Licensing
+
+BerryLan, being a nymea tool, follows the nymea license model (dual-licensed GPLv3 and nymea commercial).
+For more informations please visit https://www.nymea.io/documentation/overview/license
 
 ## Installation on a plain Raspbian
 
