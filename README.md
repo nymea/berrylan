@@ -12,7 +12,7 @@ You can setup the wireless LAN of your headless Raspberry PI in just three steps
 
 #### Etch the image
 
-Download the BerryLan flavoured [Raspbian image](https://downloads.nymea.io/images/berrylan/raspbian-stretch-berrylan-lite-latest.zip) and flash the SD Card. We recommend Etcher to do that.
+Download the BerryLan flavoured [Raspbian image](https://downloads.nymea.io/images/raspberrypi/latest) and flash the SD Card. We recommend Etcher to do that.
 
 #### Power on
 
@@ -32,6 +32,7 @@ Everything is like you are used to - we just add BerryLan.
 The app displays you the IP Address at the end of the setup process.
 
 #### Instant Feedback
+
 The app tells you if there might be an issue with the WLAN.
 
 ## Licensing
@@ -43,25 +44,10 @@ For more informations please visit https://www.nymea.io/documentation/overview/l
 
 Add the nymea repository to your system:
 
-    echo "deb http://repository.nymea.io stretch main raspbian" | sudo tee /etc/apt/sources.list.d/nymea.list
+> Note: replace `<release>` with you debian relase version like `buster`. Cou can find your release in `/etc/os-release`.
+
+    echo "deb http://repository.nymea.io <release> rpi" | sudo tee /etc/apt/sources.list.d/nymea.list
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key A1A19ED6
-
-Configure apt to prefer packages from the raspbian section of the repository
-
-> Note: the **Raspberry Pi Zero W** requires packages from the `raspbian` section, since they are not plain `armhf`, but specially built for all Raspberry Pi versions. If you are on Raspberry Pi 2/3 you can skip this step.
-
-    nano /etc/apt/preferences.d/nymea
-
-Add following lines to the file:
-
-    Package: *
-    Pin: release c=raspbian
-    Pin-Priority: 700
-
-    Package: *
-    Pin: origin repository.nymea.io c=main
-    Pin-Priority: 500
-
 
 Install the dependencies:
 
