@@ -89,6 +89,11 @@ ios: {
 
     ios_icon_files.files += $$files(ios/AppIcons.xcassets/AppIcon.appiconset/AppIcon*.png)
     QMAKE_BUNDLE_DATA += ios_icon_files
+
+    IOS_DEVELOPMENT_TEAM.name = DEVELOPMENT_TEAM
+    IOS_DEVELOPMENT_TEAM.value = Z45PLKLTHM
+    QMAKE_MAC_XCODE_SETTINGS += IOS_DEVELOPMENT_TEAM
+
 }
 
 TRANSLATIONS += $$files($$absolute_path(translations)/*.ts, true)
