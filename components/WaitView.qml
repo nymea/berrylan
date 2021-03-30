@@ -7,7 +7,6 @@ Item {
 
     property string text
     property string buttonText
-    property bool running: true
 
     signal buttonClicked()
 
@@ -24,11 +23,6 @@ Item {
             wrapMode: Text.WordWrap
             font.pixelSize: app.largeFont
         }
-
-//        BusyIndicator {
-//            Layout.alignment: Qt.AlignHCenter
-//            visible: root.running
-//        }
 
         Button {
             Layout.alignment: Qt.AlignHCenter

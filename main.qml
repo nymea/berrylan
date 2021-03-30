@@ -25,84 +25,94 @@ ApplicationWindow {
     BluetoothDiscovery {
         id: discovery
         discoveryEnabled: swipeView.currentIndex <= 1
-        onBluetoothEnabledChanged: {
-            if (!bluetoothEnabled) {
-                swipeView.currentIndex = 0;
-            }
-        }
     }
 
-    NetworkManagerController {
-        id: networkManager
+    BtWiFiSetup {
+        id: btWiFiSetup
+        onBluetoothStatusChanged: {
+            print("status changed", bluetoothStatus)
+            switch (bluetoothStatus) {
+            case BtWiFiSetup.BluetoothStatusLoaded:
+                swipeView.currentIndex = 3
+                break;
+            case BtWiFiSetup.BluetoothStatusDisconnected:
+                swipeView.currentIndex = 1
+                break;
+            }
+        }
+        onBluetoothConnectionError: {
+            print("bt connection error")
+            swipeView.currentIndex = 1
+        }
+        onWirelessStatusChanged: {
+            if (wirelessStatus == BtWiFiSetup.WirelessStatusFailed) {
+                connectingToWiFiView.text = qsTr("Sorry, the password is wrong.")
+                connectingToWiFiView.buttonText = qsTr("Try again")
+                swipeView.currentIndex = 5
+            } else if (wirelessStatus == BtWiFiSetup.WirelessStatusActivated) {
+                swipeView.currentIndex = 6
+            }
+        }
     }
 
     QtObject {
         id: d
         property var currentAP: null
-        readonly property bool accessPointMode: networkManager.manager && networkManager.manager.wirelessDeviceMode == WirelessSetupManager.WirelessDeviceModeAccessPoint
+        readonly property bool accessPointMode: btWiFiSetup.wirelessDeviceMode == BtWiFiSetup.WirelessDeviceModeAccessPoint
     }
 
-    Connections {
-        target: discovery.deviceInfos
-        onCountChanged: {
-            if (swipeView.currentItem === discoveringView && discovery.deviceInfos.count > 0) {
-                swipeView.currentIndex++
-            }
-        }
-    }
+//    Connections {
+//        target: btWiFiSetup.manager
+//        onInitializedChanged: {
+//            print("initialized changed", btWiFiSetup.manager.initialized)
 
-    Connections {
-        target: networkManager.manager
-        onInitializedChanged: {
-            print("initialized changed", networkManager.manager.initialized)
+//            if (btWiFiSetup.manager.initialized) {
+//                swipeView.currentIndex++;
+//            } else {
+//                swipeView.currentIndex = 0;
+//            }
+//        }
 
-            if (networkManager.manager.initialized) {
-                swipeView.currentIndex++;
-            } else {
-                swipeView.currentIndex = 0;
-            }
-        }
+//        onConnectedChanged: {
+//            print("connectedChanged", btWiFiSetup.manager.connected)
+//            if (!btWiFiSetup.manager.connected) {
+//                swipeView.currentIndex = 0;
+//            }
+//        }
 
-        onConnectedChanged: {
-            print("connectedChanged", networkManager.manager.connected)
-            if (!networkManager.manager.connected) {
-                swipeView.currentIndex = 0;
-            }
-        }
+//        onNetworkStatusChanged: {
+//            print("Network status changed:", btWiFiSetup.manager.networkStatus)
+//            if (swipeView.currentItem === connectingToWiFiView) {
+//                if (btWiFiSetup.manager.networkStatus === WirelessSetupManager.NetworkStatusGlobal) {
+//                    swipeView.currentIndex++;
+//                } else {
+//                    print("UNHANDLED Network status change:", btWiFiSetup.manager.networkStatus  )
+//                }
 
-        onNetworkStatusChanged: {
-            print("Network status changed:", networkManager.manager.networkStatus)
-            if (swipeView.currentItem === connectingToWiFiView) {
-                if (networkManager.manager.networkStatus === WirelessSetupManager.NetworkStatusGlobal) {
-                    swipeView.currentIndex++;
-                } else {
-                    print("UNHANDLED Network status change:", networkManager.manager.networkStatus  )
-                }
+//            }
+//        }
+//        onWirelessStatusChanged: {
+//            print("Wireless status changed:", btWiFiSetup.manager.networkStatus)
+//            if (swipeView.currentItem === connectingToWiFiView) {
+//                if (btWiFiSetup.manager.wirelessStatus === WirelessSetupManager.WirelessStatusActivated) {
+//                    swipeView.currentIndex++;
+//                }
+//                if (btWiFiSetup.manager.wirelessStatus === WirelessSetupManager.WirelessStatusFailed) {
+//                    connectingToWiFiView.running = false
+//                    connectingToWiFiView.text = qsTr("Sorry, the password is wrong.")
+//                    connectingToWiFiView.buttonText = qsTr("Try again")
+//                }
+//            }
+//        }
 
-            }
-        }
-        onWirelessStatusChanged: {
-            print("Wireless status changed:", networkManager.manager.networkStatus)
-            if (swipeView.currentItem === connectingToWiFiView) {
-                if (networkManager.manager.wirelessStatus === WirelessSetupManager.WirelessStatusActivated) {
-                    swipeView.currentIndex++;
-                }
-                if (networkManager.manager.wirelessStatus === WirelessSetupManager.WirelessStatusFailed) {
-                    connectingToWiFiView.running = false
-                    connectingToWiFiView.text = qsTr("Sorry, the password is wrong.")
-                    connectingToWiFiView.buttonText = qsTr("Try again")
-                }
-            }
-        }
-
-        onErrorOccurred: {
-            if (swipeView.currentItem === connectingToWiFiView) {
-                connectingToWiFiView.running = false
-                connectingToWiFiView.text = qsTr("Sorry, an unexpected error happened.")
-                connectingToWiFiView.buttonText = qsTr("Try again")
-            }
-        }
-    }
+//        onErrorOccurred: {
+//            if (swipeView.currentItem === connectingToWiFiView) {
+//                connectingToWiFiView.running = false
+//                connectingToWiFiView.text = qsTr("Sorry, an unexpected error happened.")
+//                connectingToWiFiView.buttonText = qsTr("Try again")
+//            }
+//        }
+//    }
 
     StackView {
         id: pageStack
@@ -141,23 +151,17 @@ ApplicationWindow {
                 case 2:
                     return 3;
                 case 3:
-                    if (!networkManager.manager) {
+                    if (!btWiFiSetup) {
                         return 2;
                     }
-                    if (networkManager.manager.accessPoints.count == 0) {
+                    if (btWiFiSetup.accessPoints.count == 0) {
                         return 3;
                     }
                     return 4;
                 case 4:
                     return 4;
                 case 5:
-                    if (networkManager.manager.wirelessStatus < WirelessSetupManager.WirelessStatusConfig) {
-                        return 5;
-                    }
-//                    if (networkManager.manager.wirelessStatus < WirelessSetupManager.WirelessStatusIpConfig) {
-                        return 6;
-//                    }
-//                    return 7;
+                    return 6;
                 case 6:
                     return 8;
                 }
@@ -167,6 +171,13 @@ ApplicationWindow {
                 id: swipeView
                 anchors.fill: parent
                 interactive: false
+
+                currentIndex: {
+                    if (discovery.deviceInfos.count == 0) {
+                        return 0;
+                    }
+                    return 1;
+                }
 
                 // 0
                 WaitView {
@@ -194,8 +205,7 @@ ApplicationWindow {
                         iconSource: "../images/bluetooth.svg"
 
                         onClicked: {
-                            networkManager.bluetoothDeviceInfo = discovery.deviceInfos.get(index);
-                            networkManager.connectDevice();
+                            btWiFiSetup.connectToDevice(discovery.deviceInfos.get(index));
                             swipeView.currentIndex++;
                         }
                     }
@@ -220,13 +230,13 @@ ApplicationWindow {
                         id: apSelectionListView
                         model: WirelessAccessPointsProxy {
                             id: accessPointsProxy
-                            accessPoints: networkManager.manager ? networkManager.manager.accessPoints : null
+                            accessPoints: btWiFiSetup.accessPoints
                         }
                         clip: true
 
                         delegate: BerryLanItemDelegate {
                             width: parent.width
-                            text: model.ssid
+                            text: model.ssid.length > 0 ? model.ssid : qsTr("Hidden network")
                             iconSource: model.signalStrength > 66
                                         ? "../images/wifi-100.svg"
                                         : model.signalStrength > 33
@@ -240,7 +250,7 @@ ApplicationWindow {
                                 d.currentAP = accessPointsProxy.get(index);
 
                                 if (!d.currentAP.isProtected) {
-                                    networkManager.manager.connectWirelessNetwork(d.currentAP.ssid)
+                                    btWiFiSetup.manager.connectWirelessNetwork(d.currentAP.ssid)
                                     swipeView.currentIndex++;
                                 }
                                 swipeView.currentIndex++;
@@ -250,7 +260,7 @@ ApplicationWindow {
 
                     Button {
                         Layout.alignment: Qt.AlignHCenter
-                        visible: networkManager.manager.accessPointModeAvailable
+                        visible: btWiFiSetup.accessPointModeAvailable
                         text: qsTr("Open Access Point")
                         onClicked: {
                             swipeView.currentIndex++
@@ -322,13 +332,12 @@ ApplicationWindow {
                             onClicked: {
                                 if (d.currentAP) {
                                     connectingToWiFiView.text = qsTr("Connecting the Raspberry Pi to %1").arg(d.currentAP.ssid);
-                                    networkManager.manager.connectWirelessNetwork(d.currentAP.ssid, passwordTextField.text)
+                                    btWiFiSetup.connectDeviceToWiFi(d.currentAP.ssid, passwordTextField.text)
                                 } else {
                                     connectingToWiFiView.text = qsTr("Opening access point \"%1\" on the Raspberry Pi").arg(ssidTextField.text);
-                                    networkManager.manager.startAccessPoint(ssidTextField.text, passwordTextField.text)
+                                    btWiFiSetup.startAccessPoint(ssidTextField.text, passwordTextField.text)
                                 }
                                 connectingToWiFiView.buttonText = "";
-                                connectingToWiFiView.running = true
 
                                 swipeView.currentIndex++
                             }
@@ -361,8 +370,8 @@ ApplicationWindow {
                             Layout.fillWidth: true
                             Layout.margins: app.margins
                             text: d.accessPointMode
-                                  ? qsTr("Access point name: %1").arg(networkManager.manager.currentConnection.ssid)
-                                  : networkManager.manager.currentConnection ? qsTr("IP Address: %1").arg(networkManager.manager.currentConnection.hostAddress) : ""
+                                  ? qsTr("Access point name: %1").arg(btWiFiSetup.currentConnection.ssid)
+                                  : btWiFiSetup.currentConnection ? qsTr("IP Address: %1").arg(btWiFiSetup.currentConnection.hostAddress) : ""
                             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                             font.pixelSize: app.largeFont
                             font.bold: true
@@ -370,7 +379,7 @@ ApplicationWindow {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
-                                    clipBoard.text = networkManager.manager.currentConnection.hostAddress
+                                    clipBoard.text = btWiFiSetup.currentConnection.hostAddress
                                     parent.ToolTip.show(qsTr("IP address copied to clipboard."), 2000)
                                 }
                             }
@@ -380,7 +389,7 @@ ApplicationWindow {
                             visible: d.accessPointMode
                             text: qsTr("Close access point")
                             onClicked: {
-                                networkManager.manager.disconnectWirelessNetwork();
+                                btWiFiSetup.disconnectDeviceFromWiFi();
                             }
                         }
 

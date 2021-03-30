@@ -1,30 +1,39 @@
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *                                                                         *
- *  Copyright (C) 2018 Simon Stuerz <simon.stuerz@guh.io>                  *
- *                                                                         *
- *  This file is part of nymea:app                                         *
- *                                                                         *
- *  This library is free software; you can redistribute it and/or          *
- *  modify it under the terms of the GNU Lesser General Public             *
- *  License as published by the Free Software Foundation; either           *
- *  version 2.1 of the License, or (at your option) any later version.     *
- *                                                                         *
- *  This library is distributed in the hope that it will be useful,        *
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of         *
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU      *
- *  Lesser General Public License for more details.                        *
- *                                                                         *
- *  You should have received a copy of the GNU Lesser General Public       *
- *  License along with this library; If not, see                           *
- *  <http://www.gnu.org/licenses/>.                                        *
- *                                                                         *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+*
+* Copyright 2013 - 2020, nymea GmbH
+* Contact: contact@nymea.io
+*
+* This file is part of nymea.
+* This project including source code and documentation is protected by
+* copyright law, and remains the property of nymea GmbH. All rights, including
+* reproduction, publication, editing and translation, are reserved. The use of
+* this project is subject to the terms of a license agreement to be concluded
+* with nymea GmbH in accordance with the terms of use of nymea GmbH, available
+* under https://nymea.io/license
+*
+* GNU General Public License Usage
+* Alternatively, this project may be redistributed and/or modified under the
+* terms of the GNU General Public License as published by the Free Software
+* Foundation, GNU version 3. This project is distributed in the hope that it
+* will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+* of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+* Public License for more details.
+*
+* You should have received a copy of the GNU General Public License along with
+* this project. If not, see <https://www.gnu.org/licenses/>.
+*
+* For any further details and any questions please contact us under
+* contact@nymea.io or see our FAQ/Licensing Information on
+* https://nymea.io/license/faq
+*
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #include "bluetoothdiscovery.h"
 
 #include <QDebug>
 #include <QTimer>
 #include <QBluetoothLocalDevice>
+#include <QBluetoothUuid>
 
 BluetoothDiscovery::BluetoothDiscovery(QObject *parent) :
     QObject(parent),
@@ -116,7 +125,7 @@ void BluetoothDiscovery::setDiscoveryEnabled(bool discoveryEnabled)
         return;
     }
     m_discoveryEnabled = discoveryEnabled;
-    emit discoveringChanged();
+    emit discoveryEnabledChanged(m_discoveryEnabled);
 
     if (m_discoveryEnabled) {
         start();
@@ -153,6 +162,9 @@ void BluetoothDiscovery::onBluetoothHostModeChanged(const QBluetoothLocalDevice:
             m_discoveryAgent = new QBluetoothDeviceDiscoveryAgent(this);
 #endif
             connect(m_discoveryAgent, &QBluetoothDeviceDiscoveryAgent::deviceDiscovered, this, &BluetoothDiscovery::deviceDiscovered);
+            connect(m_discoveryAgent, &QBluetoothDeviceDiscoveryAgent::deviceUpdated, this, [=](const QBluetoothDeviceInfo &deviceInfo, QBluetoothDeviceInfo::Fields updatedFields){
+                qDebug() << "** Device updated" << deviceInfo.name() << updatedFields;
+            });
             connect(m_discoveryAgent, &QBluetoothDeviceDiscoveryAgent::finished, this, &BluetoothDiscovery::discoveryFinished);
             connect(m_discoveryAgent, &QBluetoothDeviceDiscoveryAgent::canceled, this, &BluetoothDiscovery::discoveryCancelled);
             connect(m_discoveryAgent, SIGNAL(error(QBluetoothDeviceDiscoveryAgent::Error)), this, SLOT(onError(QBluetoothDeviceDiscoveryAgent::Error)));
@@ -166,34 +178,36 @@ void BluetoothDiscovery::onBluetoothHostModeChanged(const QBluetoothLocalDevice:
 
 void BluetoothDiscovery::deviceDiscovered(const QBluetoothDeviceInfo &deviceInfo)
 {
-    if (!deviceInfo.isValid())
-        return;
-
-    BluetoothDeviceInfo *deviceInformation = new BluetoothDeviceInfo(deviceInfo);
-    bool isLowEnergy = deviceInfo.coreConfigurations() & QBluetoothDeviceInfo::LowEnergyCoreConfiguration;
-
-    qDebug() << "BluetoothDiscovery: [+]" << deviceInformation->name() << "(" << deviceInformation->address() << ")" << (isLowEnergy ? "LE" : "");
-
-    if (!isLowEnergy || deviceInformation->name().isEmpty()) {
-        delete deviceInformation;
+    // FIXME: All this filtering shouldn't be here, instead we should have a proxy model which allows filtering
+    if (!deviceInfo.isValid()
+            || !deviceInfo.coreConfigurations().testFlag(QBluetoothDeviceInfo::LowEnergyCoreConfiguration)
+            || deviceInfo.name().isEmpty()) {
         return;
     }
 
-    // Check if we already have added this device info
+    // Only show devices that either list the wifi service uuid or are called BT WLAN Setup (for legacy reasons)
+    static QBluetoothUuid wifiServiceUuid = QBluetoothUuid(QUuid("e081fec0-f757-4449-b9c9-bfa83133f7fc"));
+    if (!deviceInfo.serviceUuids().contains(wifiServiceUuid) && deviceInfo.name() != "BT WLAN Setup") {
+        qDebug() << "Skipping device" << deviceInfo.name() << deviceInfo.serviceUuids();
+        return;
+    }
+
     foreach (BluetoothDeviceInfo *di, m_deviceInfos->deviceInfos()) {
-        if (di->address() == deviceInformation->address()) {
-            qWarning() << "BluetoothDiscover: device" << deviceInformation->name() << "(" << deviceInformation->address() << ") already added";
-            deviceInformation->deleteLater();
+        if (di->address() == deviceInfo.address().toString()) {
+            di->setBluetoothDeviceInfo(deviceInfo);
             return;
         }
     }
 
+
+    BluetoothDeviceInfo *deviceInformation = new BluetoothDeviceInfo(deviceInfo);
+    qDebug() << "BluetoothDiscovery: [+]" << deviceInformation->name() << "(" << deviceInformation->address() << ")" << (deviceInformation->isLowEnergy() ? "LE" : "") << deviceInfo.serviceUuids();
     m_deviceInfos->addBluetoothDeviceInfo(deviceInformation);
 }
 
 void BluetoothDiscovery::discoveryFinished()
 {
-    qDebug() << "BluetoothDiscovery: Discovery finished";
+    qDebug() << "BluetoothDiscovery: Discovery finished" << m_discoveryEnabled << this;
     if (m_discoveryEnabled) {
         qDebug() << "BluetoothDiscovery: Restarting discovery";
         m_discoveryAgent->start();
@@ -234,7 +248,7 @@ void BluetoothDiscovery::start()
 
     m_deviceInfos->clearModel();
 
-    qDebug() << "BluetoothDiscovery: Start discovering.";
+    qDebug() << "BluetoothDiscovery: Starting discovery.";
     m_discoveryAgent->start();
     emit discoveringChanged();
 }
