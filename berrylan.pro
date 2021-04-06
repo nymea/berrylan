@@ -21,6 +21,8 @@ APP_REVISION=$$member(VERSION_INFO, 1)
 SOURCES += \
     clipboardhelper.cpp \
     main.cpp \
+    permissionhelper.cpp \
+    permissionhelperandroid.cpp \
     styles/berrylanbusyindicator.cpp \
     wifisetup/btwifisetup.cpp \
     wifisetup/bluetoothdevice.cpp \
@@ -34,6 +36,8 @@ SOURCES += \
 
 HEADERS += \
     clipboardhelper.h \
+    permissionhelper.h \
+    permissionhelperandroid.h \
     styles/berrylanbusyindicator.h \
     wifisetup/btwifisetup.h \
     wifisetup/bluetoothdevice.h \
