@@ -2,6 +2,8 @@
 
 #ifdef Q_OS_ANDROID
 #include "permissionhelperandroid.h"
+#elif defined(Q_OS_IOS)
+#include "permissionhelperios.h"
 #endif
 
 Q_LOGGING_CATEGORY(dcPermissionHelper, "Permissions")
