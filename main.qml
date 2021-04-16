@@ -260,7 +260,6 @@ ApplicationWindow {
 
                     Button {
                         Layout.alignment: Qt.AlignHCenter
-                        visible: btWiFiSetup.accessPointModeAvailable
                         text: qsTr("Open Access Point")
                         onClicked: {
                             swipeView.currentIndex++
