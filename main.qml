@@ -24,7 +24,7 @@ ApplicationWindow {
 
     BluetoothDiscovery {
         id: discovery
-        discoveryEnabled: swipeView.currentIndex <= 1
+        discoveryEnabled: PermissionHelper.bluetoothPermission === PermissionHelper.PermissionStatusGranted && swipeView.currentIndex <= 1
     }
 
     BtWiFiSetup {
@@ -60,59 +60,6 @@ ApplicationWindow {
         property var currentAP: null
         readonly property bool accessPointMode: btWiFiSetup.wirelessDeviceMode == BtWiFiSetup.WirelessDeviceModeAccessPoint
     }
-
-//    Connections {
-//        target: btWiFiSetup.manager
-//        onInitializedChanged: {
-//            print("initialized changed", btWiFiSetup.manager.initialized)
-
-//            if (btWiFiSetup.manager.initialized) {
-//                swipeView.currentIndex++;
-//            } else {
-//                swipeView.currentIndex = 0;
-//            }
-//        }
-
-//        onConnectedChanged: {
-//            print("connectedChanged", btWiFiSetup.manager.connected)
-//            if (!btWiFiSetup.manager.connected) {
-//                swipeView.currentIndex = 0;
-//            }
-//        }
-
-//        onNetworkStatusChanged: {
-//            print("Network status changed:", btWiFiSetup.manager.networkStatus)
-//            if (swipeView.currentItem === connectingToWiFiView) {
-//                if (btWiFiSetup.manager.networkStatus === WirelessSetupManager.NetworkStatusGlobal) {
-//                    swipeView.currentIndex++;
-//                } else {
-//                    print("UNHANDLED Network status change:", btWiFiSetup.manager.networkStatus  )
-//                }
-
-//            }
-//        }
-//        onWirelessStatusChanged: {
-//            print("Wireless status changed:", btWiFiSetup.manager.networkStatus)
-//            if (swipeView.currentItem === connectingToWiFiView) {
-//                if (btWiFiSetup.manager.wirelessStatus === WirelessSetupManager.WirelessStatusActivated) {
-//                    swipeView.currentIndex++;
-//                }
-//                if (btWiFiSetup.manager.wirelessStatus === WirelessSetupManager.WirelessStatusFailed) {
-//                    connectingToWiFiView.running = false
-//                    connectingToWiFiView.text = qsTr("Sorry, the password is wrong.")
-//                    connectingToWiFiView.buttonText = qsTr("Try again")
-//                }
-//            }
-//        }
-
-//        onErrorOccurred: {
-//            if (swipeView.currentItem === connectingToWiFiView) {
-//                connectingToWiFiView.running = false
-//                connectingToWiFiView.text = qsTr("Sorry, an unexpected error happened.")
-//                connectingToWiFiView.buttonText = qsTr("Try again")
-//            }
-//        }
-//    }
 
     StackView {
         id: pageStack
@@ -188,7 +135,25 @@ ApplicationWindow {
                           ? qsTr("Bluetooth doesn't seem to be available on this device. BerryLan requires a working Bluetooth connection.")
                           : !discovery.bluetoothEnabled
                             ? qsTr("Bluetooth seems to be disabled. Please enable Bluetooth on your device in order to use BerryLan.")
-                            : qsTr("Searching for your\nRaspberry Pi")
+                            : PermissionHelper.bluetoothPermission === PermissionHelper.PermissionStatusNotDetermined
+                              ? qsTr("Berrylan doesn't seem to have permissions to scan for Bluetooth devices.")
+                              : PermissionHelper.bluetoothPermission === PermissionHelper.PermissionStatusDenied
+                                ? qsTr("Bluetooth access has been denied. Please grant permissions in the settings.")
+                                  : qsTr("Searching for your\nRaspberry Pi")
+
+                    buttonText: PermissionHelper.bluetoothPermission === PermissionHelper.PermissionStatusNotDetermined
+                                ? qsTr("Request permission")
+                                : PermissionHelper.bluetoothPermission === PermissionHelper.PermissionStatusDenied
+                                  ? qsTr("Open settings")
+                                  : ""
+                    onButtonClicked: {
+                        print("BT permission", PermissionHelper.bluetoothPermission)
+                        if (PermissionHelper.bluetoothPermission === PermissionHelper.PermissionStatusNotDetermined) {
+                            PermissionHelper.requestPermission(PermissionHelper.PermissionBluetooth)
+                        } else {
+                            PermissionHelper.openPermissionSettings();
+                        }
+                    }
                 }
 
                 // 1

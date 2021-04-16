@@ -21,6 +21,7 @@ APP_REVISION=$$member(VERSION_INFO, 1)
 SOURCES += \
     clipboardhelper.cpp \
     main.cpp \
+    permissionhelper.cpp \
     styles/berrylanbusyindicator.cpp \
     wifisetup/btwifisetup.cpp \
     wifisetup/bluetoothdevice.cpp \
@@ -34,6 +35,7 @@ SOURCES += \
 
 HEADERS += \
     clipboardhelper.h \
+    permissionhelper.h \
     styles/berrylanbusyindicator.h \
     wifisetup/btwifisetup.h \
     wifisetup/bluetoothdevice.h \
@@ -60,6 +62,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 android: {
     QT += androidextras
+
+    HEADERS += permissionhelperandroid.h
+    SOURCES += permissionhelperandroid.cpp
+
     DISTFILES += \
         android/AndroidManifest.xml \
         android/gradle/wrapper/gradle-wrapper.jar \
@@ -76,6 +82,11 @@ android: {
 ios: {
     QMAKE_TARGET_BUNDLE_PREFIX = io.guh
     QMAKE_BUNDLE = berrylan
+
+    HEADERS += permissionhelperios.h    
+    SOURCES += permissionhelperios.cpp
+    OBJECTIVE_SOURCES += permissionhelperios.mm
+
     # Configure generated xcode project to have our bundle id
     xcode_product_bundle_identifier_setting.value = $${QMAKE_TARGET_BUNDLE_PREFIX}.$${QMAKE_BUNDLE}
     QMAKE_ASSET_CATALOGS += ios/AppIcons.xcassets
