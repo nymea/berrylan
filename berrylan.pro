@@ -22,50 +22,28 @@ SOURCES += \
     clipboardhelper.cpp \
     main.cpp \
     styles/berrylanbusyindicator.cpp \
+    wifisetup/btwifisetup.cpp \
     wifisetup/bluetoothdevice.cpp \
     wifisetup/bluetoothdeviceinfo.cpp \
     wifisetup/bluetoothdeviceinfos.cpp \
     wifisetup/bluetoothdiscovery.cpp \
-    wifisetup/wirelessaccesspoint.cpp \
     wifisetup/wirelessaccesspoints.cpp \
+    wifisetup/wirelessaccesspoint.cpp \
     wifisetup/wirelessaccesspointsproxy.cpp \
-    wifisetup/wirelesssetupmanager.cpp \
-    wifisetup/networkmanagercontroller.cpp \
 
-SOURCES += \
-    wifisetupmock/networkmanagercontrollermock.cpp \
-    wifisetupmock/bluetoothdiscoverymock.cpp \
-    wifisetupmock/bluetoothdevicemock.cpp \
-    wifisetupmock/bluetoothdeviceinfosmock.cpp \
-    wifisetupmock/bluetoothdeviceinfomock.cpp \
-    wifisetupmock/wirelessaccesspointmock.cpp \
-    wifisetupmock/wirelessaccesspointsmock.cpp \
-    wifisetupmock/wirelessaccesspointsproxymock.cpp \
-    wifisetupmock/wirelesssetupmanagermock.cpp \
 
 HEADERS += \
     clipboardhelper.h \
     styles/berrylanbusyindicator.h \
+    wifisetup/btwifisetup.h \
     wifisetup/bluetoothdevice.h \
     wifisetup/bluetoothdeviceinfo.h \
     wifisetup/bluetoothdeviceinfos.h \
     wifisetup/bluetoothdiscovery.h \
-    wifisetup/wirelessaccesspoint.h \
     wifisetup/wirelessaccesspoints.h \
+    wifisetup/wirelessaccesspoint.h \
     wifisetup/wirelessaccesspointsproxy.h \
-    wifisetup/wirelesssetupmanager.h \
-    wifisetup/networkmanagercontroller.h \
 
-HEADERS += \
-    wifisetupmock/networkmanagercontrollermock.h \
-    wifisetupmock/bluetoothdiscoverymock.h \
-    wifisetupmock/bluetoothdevicemock.h \
-    wifisetupmock/bluetoothdeviceinfosmock.h \
-    wifisetupmock/bluetoothdeviceinfomock.h \
-    wifisetupmock/wirelessaccesspointmock.h \
-    wifisetupmock/wirelessaccesspointsmock.h \
-    wifisetupmock/wirelessaccesspointsproxymock.h \
-    wifisetupmock/wirelesssetupmanagermock.h \
 
 RESOURCES += qml.qrc
 
@@ -111,6 +89,11 @@ ios: {
 
     ios_icon_files.files += $$files(ios/AppIcons.xcassets/AppIcon.appiconset/AppIcon*.png)
     QMAKE_BUNDLE_DATA += ios_icon_files
+
+    IOS_DEVELOPMENT_TEAM.name = DEVELOPMENT_TEAM
+    IOS_DEVELOPMENT_TEAM.value = Z45PLKLTHM
+    QMAKE_MAC_XCODE_SETTINGS += IOS_DEVELOPMENT_TEAM
+
 }
 
 TRANSLATIONS += $$files($$absolute_path(translations)/*.ts, true)

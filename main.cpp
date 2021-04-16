@@ -16,18 +16,10 @@
 #endif
 
 #include "wifisetup/bluetoothdiscovery.h"
-#include "wifisetup/networkmanagercontroller.h"
-#include "wifisetup/wirelessaccesspoints.h"
+#include "wifisetup/btwifisetup.h"
 #include "wifisetup/wirelessaccesspoint.h"
+#include "wifisetup/wirelessaccesspoints.h"
 #include "wifisetup/wirelessaccesspointsproxy.h"
-#include "wifisetup/wirelesssetupmanager.h"
-
-#include "wifisetupmock/bluetoothdiscoverymock.h"
-#include "wifisetupmock/networkmanagercontrollermock.h"
-#include "wifisetupmock/wirelessaccesspointsmock.h"
-#include "wifisetupmock/wirelessaccesspointmock.h"
-#include "wifisetupmock/wirelessaccesspointsproxymock.h"
-#include "wifisetupmock/wirelesssetupmanagermock.h"
 
 #include "styles/berrylanbusyindicator.h"
 #include "clipboardhelper.h"
@@ -71,25 +63,13 @@ int main(int argc, char *argv[])
     appTranslator.load(":/translations/berrylan-" + QLocale::system().name());
     app.installTranslator(&appTranslator);
 
-    if (parser.isSet(demoOption)) {
-        qmlRegisterType<BluetoothDiscoveryMock>("BerryLan", 1, 0, "BluetoothDiscovery");
-        qmlRegisterUncreatableType<BluetoothDeviceInfosMock>("BerryLan", 1, 0, "BluetoothDeviceInfos", "Get it from BluetoothDiscovery");
-        qmlRegisterUncreatableType<BluetoothDeviceInfoMock>("BerryLan", 1, 0, "BluetoothDeviceInfo", "Get it from BluetoothDeviceInfos");
-        qmlRegisterType<NetworkManagerControllerMock>("BerryLan", 1, 0, "NetworkManagerController");
-        qmlRegisterUncreatableType<WirelessSetupManagerMock>("BerryLan", 1, 0, "WirelessSetupManager", "Get it from NeworkManagerController");
-        qmlRegisterUncreatableType<WirelessAccessPointsMock>("BerryLan", 1, 0, "WirelessAccessPoints", "Get it from NetworkManagerController");
-        qmlRegisterUncreatableType<WirelessAccessPointMock>("BerryLan", 1, 0, "WirelessAccessPoint", "Get it from WirelessAccessPoints");
-        qmlRegisterType<WirelessAccessPointsProxyMock>("BerryLan", 1, 0, "WirelessAccessPointsProxy");
-    } else {
-        qmlRegisterType<BluetoothDiscovery>("BerryLan", 1, 0, "BluetoothDiscovery");
-        qmlRegisterUncreatableType<BluetoothDeviceInfos>("BerryLan", 1, 0, "BluetoothDeviceInfos", "Get it from BluetoothDiscovery");
-        qmlRegisterUncreatableType<BluetoothDeviceInfo>("BerryLan", 1, 0, "BluetoothDeviceInfo", "Get it from BluetoothDeviceInfos");
-        qmlRegisterType<NetworkManagerController>("BerryLan", 1, 0, "NetworkManagerController");
-        qmlRegisterUncreatableType<WirelessSetupManager>("BerryLan", 1, 0, "WirelessSetupManager", "Get it from NeworkManagerController");
-        qmlRegisterUncreatableType<WirelessAccessPoints>("BerryLan", 1, 0, "WirelessAccessPoints", "Get it from NetworkManagerController");
-        qmlRegisterUncreatableType<WirelessAccessPoint>("BerryLan", 1, 0, "WirelessAccessPoint", "Get it from WirelessAccessPoints");
-        qmlRegisterType<WirelessAccessPointsProxy>("BerryLan", 1, 0, "WirelessAccessPointsProxy");
-    }
+    qmlRegisterType<BtWiFiSetup>("BerryLan", 1, 0, "BtWiFiSetup");
+    qmlRegisterType<BluetoothDiscovery>("BerryLan", 1, 0, "BluetoothDiscovery");
+    qmlRegisterUncreatableType<BluetoothDeviceInfos>("BerryLan", 1, 0, "BluetoothDeviceInfos", "Get it from BluetoothDiscovery");
+    qmlRegisterUncreatableType<BluetoothDeviceInfo>("BerryLan", 1, 0, "BluetoothDeviceInfo", "Get it from BluetoothDeviceInfos");
+    qmlRegisterUncreatableType<WirelessAccessPoints>("BerryLan", 1, 0, "WirelessAccessPoints", "Get it from NetworkManagerController");
+    qmlRegisterUncreatableType<WirelessAccessPoint>("BerryLan", 1, 0, "WirelessAccessPoint", "Get it from WirelessAccessPoints");
+    qmlRegisterType<WirelessAccessPointsProxy>("BerryLan", 1, 0, "WirelessAccessPointsProxy");
 
     qmlRegisterType<BerryLanBusyIndicator>("BerryLan", 1, 0, "BerryLanBusyIndicator");
 
