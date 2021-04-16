@@ -22,8 +22,6 @@ SOURCES += \
     clipboardhelper.cpp \
     main.cpp \
     permissionhelper.cpp \
-    permissionhelperios.cpp \
-    permissionhelperios.mm \
     styles/berrylanbusyindicator.cpp \
     wifisetup/btwifisetup.cpp \
     wifisetup/bluetoothdevice.cpp \
@@ -38,7 +36,6 @@ SOURCES += \
 HEADERS += \
     clipboardhelper.h \
     permissionhelper.h \
-    permissionhelperios.h \
     styles/berrylanbusyindicator.h \
     wifisetup/btwifisetup.h \
     wifisetup/bluetoothdevice.h \
@@ -86,7 +83,7 @@ ios: {
     QMAKE_TARGET_BUNDLE_PREFIX = io.guh
     QMAKE_BUNDLE = berrylan
 
-    HEADERS += permissionhelperios.h
+    HEADERS += permissionhelperios.h    
     SOURCES += permissionhelperios.cpp
     OBJECTIVE_SOURCES += permissionhelperios.mm
 
