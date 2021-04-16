@@ -24,7 +24,7 @@ ApplicationWindow {
 
     BluetoothDiscovery {
         id: discovery
-        discoveryEnabled: PermissionHelper.bluetoothPermission === PermissionHelper.PermissionStatusGranged && swipeView.currentIndex <= 1
+        discoveryEnabled: PermissionHelper.bluetoothPermission === PermissionHelper.PermissionStatusGranted && swipeView.currentIndex <= 1
     }
 
     BtWiFiSetup {
