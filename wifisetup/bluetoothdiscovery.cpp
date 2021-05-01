@@ -185,9 +185,9 @@ void BluetoothDiscovery::deviceDiscovered(const QBluetoothDeviceInfo &deviceInfo
         return;
     }
 
-    // Only show devices that either list the wifi service uuid or are called BT WLAN Setup (for legacy reasons)
+    // Only show devices that either list the wifi service uuid or are called BT WLAN setup (for legacy reasons)
     static QBluetoothUuid wifiServiceUuid = QBluetoothUuid(QUuid("e081fec0-f757-4449-b9c9-bfa83133f7fc"));
-    if (!deviceInfo.serviceUuids().contains(wifiServiceUuid) && deviceInfo.name() != "BT WLAN Setup") {
+    if (!deviceInfo.serviceUuids().contains(wifiServiceUuid) && deviceInfo.name() != "BT WLAN setup") {
         qDebug() << "Skipping device" << deviceInfo.name() << deviceInfo.serviceUuids();
         return;
     }
