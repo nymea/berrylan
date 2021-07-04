@@ -178,20 +178,6 @@ void BluetoothDiscovery::onBluetoothHostModeChanged(const QBluetoothLocalDevice:
 
 void BluetoothDiscovery::deviceDiscovered(const QBluetoothDeviceInfo &deviceInfo)
 {
-    // FIXME: All this filtering shouldn't be here, instead we should have a proxy model which allows filtering
-    if (!deviceInfo.isValid()
-            || !deviceInfo.coreConfigurations().testFlag(QBluetoothDeviceInfo::LowEnergyCoreConfiguration)
-            || deviceInfo.name().isEmpty()) {
-        return;
-    }
-
-    // Only show devices that either list the wifi service uuid or are called BT WLAN setup (for legacy reasons)
-    static QBluetoothUuid wifiServiceUuid = QBluetoothUuid(QUuid("e081fec0-f757-4449-b9c9-bfa83133f7fc"));
-    if (!deviceInfo.serviceUuids().contains(wifiServiceUuid) && deviceInfo.name() != "BT WLAN setup") {
-        qDebug() << "Skipping device" << deviceInfo.name() << deviceInfo.serviceUuids();
-        return;
-    }
-
     foreach (BluetoothDeviceInfo *di, m_deviceInfos->deviceInfos()) {
         if (di->address() == deviceInfo.address().toString()) {
             di->setBluetoothDeviceInfo(deviceInfo);

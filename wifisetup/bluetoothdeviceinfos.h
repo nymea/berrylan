@@ -33,6 +33,8 @@
 
 #include <QObject>
 #include <QAbstractListModel>
+#include <QSortFilterProxyModel>
+#include <QUuid>
 
 #include "bluetoothdeviceinfo.h"
 
@@ -70,6 +72,57 @@ protected:
 
 private:
     QList<BluetoothDeviceInfo *> m_deviceInfos;
+};
+
+class BluetoothDeviceInfosProxy: public QSortFilterProxyModel
+{
+    Q_OBJECT
+    Q_PROPERTY(BluetoothDeviceInfos* model READ model WRITE setModel NOTIFY modelChanged)
+    Q_PROPERTY(int count READ rowCount NOTIFY countChanged)
+
+    // Workaround for allowing particular names, even if they'd fail the filters below (used for legacy compatibility)
+    Q_PROPERTY(QStringList nameWhitelist READ nameWhitelist WRITE setNameWhitelist NOTIFY nameWhitelistChanged)
+
+    Q_PROPERTY(bool filterForLowEnergy READ filterForLowEnergy WRITE setFilterForLowEnergy NOTIFY filterForLowEnergyChanged)
+    Q_PROPERTY(QString filterForServiceUUID READ filterForServiceUUID WRITE setFilterForServiceUUID NOTIFY filterForServiceUUIDChanged)
+    Q_PROPERTY(QString filterForName READ filterForName WRITE setFilterForName NOTIFY filterForNameChanged)
+public:
+    BluetoothDeviceInfosProxy(QObject *parent = nullptr);
+
+    BluetoothDeviceInfos* model() const;
+    void setModel(BluetoothDeviceInfos *model);
+
+    QStringList nameWhitelist() const;
+    void setNameWhitelist(const QStringList &nameWhitelist);
+
+    bool filterForLowEnergy() const;
+    void setFilterForLowEnergy(bool filterForLowEnergy);
+
+    QString filterForServiceUUID() const;
+    void setFilterForServiceUUID(const QString &filterForServiceUUID);
+
+    QString filterForName() const;
+    void setFilterForName(const QString &name);
+
+    Q_INVOKABLE BluetoothDeviceInfo* get(int index) const;
+
+signals:
+    void modelChanged();
+    void countChanged();
+    void nameWhitelistChanged();
+    void filterForLowEnergyChanged();
+    void filterForServiceUUIDChanged();
+    void filterForNameChanged();
+
+protected:
+    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
+
+private:
+    BluetoothDeviceInfos *m_model = nullptr;
+    QStringList m_nameWhitelist;
+    bool m_filterForLowEnergy = false;
+    QUuid m_filterForServiceUUID;
+    QString m_filterForName;
 };
 
 #endif // BLUETOOTHDEVICEINFOS_H

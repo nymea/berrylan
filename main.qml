@@ -3,6 +3,7 @@ import QtQuick.Window 2.3
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.2
+import Qt.labs.settings 1.1
 import BerryLan 1.0
 import "components"
 
@@ -25,6 +26,14 @@ ApplicationWindow {
     BluetoothDiscovery {
         id: discovery
         discoveryEnabled: PermissionHelper.bluetoothPermission === PermissionHelper.PermissionStatusGranted && swipeView.currentIndex <= 1
+    }
+
+    BluetoothDeviceInfosProxy {
+        id: discoveryProxy
+        model: discovery.deviceInfos
+        nameWhitelist: ["BT WLAN setup"]
+        filterForLowEnergy: true
+        filterForServiceUUID: settings.filterEnabled ? "e081fec0-f757-4449-b9c9-bfa83133f7fc" : ""
     }
 
     BtWiFiSetup {
@@ -61,6 +70,11 @@ ApplicationWindow {
         readonly property bool accessPointMode: btWiFiSetup.wirelessDeviceMode == BtWiFiSetup.WirelessDeviceModeAccessPoint
     }
 
+    Settings {
+        id: settings
+        property bool filterEnabled: true
+    }
+
     StackView {
         id: pageStack
         anchors.fill: parent
@@ -82,12 +96,17 @@ ApplicationWindow {
                 }
             }
 
+            settingsButtonVisible: swipeView.currentIndex <= 1
             backButtonVisible: swipeView.currentIndex === 4
 
             onHelpClicked: pageStack.push(Qt.resolvedUrl("components/HelpPage.qml"))
             onBackClicked: {
                 d.currentAP = null
                 swipeView.currentIndex--
+            }
+            onSettingsClicked: {
+                var popup = settingsComponent.createObject(app)
+                popup.open()
             }
 
             step: {
@@ -120,7 +139,7 @@ ApplicationWindow {
                 interactive: false
 
                 currentIndex: {
-                    if (discovery.deviceInfos.count == 0) {
+                    if (discoveryProxy.count == 0) {
                         return 0;
                     }
                     return 1;
@@ -161,7 +180,7 @@ ApplicationWindow {
                     id: discoveryListView
                     height: swipeView.height
                     width: swipeView.width
-                    model: discovery.deviceInfos
+                    model: discoveryProxy
                     clip: true
 
                     delegate: BerryLanItemDelegate {
@@ -170,7 +189,7 @@ ApplicationWindow {
                         iconSource: "../images/bluetooth.svg"
 
                         onClicked: {
-                            btWiFiSetup.connectToDevice(discovery.deviceInfos.get(index));
+                            btWiFiSetup.connectToDevice(discoveryProxy.get(index));
                             swipeView.currentIndex++;
                         }
                     }
@@ -386,6 +405,41 @@ ApplicationWindow {
                                 }
                             }
                         }
+                    }
+                }
+            }
+        }
+    }
+
+    Component {
+        id: settingsComponent
+        Dialog {
+            id: settingsDialog
+            x: (parent.width - width) / 2
+            y: (parent.height - height) / 2
+            width: 300
+            title: qsTr("Settings")
+            contentItem: ColumnLayout {
+                width: parent.width
+                Label {
+                    Layout.fillWidth: true
+                    wrapMode: Text.WordWrap
+                    text: qsTr("BerryLan tries to detect the network setup capabilities on the devices it finds. However, old installations might not suport this. Disable filtering if your devices aren't being found.")
+                    font.pixelSize: app.smallFont
+                }
+
+                CheckDelegate {
+                    Layout.fillWidth: true
+                    text: qsTr("Filtering enabled")
+                    checked: settings.filterEnabled
+                    onClicked: settings.filterEnabled = !settings.filterEnabled
+                }
+
+                Button {
+                    Layout.fillWidth: true
+                    text: qsTr("OK")
+                    onClicked: {
+                        settingsDialog.close()
                     }
                 }
             }

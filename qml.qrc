@@ -52,5 +52,6 @@
         <file>images/wifi-0.svg</file>
         <file>images/wifi-66.svg</file>
         <file>images/wifi-100.svg</file>
+        <file>images/settings.svg</file>
     </qresource>
 </RCC>

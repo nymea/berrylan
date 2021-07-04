@@ -9,8 +9,10 @@ ColumnLayout {
     property string text
 
     property bool backButtonVisible: false
+    property bool settingsButtonVisible: false
 
     signal backClicked()
+    signal settingsClicked()
 
     RowLayout {
         Layout.margins: app.margins
@@ -25,6 +27,11 @@ ColumnLayout {
                 onClicked: root.backClicked()
             }
         }
+        Item { // just to keep the label centered
+            Layout.preferredHeight: app.iconSize * .8
+            Layout.preferredWidth: height
+            visible: !root.backButtonVisible && root.settingsButtonVisible
+        }
         Label {
             Layout.fillWidth: true
             Layout.preferredHeight: app.iconSize * .8
@@ -38,7 +45,17 @@ ColumnLayout {
         Item { // just to keep the label centered
             Layout.preferredHeight: app.iconSize * .8
             Layout.preferredWidth: height
-            visible: root.backButtonVisible
+            visible: root.backButtonVisible && !root.settingsButtonVisible
+        }
+        ColorIcon {
+            Layout.preferredHeight: app.iconSize * .8
+            Layout.preferredWidth: height
+            name: "../images/settings.svg"
+            visible: root.settingsButtonVisible
+            MouseArea {
+                anchors.fill: parent
+                onClicked: root.settingsClicked()
+            }
         }
     }
 

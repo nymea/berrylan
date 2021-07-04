@@ -31,6 +31,9 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
 
+    app.setApplicationName("berrylan");
+    app.setOrganizationName("nymea");
+
     QCommandLineParser parser;
     QCommandLineOption demoOption("demo");
     parser.addOption(demoOption);
@@ -67,6 +70,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<BtWiFiSetup>("BerryLan", 1, 0, "BtWiFiSetup");
     qmlRegisterType<BluetoothDiscovery>("BerryLan", 1, 0, "BluetoothDiscovery");
     qmlRegisterUncreatableType<BluetoothDeviceInfos>("BerryLan", 1, 0, "BluetoothDeviceInfos", "Get it from BluetoothDiscovery");
+    qmlRegisterType<BluetoothDeviceInfosProxy>("BerryLan", 1, 0, "BluetoothDeviceInfosProxy");
     qmlRegisterUncreatableType<BluetoothDeviceInfo>("BerryLan", 1, 0, "BluetoothDeviceInfo", "Get it from BluetoothDeviceInfos");
     qmlRegisterUncreatableType<WirelessAccessPoints>("BerryLan", 1, 0, "WirelessAccessPoints", "Get it from NetworkManagerController");
     qmlRegisterUncreatableType<WirelessAccessPoint>("BerryLan", 1, 0, "WirelessAccessPoint", "Get it from WirelessAccessPoints");

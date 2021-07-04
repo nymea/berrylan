@@ -7,16 +7,20 @@ Page {
     id: root
     property int step: 0
     property bool backButtonVisible: false
+    property bool settingsButtonVisible: false
 
     property alias content: contentItemContainer.data
 
     signal helpClicked()
     signal backClicked()
+    signal settingsClicked();
 
     header: BerryLanHeader {
         text: root.title
         backButtonVisible: root.backButtonVisible
         onBackClicked: root.backClicked()
+        settingsButtonVisible: root.settingsButtonVisible
+        onSettingsClicked: root.settingsClicked()
     }
 
     ColumnLayout {

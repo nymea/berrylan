@@ -31,6 +31,7 @@
 #include "bluetoothdeviceinfos.h"
 
 #include <QDebug>
+#include <QBluetoothUuid>
 
 BluetoothDeviceInfos::BluetoothDeviceInfos(QObject *parent) : QAbstractListModel(parent)
 {
@@ -107,4 +108,127 @@ QHash<int, QByteArray> BluetoothDeviceInfos::roleNames() const
     roles[BluetoothDeviceInfoRoleLe] = "lowEnergy";
     roles[BluetoothDeviceInfoRoleSignalStrength] = "signalStrength";
     return roles;
+}
+
+BluetoothDeviceInfosProxy::BluetoothDeviceInfosProxy(QObject *parent): QSortFilterProxyModel(parent)
+{
+
+}
+
+BluetoothDeviceInfos *BluetoothDeviceInfosProxy::model() const
+{
+    return m_model;
+}
+
+void BluetoothDeviceInfosProxy::setModel(BluetoothDeviceInfos *model)
+{
+    if (m_model == model) {
+        return;
+    }
+
+    if (m_model) {
+        disconnect(m_model, &BluetoothDeviceInfos::countChanged, this, &BluetoothDeviceInfosProxy::countChanged);
+    }
+
+    m_model = model;
+    setSourceModel(model);
+    emit modelChanged();
+    emit countChanged();
+
+    if (m_model) {
+        connect(m_model, &BluetoothDeviceInfos::countChanged, this, &BluetoothDeviceInfosProxy::countChanged);
+    }
+}
+
+QStringList BluetoothDeviceInfosProxy::nameWhitelist() const
+{
+    return m_nameWhitelist;
+}
+
+void BluetoothDeviceInfosProxy::setNameWhitelist(const QStringList &nameWhitelist)
+{
+    if (m_nameWhitelist != nameWhitelist) {
+        m_nameWhitelist = nameWhitelist;
+        emit nameWhitelistChanged();
+        invalidateFilter();
+        emit countChanged();
+    }
+}
+
+bool BluetoothDeviceInfosProxy::filterForLowEnergy() const
+{
+    return m_filterForLowEnergy;
+}
+
+void BluetoothDeviceInfosProxy::setFilterForLowEnergy(bool filterForLowEnergy)
+{
+    if (m_filterForLowEnergy != filterForLowEnergy) {
+        m_filterForLowEnergy = filterForLowEnergy;
+        emit filterForLowEnergyChanged();
+        invalidateFilter();
+        emit countChanged();
+    }
+}
+
+QString BluetoothDeviceInfosProxy::filterForServiceUUID() const
+{
+    return m_filterForServiceUUID.toString();
+}
+
+void BluetoothDeviceInfosProxy::setFilterForServiceUUID(const QString &filterForServiceUUID)
+{
+    if (m_filterForServiceUUID != filterForServiceUUID) {
+        m_filterForServiceUUID = filterForServiceUUID;
+        emit filterForServiceUUIDChanged();
+        invalidateFilter();
+        emit countChanged();
+    }
+}
+
+QString BluetoothDeviceInfosProxy::filterForName() const
+{
+    return m_filterForName;
+}
+
+void BluetoothDeviceInfosProxy::setFilterForName(const QString &name)
+{
+    if (m_filterForName != name) {
+        m_filterForName = name;
+        emit filterForNameChanged();
+
+        invalidateFilter();
+        emit countChanged();
+    }
+}
+
+BluetoothDeviceInfo *BluetoothDeviceInfosProxy::get(int index) const
+{
+    return m_model->get(mapToSource(this->index(index, 0)).row());
+}
+
+bool BluetoothDeviceInfosProxy::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
+{
+    Q_UNUSED(source_parent)
+
+    BluetoothDeviceInfo *info = m_model->get(source_row);
+
+    if (!m_nameWhitelist.isEmpty()) {
+        if (m_nameWhitelist.contains(info->name())) {
+            return true;
+        }
+    }
+
+    if (m_filterForLowEnergy && !info->bluetoothDeviceInfo().coreConfigurations().testFlag(QBluetoothDeviceInfo::LowEnergyCoreConfiguration)) {
+        return false;
+    }
+
+    if (!m_filterForServiceUUID.isNull() && !info->bluetoothDeviceInfo().serviceUuids().contains(QBluetoothUuid(m_filterForServiceUUID))) {
+        return false;
+    }
+
+    if (!m_filterForName.isEmpty() && info->name() != m_filterForName) {
+        return false;
+    }
+
+    return true;
 }
