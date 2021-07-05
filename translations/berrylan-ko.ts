@@ -39,27 +39,27 @@
     <name>BluetoothDeviceMock</name>
     <message>
         <source>Connecting to %1...</source>
-        <translation type="unfinished">%1 에 연결 중...</translation>
+        <translation type="obsolete">%1 에 연결 중...</translation>
     </message>
     <message>
         <source>Connected to %1</source>
-        <translation type="unfinished">%1 에 연결 되었습니다</translation>
+        <translation type="obsolete">%1 에 연결 되었습니다</translation>
     </message>
     <message>
         <source>Discovering services of %1...</source>
-        <translation type="unfinished">%1 검색 중...</translation>
+        <translation type="obsolete">%1 검색 중...</translation>
     </message>
     <message>
         <source>%1 connected and discovered.</source>
-        <translation type="unfinished">%1 검색 되고 연결 되었습니다.</translation>
+        <translation type="obsolete">%1 검색 되고 연결 되었습니다.</translation>
     </message>
     <message>
         <source>Disconnecting from %1...</source>
-        <translation type="unfinished">%1 로 부터 연결 해제 중...</translation>
+        <translation type="obsolete">%1 로 부터 연결 해제 중...</translation>
     </message>
     <message>
         <source>%1 disconnected.</source>
-        <translation type="unfinished">%1 에 연결이 끊어 졌습니다.</translation>
+        <translation type="obsolete">%1 에 연결이 끊어 졌습니다.</translation>
     </message>
 </context>
 <context>
@@ -73,35 +73,35 @@
     <name>WirelessSetupManager</name>
     <message>
         <source>Invalid value.</source>
-        <translation>유효하지 않은 값.</translation>
+        <translation type="vanished">유효하지 않은 값.</translation>
     </message>
     <message>
         <source>There is no networkmanager available on the device.</source>
-        <translation>장치에는 네트워크 관리자가 없습니다.</translation>
+        <translation type="vanished">장치에는 네트워크 관리자가 없습니다.</translation>
     </message>
     <message>
         <source>There is no wireless device available on the device.</source>
-        <translation>이 장치에는 사용할 수 있는 무선 장치가 없습니다.</translation>
+        <translation type="vanished">이 장치에는 사용할 수 있는 무선 장치가 없습니다.</translation>
     </message>
     <message>
         <source>Unknown error occured.</source>
-        <translation>알 수 없는 오류가 발생했습니다.</translation>
+        <translation type="vanished">알 수 없는 오류가 발생했습니다.</translation>
     </message>
     <message>
         <source>Invalid command.</source>
-        <translation>유효하지 않은 명령.</translation>
+        <translation type="vanished">유효하지 않은 명령.</translation>
     </message>
     <message>
         <source>Invalid parameters.</source>
-        <translation>유효하지 않은 매개 변수.</translation>
+        <translation type="vanished">유효하지 않은 매개 변수.</translation>
     </message>
     <message>
         <source>The wireless networking is disabled on the device.</source>
-        <translation>무선 네트워킹이 장치에서 비활성화 되어 있습니다.</translation>
+        <translation type="vanished">무선 네트워킹이 장치에서 비활성화 되어 있습니다.</translation>
     </message>
     <message>
         <source>The networking is disabled on the device.</source>
-        <translation>장치에서 네트워킹이 불가능 합니다.</translation>
+        <translation type="vanished">장치에서 네트워킹이 불가능 합니다.</translation>
     </message>
 </context>
 <context>
@@ -168,10 +168,6 @@ Raspberry Pi</source>
         <translation>BerryLan 을 사용 해 주셔서 감사합니다!</translation>
     </message>
     <message>
-        <source>Sorry, an unexpected error happened.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Open Access Point</source>
         <translation type="unfinished"></translation>
     </message>
@@ -201,6 +197,38 @@ Raspberry Pi</source>
     </message>
     <message>
         <source>Close access point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Berrylan doesn&apos;t seem to have permissions to scan for Bluetooth devices.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bluetooth access has been denied. Please grant permissions in the settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Request permission</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hidden network</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BerryLan tries to detect the network setup capabilities on the devices it finds. However, old installations might not suport this. Disable filtering if your devices aren&apos;t being found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filtering enabled</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

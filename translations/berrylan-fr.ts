@@ -39,27 +39,27 @@
     <name>BluetoothDeviceMock</name>
     <message>
         <source>Connecting to %1...</source>
-        <translation type="unfinished">Connecte à %1...</translation>
+        <translation type="obsolete">Connecte à %1...</translation>
     </message>
     <message>
         <source>Connected to %1</source>
-        <translation type="unfinished">Connecté à %1</translation>
+        <translation type="obsolete">Connecté à %1</translation>
     </message>
     <message>
         <source>Discovering services of %1...</source>
-        <translation type="unfinished">Cherche service à %1...</translation>
+        <translation type="obsolete">Cherche service à %1...</translation>
     </message>
     <message>
         <source>%1 connected and discovered.</source>
-        <translation type="unfinished">%1 connecté et exploré.</translation>
+        <translation type="obsolete">%1 connecté et exploré.</translation>
     </message>
     <message>
         <source>Disconnecting from %1...</source>
-        <translation type="unfinished">Déconnecte de %1...</translation>
+        <translation type="obsolete">Déconnecte de %1...</translation>
     </message>
     <message>
         <source>%1 disconnected.</source>
-        <translation type="unfinished">%1 déconnecté.</translation>
+        <translation type="obsolete">%1 déconnecté.</translation>
     </message>
 </context>
 <context>
@@ -73,35 +73,35 @@
     <name>WirelessSetupManager</name>
     <message>
         <source>Invalid value.</source>
-        <translation>Valeur non valable.</translation>
+        <translation type="vanished">Valeur non valable.</translation>
     </message>
     <message>
         <source>There is no networkmanager available on the device.</source>
-        <translation>La gestion de réseau n’est pas disponible sur cet appareil.</translation>
+        <translation type="vanished">La gestion de réseau n’est pas disponible sur cet appareil.</translation>
     </message>
     <message>
         <source>There is no wireless device available on the device.</source>
-        <translation>Le module de communication radio n’est pas disponible sur cet appareil.</translation>
+        <translation type="vanished">Le module de communication radio n’est pas disponible sur cet appareil.</translation>
     </message>
     <message>
         <source>Unknown error occured.</source>
-        <translation>Une erreur de cause s’est produite.</translation>
+        <translation type="vanished">Une erreur de cause s’est produite.</translation>
     </message>
     <message>
         <source>Invalid command.</source>
-        <translation>Commande non valable.</translation>
+        <translation type="vanished">Commande non valable.</translation>
     </message>
     <message>
         <source>Invalid parameters.</source>
-        <translation>Paramètre non valable.</translation>
+        <translation type="vanished">Paramètre non valable.</translation>
     </message>
     <message>
         <source>The wireless networking is disabled on the device.</source>
-        <translation>La communication radio est inactivée sur cet appareil.</translation>
+        <translation type="vanished">La communication radio est inactivée sur cet appareil.</translation>
     </message>
     <message>
         <source>The networking is disabled on the device.</source>
-        <translation>Le réseau est inactivé sur cet appareil.</translation>
+        <translation type="vanished">Le réseau est inactivé sur cet appareil.</translation>
     </message>
 </context>
 <context>
@@ -169,10 +169,6 @@ Raspberry Pi</translation>
         <translation>Merci beaucoup d’utiliser BerryLan!</translation>
     </message>
     <message>
-        <source>Sorry, an unexpected error happened.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Open Access Point</source>
         <translation type="unfinished"></translation>
     </message>
@@ -202,6 +198,38 @@ Raspberry Pi</translation>
     </message>
     <message>
         <source>Close access point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Berrylan doesn&apos;t seem to have permissions to scan for Bluetooth devices.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bluetooth access has been denied. Please grant permissions in the settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Request permission</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hidden network</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BerryLan tries to detect the network setup capabilities on the devices it finds. However, old installations might not suport this. Disable filtering if your devices aren&apos;t being found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filtering enabled</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

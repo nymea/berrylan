@@ -36,71 +36,9 @@
     </message>
 </context>
 <context>
-    <name>BluetoothDeviceMock</name>
-    <message>
-        <source>Connecting to %1...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Connected to %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Discovering services of %1...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1 connected and discovered.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Disconnecting from %1...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1 disconnected.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>HelpPage</name>
     <message>
         <source>About BerryLan</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>WirelessSetupManager</name>
-    <message>
-        <source>Invalid value.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>There is no networkmanager available on the device.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>There is no wireless device available on the device.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown error occured.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid command.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid parameters.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The wireless networking is disabled on the device.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The networking is disabled on the device.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -168,10 +106,6 @@ Raspberry Pi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sorry, an unexpected error happened.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Open Access Point</source>
         <translation type="unfinished"></translation>
     </message>
@@ -201,6 +135,38 @@ Raspberry Pi</source>
     </message>
     <message>
         <source>Close access point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Berrylan doesn&apos;t seem to have permissions to scan for Bluetooth devices.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bluetooth access has been denied. Please grant permissions in the settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Request permission</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hidden network</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BerryLan tries to detect the network setup capabilities on the devices it finds. However, old installations might not suport this. Disable filtering if your devices aren&apos;t being found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filtering enabled</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
