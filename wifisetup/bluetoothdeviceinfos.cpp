@@ -87,6 +87,11 @@ void BluetoothDeviceInfos::addBluetoothDeviceInfo(BluetoothDeviceInfo *deviceInf
     deviceInfo->setParent(this);
     beginInsertRows(QModelIndex(), m_deviceInfos.count(), m_deviceInfos.count());
     m_deviceInfos.append(deviceInfo);
+    connect(deviceInfo, &BluetoothDeviceInfo::deviceChanged, this, [=]{
+        int idx = m_deviceInfos.indexOf(deviceInfo);
+        QModelIndex index = this->index(idx);
+        emit dataChanged(index, index);
+    });
     endInsertRows();
     emit countChanged();
 }
