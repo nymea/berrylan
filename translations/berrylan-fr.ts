@@ -5,14 +5,14 @@
     <name>BerryLanPage</name>
     <message>
         <source>an open source tool by</source>
-        <translation>un outil open source de</translation>
+        <translation>Un outil libre par</translation>
     </message>
 </context>
 <context>
     <name>BluetoothDevice</name>
     <message>
         <source>Connecting to %1...</source>
-        <translation>Connecte à %1...</translation>
+        <translation>Connexion à %1...</translation>
     </message>
     <message>
         <source>Connected to %1</source>
@@ -20,11 +20,11 @@
     </message>
     <message>
         <source>Disconnecting from %1...</source>
-        <translation>Déconnecte de %1...</translation>
+        <translation>Déconnexion de %1...</translation>
     </message>
     <message>
         <source>Discovering services of %1...</source>
-        <translation>Cherche service à %1...</translation>
+        <translation>Recherche des services de %1...</translation>
     </message>
     <message>
         <source>%1 connected and discovered.</source>
@@ -66,42 +66,42 @@
     <name>HelpPage</name>
     <message>
         <source>About BerryLan</source>
-        <translation>Via BerryLan</translation>
+        <translation>À propos de BerryLan</translation>
     </message>
 </context>
 <context>
     <name>WirelessSetupManager</name>
     <message>
         <source>Invalid value.</source>
-        <translation type="vanished">Valeur non valable.</translation>
+        <translation>Valeur incorrecte.</translation>
     </message>
     <message>
         <source>There is no networkmanager available on the device.</source>
-        <translation type="vanished">La gestion de réseau n’est pas disponible sur cet appareil.</translation>
+        <translation>Il n&apos;y a pas de gestionnaire de réseau disponible cet appareil.</translation>
     </message>
     <message>
         <source>There is no wireless device available on the device.</source>
-        <translation type="vanished">Le module de communication radio n’est pas disponible sur cet appareil.</translation>
+        <translation>Il n&apos;y a pas de dispositif sans fil disponible sur cet appareil.</translation>
     </message>
     <message>
         <source>Unknown error occured.</source>
-        <translation type="vanished">Une erreur de cause s’est produite.</translation>
+        <translation>Une erreur inconnue s&apos;est produite.</translation>
     </message>
     <message>
         <source>Invalid command.</source>
-        <translation type="vanished">Commande non valable.</translation>
+        <translation>Commande incorrecte.</translation>
     </message>
     <message>
         <source>Invalid parameters.</source>
-        <translation type="vanished">Paramètre non valable.</translation>
+        <translation>Paramètres incorrects.</translation>
     </message>
     <message>
         <source>The wireless networking is disabled on the device.</source>
-        <translation type="vanished">La communication radio est inactivée sur cet appareil.</translation>
+        <translation>Le réseau sans fil est désactivé sur cet appareil.</translation>
     </message>
     <message>
         <source>The networking is disabled on the device.</source>
-        <translation type="vanished">Le réseau est inactivé sur cet appareil.</translation>
+        <translation>La mise en réseau est désactivée sur cet appareil.</translation>
     </message>
 </context>
 <context>
@@ -112,11 +112,11 @@
     </message>
     <message>
         <source>Sorry, the password is wrong.</source>
-        <translation>Le mot de passe est incorrect.</translation>
+        <translation>Désolé, le mot de passe est incorrect.</translation>
     </message>
     <message>
         <source>Try again</source>
-        <translation>S.v.p. essayer de nouveau</translation>
+        <translation>Veuillez réessayer</translation>
     </message>
     <message>
         <source>Devices</source>
@@ -124,15 +124,15 @@
     </message>
     <message>
         <source>Network</source>
-        <translation>Reseau</translation>
+        <translation>Réseau</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation>Inscription</translation>
+        <translation>Connexion</translation>
     </message>
     <message>
         <source>Connecting</source>
-        <translation>Connecte</translation>
+        <translation>Connexion</translation>
     </message>
     <message>
         <source>Connected</source>
@@ -140,21 +140,21 @@
     </message>
     <message>
         <source>Bluetooth doesn&apos;t seem to be available on this device. BerryLan requires a working Bluetooth connection.</source>
-        <translation>Bluetooth n’est pas disponible sur cet appareil. BerryLan a besoin d’une connection Bluetooth qui fonctionne.</translation>
+        <translation>Le Bluetooth n’est pas disponible sur cet appareil. BerryLan a besoin d’une connexion Bluetooth fonctionnelle.</translation>
     </message>
     <message>
         <source>Bluetooth seems to be disabled. Please enable Bluetooth on your device in order to use BerryLan.</source>
-        <translation>Bluetooth semble être inactivé. Pour utiliser BerryLan tu dois activer Bluetooth.</translation>
+        <translation>Le Bluetooth semble être désactivé. Veuillez activer le Bluetooth sur votre appareil afin d&apos;utiliser BerryLan.</translation>
     </message>
     <message>
         <source>Searching for your
 Raspberry Pi</source>
-        <translation>Cherche ton 
+        <translation>Recherche de votre
 Raspberry Pi</translation>
     </message>
     <message>
         <source>Connecting to your Raspberry Pi</source>
-        <translation>Connecte à ton Raspberry Pi</translation>
+        <translation>Connexion à votre Raspberry Pi</translation>
     </message>
     <message>
         <source>OK</source>
@@ -162,51 +162,51 @@ Raspberry Pi</translation>
     </message>
     <message>
         <source>Connecting the Raspberry Pi to %1</source>
-        <translation>Connecte le Raspberry Pi à %1</translation>
+        <translation>Connexion du Raspberry Pi à %1</translation>
     </message>
     <message>
         <source>Thanks for using BerryLan!</source>
-        <translation>Merci beaucoup d’utiliser BerryLan!</translation>
+        <translation>Merci beaucoup d’utiliser BerryLan !</translation>
     </message>
     <message>
         <source>Open Access Point</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir le point d&apos;accès</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Mot de passe</translation>
     </message>
     <message>
         <source>Opening access point &quot;%1&quot; on the Raspberry Pi</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouverture du point d&apos;accès « %1 » sur le Raspberry Pi</translation>
     </message>
     <message>
         <source>Access point name: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom du point d&apos;accès : %1</translation>
     </message>
     <message>
         <source>IP Address: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresse IP : %1</translation>
     </message>
     <message>
         <source>IP address copied to clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;adresse IP a été copiée dans le presse-papiers.</translation>
     </message>
     <message>
         <source>Close access point</source>
-        <translation type="unfinished"></translation>
+        <translation>Fermer le point d&apos;accès</translation>
     </message>
     <message>
         <source>Berrylan doesn&apos;t seem to have permissions to scan for Bluetooth devices.</source>
-        <translation type="unfinished"></translation>
+        <translation>BerryLan ne semble pas avoir la permission de rechercher des appareils Bluetooth.</translation>
     </message>
     <message>
         <source>Bluetooth access has been denied. Please grant permissions in the settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;accès Bluetooth a été refusé. Veuillez accorder les autorisations dans les paramètres.</translation>
     </message>
     <message>
         <source>Request permission</source>
