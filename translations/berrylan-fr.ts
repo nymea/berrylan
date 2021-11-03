@@ -206,31 +206,31 @@ Raspberry Pi</translation>
     </message>
     <message>
         <source>Bluetooth access has been denied. Please grant permissions in the settings.</source>
-        <translation>L&apos;accès Bluetooth a été refusé. Veuillez accorder les autorisations dans les paramètres.</translation>
+        <translation>L&apos;accès Bluetooth a été refusé. Veuillez accorder les permissions dans les paramètres.</translation>
     </message>
     <message>
         <source>Request permission</source>
-        <translation type="unfinished"></translation>
+        <translation>Demander la permission</translation>
     </message>
     <message>
         <source>Open settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir les paramètres</translation>
     </message>
     <message>
         <source>Hidden network</source>
-        <translation type="unfinished"></translation>
+        <translation>Réseau caché</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres</translation>
     </message>
     <message>
         <source>BerryLan tries to detect the network setup capabilities on the devices it finds. However, old installations might not suport this. Disable filtering if your devices aren&apos;t being found.</source>
-        <translation type="unfinished"></translation>
+        <translation>BerryLan essaie de détecter les capacités de configuration du réseau sur les appareils qu&apos;il trouve. Cependant, les anciennes installations peuvent ne pas supporter cela. Désactivez le filtrage si vos appareils ne sont pas trouvés.</translation>
     </message>
     <message>
         <source>Filtering enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtrage activé</translation>
     </message>
 </context>
 </TS>
