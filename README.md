@@ -13,7 +13,6 @@ You can setup the wireless LAN of your headless Raspberry PI in just three steps
 #### Etch the image
 
 Download the BerryLan flavoured [Raspbian image](https://downloads.nymea.io/images/raspberrypi/latest) and flash the SD Card. We recommend Etcher to do that.
-Note: SSH user/pwd for this image is both 'nymea'.
 
 #### Power on
 
