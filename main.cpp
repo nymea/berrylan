@@ -21,7 +21,6 @@
 #include "wifisetup/wirelessaccesspoints.h"
 #include "wifisetup/wirelessaccesspointsproxy.h"
 
-#include "styles/berrylanbusyindicator.h"
 #include "clipboardhelper.h"
 #include "permissionhelper.h"
 
@@ -77,8 +76,6 @@ int main(int argc, char *argv[])
     qmlRegisterType<WirelessAccessPointsProxy>("BerryLan", 1, 0, "WirelessAccessPointsProxy");
 
     qmlRegisterSingletonInstance<PermissionHelper>("BerryLan", 1, 0, "PermissionHelper", PermissionHelper::instance());
-
-    qmlRegisterType<BerryLanBusyIndicator>("BerryLan", 1, 0, "BerryLanBusyIndicator");
 
     QQmlApplicationEngine engine;
 

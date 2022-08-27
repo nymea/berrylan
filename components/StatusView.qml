@@ -17,11 +17,10 @@ Item {
             Layout.preferredHeight: app.iconSize * 1.5
             radius: height / 2
             color: "#D8D8D8"
-            BerryLanBusyIndicator {
+            BusyIndicator {
                 anchors.fill: parent
+                anchors.margins: -6
                 visible: step === 0
-                color: Material.accent
-                penWidth: 3
             }
 
             Rectangle {
@@ -73,11 +72,10 @@ Item {
 //            color: root.step > 4 ? "#e71d36" : "#D8D8D8"
             color: "#D8D8D8"
 
-            BerryLanBusyIndicator {
+            BusyIndicator {
                 anchors.fill: parent
+                anchors.margins: -6
                 visible: step === 3
-                color: Material.accent
-                penWidth: 3
             }
 
             Rectangle {
@@ -120,11 +118,11 @@ Item {
             radius: height / 2
 //            color: root.step > 7 ? "#e71d36" : "#D8D8D8"
             color: "#D8D8D8"
-            BerryLanBusyIndicator {
+
+            BusyIndicator {
                 anchors.fill: parent
+                anchors.margins: -6
                 visible: step === 6
-                color: Material.accent
-                penWidth: 3
             }
             Rectangle {
                 anchors.centerIn: parent
