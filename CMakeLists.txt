@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(helloworld C CXX)
+project(berrylan C CXX)
 
 # Automatically create moc files
 set(CMAKE_AUTOMOC ON)
