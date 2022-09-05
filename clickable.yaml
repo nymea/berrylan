@@ -1,0 +1,26 @@
+clickable_minimum_required: 7.1.2
+builder: qmake
+kill: berrylan
+build_args: CONFIG+=ubports
+
+dependencies_target: [
+    libavahi-client-dev,
+    libavahi-common-dev,
+    libqt5charts5-dev,
+    qt5-default,
+    qml-module-qtcharts,
+    qml-module-qt-labs-calendar,
+    libconnectivity-qt1-dev,
+    libunity-api-dev,
+    libnih-dbus-dev,
+    libdbus-1-dev,
+    build-essential
+  ]
+
+image_setup:
+  run:
+  - echo "deb http://repository.nymea.io focal rpi" | tee /etc/apt/sources.list.d/nymea.list
+  - apt-key adv --keyserver keyserver.ubuntu.com --recv-key A1A19ED6
+  - apt-get update
+  - apt-get install -y dirmngr
+  - apt-get install g++
