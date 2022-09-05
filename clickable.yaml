@@ -23,4 +23,3 @@ image_setup:
   - apt-key adv --keyserver keyserver.ubuntu.com --recv-key A1A19ED6
   - apt-get update
   - apt-get install -y dirmngr
-  - apt-get install g++
