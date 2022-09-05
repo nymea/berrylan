@@ -6,9 +6,7 @@ build_args: CONFIG+=ubports
 dependencies_target: [
     libavahi-client-dev,
     libavahi-common-dev,
-    libqt5charts5-dev,
     qt5-default,
-    qml-module-qtcharts,
     qml-module-qt-labs-calendar,
     libconnectivity-qt1-dev,
     libunity-api-dev,
