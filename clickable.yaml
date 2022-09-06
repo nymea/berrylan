@@ -4,13 +4,9 @@ kill: berrylan
 build_args: CONFIG+=ubports
 
 dependencies_target: [
-    libavahi-client-dev,
-    libavahi-common-dev,
     qt5-default,
     libconnectivity-qt1-dev,
     libunity-api-dev,
-    libnih-dbus-dev,
-    libdbus-1-dev,
     build-essential
   ]
 
