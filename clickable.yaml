@@ -7,7 +7,6 @@ dependencies_target: [
     libavahi-client-dev,
     libavahi-common-dev,
     qt5-default,
-    qml-module-qt-labs-calendar,
     libconnectivity-qt1-dev,
     libunity-api-dev,
     libnih-dbus-dev,
