@@ -6,13 +6,10 @@ build_args: CONFIG+=ubports
 dependencies_target: [
     qt5-default,
     libconnectivity-qt1-dev,
-    libunity-api-dev,
     build-essential
   ]
 
 image_setup:
   run:
-  - echo "deb http://repository.nymea.io focal rpi" | tee /etc/apt/sources.list.d/nymea.list
-  - apt-key adv --keyserver keyserver.ubuntu.com --recv-key A1A19ED6
   - apt-get update
   - apt-get install -y dirmngr
