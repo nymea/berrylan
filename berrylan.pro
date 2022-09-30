@@ -1,5 +1,5 @@
 QT += quick bluetooth svg quickcontrols2
-QT += quickcontrols2-private webview
+QT += webview
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
@@ -22,7 +22,6 @@ SOURCES += \
     clipboardhelper.cpp \
     main.cpp \
     permissionhelper.cpp \
-    styles/berrylanbusyindicator.cpp \
     wifisetup/btwifisetup.cpp \
     wifisetup/bluetoothdevice.cpp \
     wifisetup/bluetoothdeviceinfo.cpp \
@@ -36,7 +35,6 @@ SOURCES += \
 HEADERS += \
     clipboardhelper.h \
     permissionhelper.h \
-    styles/berrylanbusyindicator.h \
     wifisetup/btwifisetup.h \
     wifisetup/bluetoothdevice.h \
     wifisetup/bluetoothdeviceinfo.h \
