@@ -2,6 +2,7 @@
 #define PERMISSIONHELPER_H
 
 #include <QObject>
+#include <QQmlEngine>
 #include <QLoggingCategory>
 Q_DECLARE_LOGGING_CATEGORY(dcPermissionHelper)
 
@@ -34,6 +35,7 @@ public:
     };
     Q_ENUM(PermissionStatus)
 
+    static QObject* permissionsHelperProvider(QQmlEngine *engine, QJSEngine *scriptEngine);
     static PermissionHelper* instance();
     virtual ~PermissionHelper() override = default;
 

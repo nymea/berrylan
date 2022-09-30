@@ -10,6 +10,7 @@
 #include <QtWebView>
 #include <QTranslator>
 #include <QLibraryInfo>
+#include <qqml.h>
 
 #ifdef Q_OS_ANDROID
 #include <QtAndroidExtras/QtAndroid>
@@ -75,7 +76,7 @@ int main(int argc, char *argv[])
     qmlRegisterUncreatableType<WirelessAccessPoint>("BerryLan", 1, 0, "WirelessAccessPoint", "Get it from WirelessAccessPoints");
     qmlRegisterType<WirelessAccessPointsProxy>("BerryLan", 1, 0, "WirelessAccessPointsProxy");
 
-    qmlRegisterSingletonInstance<PermissionHelper>("BerryLan", 1, 0, "PermissionHelper", PermissionHelper::instance());
+    qmlRegisterSingletonType<PermissionHelper>("BerryLan", 1, 0, "PermissionHelper", PermissionHelper::permissionsHelperProvider);
 
     QQmlApplicationEngine engine;
 
