@@ -1,0 +1,7 @@
+[Desktop Entry]
+_Name=berrylan
+Exec=berrylan
+Icon=ios/AppIcon.svg
+Terminal=false
+Type=Application
+X-Ubuntu-Touch=true

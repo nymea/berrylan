@@ -1,0 +1,15 @@
+clickable_minimum_required: 7.1.2
+builder: qmake
+kill: berrylan
+build_args: CONFIG+=ubports
+
+dependencies_target: [
+    qt5-default,
+    libconnectivity-qt1-dev,
+    build-essential
+  ]
+
+image_setup:
+  run:
+  - apt-get update
+  - apt-get install -y dirmngr

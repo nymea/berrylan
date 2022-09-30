@@ -1,0 +1,15 @@
+{
+    "name": "io.guh.berrylan",
+    "description": "Hello world",
+    "architecture": "@CLICK_ARCH@",
+    "title": "BerryLan",
+    "hooks": {
+        "helloworld": {
+            "apparmor": "berrylan.apparmor",
+            "desktop":  "berrylan.desktop"
+        }
+    },
+    "version": "1.0.47",
+    "maintainer": "nymea GmbH <developer@nymea.io>",
+    "framework" : "@CLICK_FRAMEWORK@"
+}
