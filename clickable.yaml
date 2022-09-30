@@ -6,7 +6,7 @@ build_args: CONFIG+=ubports
 dependencies_target: [
     qt5-default,
     libconnectivity-qt1-dev,
-    build-essential
+    libqt5webview5-dev
   ]
 
 image_setup:

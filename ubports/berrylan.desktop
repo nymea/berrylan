@@ -1,7 +1,7 @@
 [Desktop Entry]
-_Name=berrylan
-Exec=berrylan
-Icon=ios/AppIcon.svg
+Name=berrylan
+Exec=usr/bin/berrylan
+Icon=logo.svg
 Terminal=false
 Type=Application
 X-Ubuntu-Touch=true

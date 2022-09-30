@@ -47,17 +47,6 @@ HEADERS += \
 
 RESOURCES += qml.qrc
 
-# Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH =
-
-# Additional import path used to resolve QML modules just for Qt Quick Designer
-QML_DESIGNER_IMPORT_PATH =
-
-# Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
-
 android: {
     QT += androidextras
 
@@ -104,6 +93,19 @@ ios: {
     QMAKE_MAC_XCODE_SETTINGS += IOS_DEVELOPMENT_TEAM
 
 }
+
+ubports: {
+    ubuntu_files.path = /
+    ubuntu_files.files += \
+        ubports/manifest.json \
+        ubports/berrylan.apparmor \
+        ubports/berrylan.desktop \
+        logo.svg
+
+    target.path = /usr/bin/
+    INSTALLS += ubuntu_files target
+}
+
 
 TRANSLATIONS += $$files($$absolute_path(translations)/*.ts, true)
 # Run lrelease with the qmake run so we're ready to build
