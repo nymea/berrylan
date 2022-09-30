@@ -24,6 +24,13 @@ PermissionHelper *PermissionHelper::instance()
     return s_instance;
 }
 
+QObject *PermissionHelper::permissionsHelperProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+    return instance();
+}
+
 PermissionHelper::PermissionHelper(QObject *parent) : QObject(parent)
 {
 
