@@ -44,10 +44,8 @@ For more informations please visit https://www.nymea.io/documentation/overview/l
 
 Add the nymea repository to your system:
 
-> Note: replace `<release>` with you debian relase version like `buster`. Cou can find your release in `/etc/os-release`.
-
-    echo "deb http://repository.nymea.io <release> rpi" | sudo tee /etc/apt/sources.list.d/nymea.list
-    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key A1A19ED6
+    echo -e "deb http://repository.nymea.io $(lsb_release -s -c) main" | sudo tee /etc/apt/sources.list.d/nymea.list
+    sudo wget -O /etc/apt/trusted.gpg.d/nymea.gpg https://repository.nymea.io/nymea.gpg
 
 Install the dependencies:
 
