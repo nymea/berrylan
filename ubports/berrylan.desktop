@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=berrylan
+Exec=usr/bin/berrylan
+Icon=logo.svg
+Terminal=false
+Type=Application
+X-Ubuntu-Touch=true
